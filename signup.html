@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret dig | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .signup-page {
+            min-height: calc(100vh - 80px);
+        }
+        
+        .signup-three-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: calc(100vh - 80px);
+        }
+        
+        .signup-left-panel,
+        .signup-right-panel {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .signup-image {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .signup-left-image {
+            background-image:
+                linear-gradient(rgba(0, 40, 85, 0.2), rgba(0, 115, 230, 0.25)),
+                url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .signup-right-image {
+            background-image:
+                linear-gradient(rgba(0, 40, 85, 0.2), rgba(0, 115, 230, 0.25)),
+                url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=1350&q=80');
+        }
+        
+        .signup-center-panel {
+            padding: 1.5rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: var(--bg-white);
+            overflow: hidden;
+        }
+        
+        .signup-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .signup-header .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .signup-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.15rem;
+        }
+        
+        .signup-header p {
+            color: var(--text-light);
+            font-size: 0.8rem;
+        }
+        
+        .signup-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        
+        .form-group label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+        
+        .form-group input {
+            padding: 0.55rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 115, 230, 0.1);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.6rem;
+        }
+        
+        .btn-signup-submit {
+            background-color: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 0.65rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.15rem;
+        }
+        
+        .btn-signup-submit:hover {
+            background-color: var(--primary-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 115, 230, 0.3);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 0.7rem 0;
+            gap: 0.6rem;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+        
+        .divider span {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+        
+        .social-signup {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .btn-social {
+            padding: 0.6rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+        }
+        
+        .btn-social:hover {
+            background: var(--bg-light);
+            border-color: var(--primary-blue);
+        }
+        
+        .login-link {
+            text-align: center;
+            margin-top: 0.7rem;
+            padding-top: 0.7rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .login-link p {
+            color: var(--text-light);
+            font-size: 0.75rem;
+        }
+        
+        .login-link a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            margin-top: 0.15rem;
+        }
+        
+        .terms-checkbox input[type="checkbox"] {
+            margin-top: 0.1rem;
+            cursor: pointer;
+        }
+        
+        .terms-checkbox label {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            line-height: 1.3;
+        }
+        
+        .terms-checkbox a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+        
+        .terms-checkbox a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 968px) {
+            .signup-three-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .signup-left-panel,
+            .signup-right-panel {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Logo -->
+            <a href="index.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="index.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Grid Icon -->
+            <button class="grid-icon-btn">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <rect x="3" y="3" width="7" height="7" rx="1"/>
+                    <rect x="14" y="3" width="7" height="7" rx="1"/>
+                    <rect x="3" y="14" width="7" height="7" rx="1"/>
+                    <rect x="14" y="14" width="7" height="7" rx="1"/>
+                </svg>
+            </button>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="signup-page">
+        <div class="signup-three-column">
+            <!-- Left Panel - Image -->
+            <div class="signup-left-panel">
+                <div class="signup-image signup-left-image"></div>
+            </div>
+
+            <!-- Center Panel - Signup Form -->
+            <div class="signup-center-panel">
+            <div class="signup-header">
+                <div class="logo" style="pointer-events: none;">GYMLY</div>
+                <h1>Opret dig</h1>
+                    <p>Bliv en del af fællesskabet</p>
+                </div>
+                
+                <form class="signup-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Fornavn</label>
+                            <input type="text" id="firstName" name="firstName" placeholder="Fornavn" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lastName">Efternavn</label>
+                            <input type="text" id="lastName" name="lastName" placeholder="Efternavn" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="din@email.dk" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Adgangskode</label>
+                        <input type="password" id="password" name="password" placeholder="Mindst 8 tegn" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirmPassword">Bekræft adgangskode</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Gentag adgangskode" required>
+                    </div>
+                    
+                    <div class="terms-checkbox">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <label for="terms">
+                            Jeg accepterer <a href="#">Servicevilkår</a> og <a href="#">Privatlivspolitik</a>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-signup-submit">Opret konto</button>
+                </form>
+                
+                <div class="divider">
+                    <span>eller</span>
+                </div>
+                
+                <div class="social-signup">
+                    <button type="button" class="btn-social">
+                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Tilmeld dig med Google
+                    </button>
+                    
+                    <button type="button" class="btn-social">
+                        <svg class="icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                        </svg>
+                        Tilmeld dig med Apple
+                    </button>
+                </div>
+                
+            <div class="login-link">
+                <p>Har du allerede en konto? <a href="index.html">Log ind her</a></p>
+            </div>
+            </div>
+
+            <!-- Right Panel - Image -->
+            <div class="signup-right-panel">
+                <div class="signup-image signup-right-image"></div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+        <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
+        <a href="terms.html" class="footer-bar-link">Servicevilkår</a>
+    </div>
+</body>
+</html>
