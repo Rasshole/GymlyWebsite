@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .dashboard-container {
+            margin-top: 0;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .dashboard-header {
+            margin-bottom: 2rem;
+        }
+        
+        .dashboard-header h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dashboard-header p {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 2rem;
+        }
+        
+        .feed-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .feed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .feed-header h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+        
+        .activity-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .activity-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007AFF, #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .activity-info {
+            flex: 1;
+        }
+        
+        .activity-name {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .activity-time {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        .activity-content {
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 0.75rem;
+        }
+        
+        .activity-location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #007AFF;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .sidebar-section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .sidebar-section h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .check-in-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #007AFF, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-bottom: 0;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .check-in-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
+        }
+        
+        .active-user {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            transition: background-color 0.2s;
+        }
+        
+        .active-user:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .active-user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007AFF, #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+        }
+        
+        .active-user-info {
+            flex: 1;
+        }
+        
+        .active-user-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .active-user-location {
+            font-family: 'Inter', sans-serif;
+            color: #666;
+            font-size: 0.8rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .active-user-time {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 0.25rem;
+        }
+        
+        .active-user-muscle {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            color: #4CAF50;
+            font-weight: 500;
+        }
+        
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4CAF50;
+            margin-left: auto;
+        }
+        
+        @media (max-width: 968px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Settings Icon -->
+            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="2"/>
+                    <path d="M12 2 L12 4.5 M12 19.5 L12 22 M2 12 L4.5 12 M19.5 12 L22 12 M5.64 5.64 L7.41 7.41 M16.59 16.59 L18.36 18.36 M5.64 18.36 L7.41 16.59 M16.59 7.41 L18.36 5.64 M12 2 L13.5 3.5 M12 2 L10.5 3.5 M12 22 L13.5 20.5 M12 22 L10.5 20.5 M2 12 L3.5 10.5 M2 12 L3.5 13.5 M22 12 L20.5 10.5 M22 12 L20.5 13.5"/>
+                </svg>
+            </button>
+            
+            <!-- Logo -->
+            <a href="dashboard.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="dashboard.html" class="nav-icon-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="online.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="checkin.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="messages.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="profile.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>Velkommen tilbage!</h1>
+            <p>Se hvad der sker i dit fitness-fællesskab</p>
+        </div>
+        
+        <div class="dashboard-grid">
+            <!-- Main Feed -->
+            <div class="feed-section">
+                <div class="feed-header">
+                    <h2>Aktivitetsfeed</h2>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-avatar">MK</div>
+                        <div class="activity-info">
+                            <div class="activity-name">Mads Kristensen</div>
+                            <div class="activity-time">For 15 minutter siden</div>
+                        </div>
+                    </div>
+                    <div class="activity-content">
+                        Lige færdig med benpres! 💪 Nyt PR på 180kg!
+                    </div>
+                    <div class="activity-location">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Fitness World, Nørrebro
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-avatar">SL</div>
+                        <div class="activity-info">
+                            <div class="activity-name">Sarah Larsen</div>
+                            <div class="activity-time">For 32 minutter siden</div>
+                        </div>
+                    </div>
+                    <div class="activity-content">
+                        Træner med Emma i dag! Skulder og bryst 💪
+                    </div>
+                    <div class="activity-location">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        PureGym, Vesterbro
+                    </div>
+                </div>
+                
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-avatar">TJ</div>
+                        <div class="activity-info">
+                            <div class="activity-name">Thomas Jensen</div>
+                            <div class="activity-time">For 1 time siden</div>
+                        </div>
+                    </div>
+                    <div class="activity-content">
+                        Deadlift dag! 200kg x 3 reps 🔥
+                    </div>
+                    <div class="activity-location">
+                        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Fitness World, Frederiksberg
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sidebar -->
+            <div>
+                <div class="sidebar-section">
+                    <a href="checkin.html" class="check-in-button">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M8 12l2 2 4-4"/>
+                        </svg>
+                        Tjek ind
+                    </a>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h3>Aktive nu</h3>
+                    <div class="active-user">
+                        <div class="active-user-avatar">MK</div>
+                        <div class="active-user-info">
+                            <div class="active-user-name">Mads Kristensen</div>
+                            <div class="active-user-location">Fitness World, Nørrebro</div>
+                            <div class="active-user-time">Aktiv i 00:15:30</div>
+                            <div class="active-user-muscle">Bryst & triceps</div>
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="active-user">
+                        <div class="active-user-avatar">SL</div>
+                        <div class="active-user-info">
+                            <div class="active-user-name">Sarah Larsen</div>
+                            <div class="active-user-location">PureGym, Vesterbro</div>
+                            <div class="active-user-time">Aktiv i 00:32:15</div>
+                            <div class="active-user-muscle">Ben & core</div>
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="active-user">
+                        <div class="active-user-avatar">TJ</div>
+                        <div class="active-user-info">
+                            <div class="active-user-name">Thomas Jensen</div>
+                            <div class="active-user-location">Fitness World, Frederiksberg</div>
+                            <div class="active-user-time">Aktiv i 00:48:20</div>
+                            <div class="active-user-muscle">Ryg & skuldre</div>
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                    <div class="active-user">
+                        <div class="active-user-avatar">AN</div>
+                        <div class="active-user-info">
+                            <div class="active-user-name">Anna Nielsen</div>
+                            <div class="active-user-location">Fitness World, Østerbro</div>
+                            <div class="active-user-time">Aktiv i 00:12:45</div>
+                            <div class="active-user-muscle">Arme & biceps</div>
+                        </div>
+                        <div class="status-indicator"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+        <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
+        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
+    </div>
+</body>
+</html>
+

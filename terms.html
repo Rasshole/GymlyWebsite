@@ -3,16 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicevilkår | Gymly</title>
+    <title>Vilkår og betingelser | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            margin-top: 80px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 2rem 1rem;
+            position: fixed;
+            left: 0;
+            top: 80px;
+            height: calc(100vh - 80px - 60px);
+            overflow-y: auto;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .sidebar h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: #e0e0e0;
+            color: #007AFF;
+        }
+        
+        .sidebar-nav a.active {
+            background-color: #007AFF;
+            color: white;
+        }
+        
         .terms-page {
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            max-width: 900px;
+            flex: 1;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+            padding-top: 4rem;
+            padding-bottom: 100px;
+            padding-left: 290px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -20,7 +103,14 @@
             font-family: 'Manrope', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .terms-page .last-updated {
+            font-family: 'Inter', sans-serif;
+            color: #666;
             margin-bottom: 2rem;
+            font-size: 0.9rem;
         }
         
         .terms-page h2 {
@@ -29,6 +119,7 @@
             font-weight: 800;
             margin-top: 2rem;
             margin-bottom: 1rem;
+            scroll-margin-top: 100px;
         }
         
         .terms-page p {
@@ -36,19 +127,254 @@
             line-height: 1.6;
             margin-bottom: 1rem;
         }
+        
+        .terms-page ul {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .terms-page li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .terms-page .contact-email {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #007AFF;
+        }
     </style>
 </head>
 <body>
-    <main class="terms-page">
-        <h1>Servicevilkår</h1>
-        <p>Her kommer Gymly's servicevilkår...</p>
-    </main>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Settings Icon -->
+            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="2"/>
+                    <path d="M12 2 L12 4.5 M12 19.5 L12 22 M2 12 L4.5 12 M19.5 12 L22 12 M5.64 5.64 L7.41 7.41 M16.59 16.59 L18.36 18.36 M5.64 18.36 L7.41 16.59 M16.59 7.41 L18.36 5.64 M12 2 L13.5 3.5 M12 2 L10.5 3.5 M12 22 L13.5 20.5 M12 22 L10.5 20.5 M2 12 L3.5 10.5 M2 12 L3.5 13.5 M22 12 L20.5 10.5 M22 12 L20.5 13.5"/>
+                </svg>
+            </button>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="index.html" class="nav-icon-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Indhold</h3>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="#section-1">1. Appens formål</a></li>
+                    <li><a href="#section-2">2. Berettigelse og alder</a></li>
+                    <li><a href="#section-3">3. Brugerkonto og ansvar</a></li>
+                    <li><a href="#section-4">4. Acceptabel brug</a></li>
+                    <li><a href="#section-5">5. Brugerindhold</a></li>
+                    <li><a href="#section-6">6. Sundhed, sikkerhed og ansvar</a></li>
+                    <li><a href="#section-7">7. Betalinger og abonnementer</a></li>
+                    <li><a href="#section-8">8. Tredjepartsplatforme</a></li>
+                    <li><a href="#section-9">9. Immaterielle rettigheder</a></li>
+                    <li><a href="#section-10">10. Opsigelse</a></li>
+                    <li><a href="#section-11">11. Ansvarsfraskrivelse</a></li>
+                    <li><a href="#section-12">12. Lovvalg</a></li>
+                    <li><a href="#section-13">13. Kontakt</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="terms-page">
+        <h1>📄 Vilkår og betingelser for Gymly</h1>
+        <p class="last-updated">Sidst opdateret: 21. dec. 2025</p>
+        
+        <p>Disse vilkår og betingelser ("Vilkår") regulerer din brug af Gymly-appen ("Appen"), som leveres af Gymly ("vi", "os", "vores").</p>
+        
+        <p>Ved at downloade, oprette en konto eller bruge Appen accepterer du disse Vilkår. Hvis du ikke accepterer Vilkårene, må du ikke bruge Appen.</p>
+        
+        <h2 id="section-1">1. Appens formål</h2>
+        <p>Gymly er en social fitness-app, der giver brugere mulighed for at:</p>
+        <ul>
+            <li>Checke ind i fitnesscentre</li>
+            <li>Se og interagere med andre brugere</li>
+            <li>Registrere træningsaktivitet og progression</li>
+            <li>Deltage i et fitness-fællesskab</li>
+        </ul>
+        <p>Gymly leverer ikke medicinsk rådgivning, personlig træningsvejledning eller sundhedsbehandling.</p>
+        
+        <h2 id="section-2">2. Berettigelse og alder</h2>
+        <p>For at bruge Appen skal du:</p>
+        <ul>
+            <li>Være mindst 13 år</li>
+            <li>Give korrekte og sandfærdige oplysninger ved oprettelse</li>
+        </ul>
+        <p>Hvis du er under 18 år, bekræfter du, at du har forældres eller værges samtykke.</p>
+        
+        <h2 id="section-3">3. Brugerkonto og ansvar</h2>
+        <p>Du er ansvarlig for:</p>
+        <ul>
+            <li>Aktivitet, der sker via din konto</li>
+            <li>At holde dine loginoplysninger fortrolige</li>
+            <li>Alt indhold, du deler i Appen</li>
+        </ul>
+        <p>Du må ikke dele din konto med andre.</p>
+        
+        <h2 id="section-4">4. Acceptabel brug</h2>
+        <p>Du må ikke:</p>
+        <ul>
+            <li>Overtræde gældende lovgivning</li>
+            <li>Chikanere, true eller krænke andre brugere</li>
+            <li>Dele stødende, hadefuldt, voldeligt eller ulovligt indhold</li>
+            <li>Manipulere check-ins, lokationsdata eller anden funktionalitet</li>
+            <li>Forsøge at omgå sikkerhed eller tekniske begrænsninger</li>
+        </ul>
+        <p>Vi forbeholder os retten til at suspendere eller slette konti ved brud på Vilkårene.</p>
+        
+        <h2 id="section-5">5. Brugerindhold</h2>
+        <p>Når du deler indhold i Appen (fx check-ins, tekst, billeder eller træningsdata):</p>
+        <ul>
+            <li>Bevarer du ejerskabet af dit indhold</li>
+            <li>Giver du Gymly en ikke-eksklusiv, verdensomspændende, royalty-fri licens til at vise og anvende indholdet i Appen</li>
+        </ul>
+        <p>Vi forbeholder os retten til at fjerne indhold, der overtræder Vilkårene.</p>
+        
+        <h2 id="section-6">6. Sundhed, sikkerhed og ansvar</h2>
+        <p>Al brug af Appen og al træning sker på eget ansvar.</p>
+        <p>Gymly er ikke ansvarlig for:</p>
+        <ul>
+            <li>Skader, ulykker eller helbredsproblemer</li>
+            <li>Forkerte træningsvalg</li>
+            <li>Brugeres handlinger i eller uden for Appen</li>
+        </ul>
+        <p>Kontakt en sundhedsprofessionel, hvis du er i tvivl om din fysiske formåen.</p>
+        
+        <h2 id="section-7">7. Betalinger og abonnementer (hvis relevant)</h2>
+        <p>Hvis Appen tilbyder betalte funktioner:</p>
+        <ul>
+            <li>Betaling sker via App Store</li>
+            <li>Abonnementer fornyes automatisk, medmindre de opsiges</li>
+            <li>Opsigelse og administration sker via din Apple-konto</li>
+        </ul>
+        <p>Gymly håndterer ikke betalingsoplysninger direkte.</p>
+        
+        <h2 id="section-8">8. Tredjepartsplatforme</h2>
+        <p>Appen kan integrere eller linke til tredjepartstjenester (fx fitnesscentre eller sociale funktioner).</p>
+        <p>Gymly er ikke ansvarlig for tredjepartsindhold eller -tjenester.</p>
+        
+        <h2 id="section-9">9. Immaterielle rettigheder</h2>
+        <p>Alle rettigheder til Appen, herunder design, logoer, kode og funktioner, tilhører Gymly eller vores licensgivere.</p>
+        <p>Du må ikke kopiere, ændre eller distribuere Appen uden tilladelse.</p>
+        
+        <h2 id="section-10">10. Opsigelse</h2>
+        <p>Du kan til enhver tid slette din konto.</p>
+        <p>Vi kan suspendere eller lukke konti ved overtrædelse af Vilkårene.</p>
+        
+        <h2 id="section-11">11. Ansvarsfraskrivelse</h2>
+        <p>Appen leveres "som den er" og "som tilgængelig".</p>
+        <p>Vi garanterer ikke fejlfri drift eller konstant tilgængelighed.</p>
+        
+        <h2 id="section-12">12. Lovvalg</h2>
+        <p>Disse Vilkår er underlagt dansk ret, og tvister afgøres ved danske domstole.</p>
+        
+        <h2 id="section-13">13. Kontakt</h2>
+        <p>📧 <a href="mailto:gymly@support.com" class="contact-email">gymly@support.com</a></p>
+        </main>
+    </div>
     
     <!-- Footer Bar -->
     <div class="footer-bar">
         <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
-        <a href="terms.html" class="footer-bar-link">Servicevilkår</a>
+        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
     </div>
+    
+    <script>
+        // Highlight active section in sidebar on scroll
+        const sections = document.querySelectorAll('.terms-page h2[id]');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        
+        function updateActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveSection);
+        updateActiveSection(); // Call once on load
+    </script>
 </body>
 </html>
 

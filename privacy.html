@@ -6,13 +6,96 @@
     <title>Privatlivspolitik | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-wrapper {
+            display: flex;
+            flex: 1;
+            margin-top: 80px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: #f8f9fa;
+            padding: 2rem 1rem;
+            position: fixed;
+            left: 0;
+            top: 80px;
+            height: calc(100vh - 80px - 60px);
+            overflow-y: auto;
+            border-right: 1px solid #e0e0e0;
+        }
+        
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 3px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .sidebar h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #000;
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .sidebar-nav li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-nav a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: #333;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+        
+        .sidebar-nav a:hover {
+            background-color: #e0e0e0;
+            color: #007AFF;
+        }
+        
+        .sidebar-nav a.active {
+            background-color: #007AFF;
+            color: white;
+        }
+        
         .privacy-page {
-            min-height: 100vh;
-            padding: 4rem 2rem;
-            max-width: 900px;
+            flex: 1;
+            min-height: calc(100vh - 80px);
+            padding: 2rem;
+            padding-top: 4rem;
+            padding-bottom: 100px;
+            padding-left: 290px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         
@@ -20,7 +103,14 @@
             font-family: 'Manrope', sans-serif;
             font-size: 2.5rem;
             font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .privacy-page .last-updated {
+            font-family: 'Inter', sans-serif;
+            color: #666;
             margin-bottom: 2rem;
+            font-size: 0.9rem;
         }
         
         .privacy-page h2 {
@@ -29,6 +119,7 @@
             font-weight: 800;
             margin-top: 2rem;
             margin-bottom: 1rem;
+            scroll-margin-top: 100px;
         }
         
         .privacy-page p {
@@ -36,19 +127,230 @@
             line-height: 1.6;
             margin-bottom: 1rem;
         }
+        
+        .privacy-page ul {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+        }
+        
+        .privacy-page li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .privacy-page .contact-email {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            color: #007AFF;
+        }
     </style>
 </head>
 <body>
-    <main class="privacy-page">
-        <h1>Privatlivspolitik</h1>
-        <p>Her kommer Gymly's privatlivspolitik...</p>
-    </main>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Settings Icon -->
+            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="2"/>
+                    <path d="M12 2 L12 4.5 M12 19.5 L12 22 M2 12 L4.5 12 M19.5 12 L22 12 M5.64 5.64 L7.41 7.41 M16.59 16.59 L18.36 18.36 M5.64 18.36 L7.41 16.59 M16.59 7.41 L18.36 5.64 M12 2 L13.5 3.5 M12 2 L10.5 3.5 M12 22 L13.5 20.5 M12 22 L10.5 20.5 M2 12 L3.5 10.5 M2 12 L3.5 13.5 M22 12 L20.5 10.5 M22 12 L20.5 13.5"/>
+                </svg>
+            </button>
+            
+            <!-- Logo -->
+            <a href="index.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="index.html" class="nav-icon-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="splash.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3>Indhold</h3>
+            <nav>
+                <ul class="sidebar-nav">
+                    <li><a href="#section-1">1. Hvilke oplysninger indsamler vi?</a></li>
+                    <li><a href="#section-2">2. Hvordan bruger vi dine data?</a></li>
+                    <li><a href="#section-3">3. Deling af data</a></li>
+                    <li><a href="#section-4">4. Opbevaring af data</a></li>
+                    <li><a href="#section-5">5. Dine rettigheder</a></li>
+                    <li><a href="#section-6">6. Datasikkerhed</a></li>
+                    <li><a href="#section-7">7. Børn</a></li>
+                    <li><a href="#section-8">8. Ændringer i privatlivspolitikken</a></li>
+                    <li><a href="#section-9">9. Kontakt</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="privacy-page">
+        <h1>🔐 Privatlivspolitik for Gymly</h1>
+        <p class="last-updated">Sidst opdateret: 21. dec. 2025</p>
+        
+        <p>Gymly respekterer dit privatliv. Denne privatlivspolitik forklarer, hvordan vi indsamler, bruger og beskytter dine personoplysninger i overensstemmelse med GDPR og App Store-krav.</p>
+        
+        <h2 id="section-1">1. Hvilke oplysninger indsamler vi?</h2>
+        <p>Vi kan indsamle følgende oplysninger:</p>
+        <p><strong>Oplysninger du selv giver:</strong></p>
+        <ul>
+            <li>Navn eller brugernavn</li>
+            <li>E-mailadresse</li>
+            <li>Profiloplysninger</li>
+            <li>Træningsdata og check-ins</li>
+        </ul>
+        <p><strong>Automatisk indsamlede oplysninger:</strong></p>
+        <ul>
+            <li>Enhedsoplysninger</li>
+            <li>App-brug og interaktion</li>
+            <li>Omtrentlig lokation (kun til check-in-funktion)</li>
+        </ul>
+        <p>Vi indsamler ikke præcis GPS-sporing i baggrunden, medmindre det tydeligt er aktiveret af brugeren.</p>
+        
+        <h2 id="section-2">2. Hvordan bruger vi dine data?</h2>
+        <p>Vi bruger dine data til at:</p>
+        <ul>
+            <li>Drive og forbedre Appen</li>
+            <li>Muliggøre sociale funktioner</li>
+            <li>Vise check-ins og aktivitet</li>
+            <li>Sikre appens stabilitet og sikkerhed</li>
+            <li>Overholde juridiske krav</li>
+        </ul>
+        
+        <h2 id="section-3">3. Deling af data</h2>
+        <p>Vi deler ikke dine personoplysninger med tredjeparter til markedsføring.</p>
+        <p>Data kan deles med:</p>
+        <ul>
+            <li>Tekniske serviceudbydere (hosting, analytics)</li>
+            <li>Myndigheder, hvis loven kræver det</li>
+        </ul>
+        <p>Alle partnere er GDPR-compliant.</p>
+        
+        <h2 id="section-4">4. Opbevaring af data</h2>
+        <p>Vi opbevarer kun dine data, så længe:</p>
+        <ul>
+            <li>Din konto er aktiv</li>
+            <li>Det er nødvendigt af juridiske eller tekniske årsager</li>
+        </ul>
+        <p>Du kan til enhver tid anmode om sletning.</p>
+        
+        <h2 id="section-5">5. Dine rettigheder</h2>
+        <p>Du har ret til:</p>
+        <ul>
+            <li>Indsigt i dine data</li>
+            <li>Rettelse af forkerte oplysninger</li>
+            <li>Sletning af dine data</li>
+            <li>Dataportabilitet</li>
+            <li>At trække samtykke tilbage</li>
+        </ul>
+        <p>Kontakt os for at udøve dine rettigheder.</p>
+        
+        <h2 id="section-6">6. Datasikkerhed</h2>
+        <p>Vi anvender tekniske og organisatoriske sikkerhedsforanstaltninger for at beskytte dine data mod misbrug, tab og uautoriseret adgang.</p>
+        
+        <h2 id="section-7">7. Børn</h2>
+        <p>Gymly er ikke rettet mod børn under 13 år.</p>
+        <p>Vi indsamler ikke bevidst data fra børn under denne alder.</p>
+        
+        <h2 id="section-8">8. Ændringer i privatlivspolitikken</h2>
+        <p>Vi kan opdatere denne privatlivspolitik.</p>
+        <p>Væsentlige ændringer vil blive kommunikeret i Appen.</p>
+        
+        <h2 id="section-9">9. Kontakt</h2>
+        <p>📧 <a href="mailto:gymly@support.com" class="contact-email">gymly@support.com</a></p>
+        </main>
+    </div>
     
     <!-- Footer Bar -->
     <div class="footer-bar">
         <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
-        <a href="terms.html" class="footer-bar-link">Servicevilkår</a>
+        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
     </div>
+    
+    <script>
+        // Highlight active section in sidebar on scroll
+        const sections = document.querySelectorAll('.privacy-page h2[id]');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        
+        function updateActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', updateActiveSection);
+        updateActiveSection(); // Call once on load
+    </script>
 </body>
 </html>
 

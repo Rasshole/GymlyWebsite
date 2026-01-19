@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beskeder | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #FFFFFF;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .messages-page {
+            margin-top: 0;
+            padding: 0;
+            max-width: 100%;
+            padding-bottom: 100px;
+        }
+        
+        .messages-header {
+            background: transparent;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #000;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-center {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .header-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .header-icon {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            color: #000;
+        }
+        
+        .messages-content {
+            padding: 0.5rem 2rem 2rem;
+        }
+        
+        .search-container-messages {
+            margin-bottom: 1.5rem;
+        }
+        
+        .search-box {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #000;
+        }
+        
+        .search-box input {
+            flex: 1;
+            background: none;
+            border: none;
+            outline: none;
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        
+        .search-box input::placeholder {
+            color: #999;
+        }
+        
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .message-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .message-card:hover {
+            background: #f8f9fa;
+        }
+        
+        .message-card.unread {
+            background: #f0f8f0;
+            border-left: 3px solid #4CAF50;
+        }
+        
+        .message-avatar-container {
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .message-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #007AFF, #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+        
+        .online-indicator {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background: #4CAF50;
+            border: 2px solid #6B46C1;
+            border-radius: 50%;
+        }
+        
+        .message-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+        
+        .message-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #000;
+        }
+        
+        .message-time {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #999;
+        }
+        
+        .message-preview {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .message-badge {
+            width: 20px;
+            height: 20px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #666;
+        }
+        
+        .empty-state-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Settings Icon -->
+            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                </svg>
+            </button>
+            
+            <!-- Logo -->
+            <a href="dashboard.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="dashboard.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="online.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="checkin.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="messages.html" class="nav-icon-item active">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="profile.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Messages Page Content -->
+    <div class="messages-page">
+        <!-- Messages Header -->
+        <div class="messages-header">
+            <div class="header-left"></div>
+            <div class="header-center">
+                <h1 class="header-title">Beskeder</h1>
+            </div>
+            <div class="header-right">
+                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="messages-content">
+            <!-- Search Bar -->
+            <div class="search-container-messages">
+                <div class="search-box">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" placeholder="Søg efter beskeder...">
+                </div>
+            </div>
+            
+            <!-- Messages List -->
+            <div class="messages-list">
+                <!-- Message 1 - Unread -->
+                <a href="chat.html?user=mads" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card unread">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">MK</div>
+                            <div class="online-indicator"></div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Mads Kristensen</div>
+                                <div class="message-time">Nu</div>
+                            </div>
+                            <div class="message-preview">Hej! Skal vi træne sammen i morgen?</div>
+                        </div>
+                        <div class="message-badge">2</div>
+                    </div>
+                </a>
+                
+                <!-- Message 2 - Unread -->
+                <a href="chat.html?user=sarah" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card unread">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">SL</div>
+                            <div class="online-indicator"></div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Sarah Larsen</div>
+                                <div class="message-time">5 min</div>
+                            </div>
+                            <div class="message-preview">Jeg er nede i centeret nu, hvis du vil komme?</div>
+                        </div>
+                        <div class="message-badge">1</div>
+                    </div>
+                </a>
+                
+                <!-- Message 3 -->
+                <a href="chat.html?user=thomas" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">TJ</div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Thomas Jensen</div>
+                                <div class="message-time">1 t</div>
+                            </div>
+                            <div class="message-preview">Tak for i dag! Det var fedt at træne sammen 💪</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Message 4 -->
+                <a href="chat.html?user=anna" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">AN</div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Anna Nielsen</div>
+                                <div class="message-time">2 t</div>
+                            </div>
+                            <div class="message-preview">Weekend Warriors gruppen træner lørdag kl. 10</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Message 5 -->
+                <a href="chat.html?user=jeff" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">JE</div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Jeff</div>
+                                <div class="message-time">I går</div>
+                            </div>
+                            <div class="message-preview">Nyt PR på benpres! 180kg 🔥</div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Message 6 -->
+                <a href="chat.html?user=lars" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar">LA</div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Lars</div>
+                                <div class="message-time">I går</div>
+                            </div>
+                            <div class="message-preview">Skal vi lave en gruppetræning næste uge?</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+        <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
+        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
+    </div>
+</body>
+</html>
+

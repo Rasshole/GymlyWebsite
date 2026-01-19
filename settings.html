@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indstillinger | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #FFFFFF;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .settings-page {
+            margin-top: 0;
+            padding: 0;
+            max-width: 100%;
+            padding-bottom: 100px;
+        }
+        
+        .settings-header {
+            background: transparent;
+            padding: 0.75rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: #000;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #000;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem;
+        }
+        
+        .back-button svg {
+            width: 20px;
+            height: 20px;
+        }
+        
+        .header-title {
+            flex: 1;
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #000;
+            text-align: center;
+            margin: 0;
+        }
+        
+        .settings-content {
+            padding: 1rem 2rem;
+        }
+        
+        .settings-section {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+        
+        .settings-item {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .settings-item:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .settings-item-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #007AFF, #0056b3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .settings-item-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+        
+        .settings-item-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .settings-item-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #000;
+            margin-bottom: 0.25rem;
+        }
+        
+        .settings-item-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .settings-item-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            margin-left: 0.5rem;
+        }
+        
+        .settings-item-arrow {
+            width: 20px;
+            height: 20px;
+            color: #999;
+            flex-shrink: 0;
+        }
+        
+        .settings-section-header {
+            padding: 1rem 1.5rem;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .settings-section-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .new-badge {
+            background: #FF6B35;
+            color: white;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 8px;
+            margin-left: 0.5rem;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #ccc;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+            flex-shrink: 0;
+        }
+        
+        .toggle-switch.active {
+            background: #FF6B35;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(22px);
+        }
+        
+        .settings-item-simple {
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .settings-item-simple:last-child {
+            border-bottom: none;
+        }
+        
+        .settings-item-simple:hover {
+            background: #f8f9fa;
+        }
+        
+        .settings-item-simple-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <!-- Settings Icon -->
+            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
+                </svg>
+            </button>
+            
+            <!-- Logo -->
+            <a href="dashboard.html" class="logo-icon">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+                    <circle cx="8" cy="10" r="1.5"/>
+                    <circle cx="16" cy="10" r="1.5"/>
+                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
+                </svg>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="search-container">
+                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <input type="text" class="search-input" placeholder="Søg">
+            </div>
+            
+            <!-- Navigation Icons -->
+            <nav class="nav-icons">
+                <a href="dashboard.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    <span class="nav-label">Hjem</span>
+                </a>
+                <a href="online.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    <span class="nav-label">Online</span>
+                </a>
+                <a href="checkin.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M8 12l2 2 4-4"/>
+                    </svg>
+                    <span class="nav-label">Tjek ind</span>
+                </a>
+                <a href="messages.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span class="nav-label">Beskeder</span>
+                </a>
+                <a href="profile.html" class="nav-icon-item">
+                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span class="nav-label">Profil</span>
+                </a>
+            </nav>
+            
+            <!-- Action Buttons -->
+            <div class="header-actions">
+                <a href="splash.html" class="btn-black">Gå aktiv</a>
+                <a href="download.html" class="btn-black">Download</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Settings Page Content -->
+    <div class="settings-page">
+        <!-- Settings Header -->
+        <div class="settings-header">
+            <button class="back-button" onclick="window.history.back()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>Tilbage</span>
+            </button>
+            <h1 class="header-title">Indstillinger</h1>
+            <div style="width: 80px;"></div> <!-- Spacer for centering -->
+        </div>
+        
+        <div class="settings-content">
+            <!-- Section 1: Connections and Account -->
+            <div class="settings-section">
+                <div class="settings-item">
+                    <div class="settings-item-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                            <line x1="12" y1="18" x2="12" y2="18"/>
+                        </svg>
+                    </div>
+                    <div class="settings-item-content">
+                        <div class="settings-item-title">Forbind en app eller enhed</div>
+                        <div class="settings-item-description">Upload direkte til Gymly med næsten enhver fitness app eller enhed</div>
+                    </div>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <span class="settings-item-title">Administrer apps og enheder</span>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <span class="settings-item-title">Skift Email</span>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <span class="settings-item-title">Hjælp</span>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Section 2: Preferences -->
+            <div class="settings-section">
+                <div class="settings-section-header">
+                    <div class="settings-section-title">PRÆFERENCER</div>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <div class="settings-item-simple-left">
+                        <span class="settings-item-title">Udseende</span>
+                        <span class="settings-item-value">Lys tilstand</span>
+                    </div>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <div class="settings-item-simple-left">
+                        <span class="settings-item-title">Privatlivskontroller</span>
+                        <span class="new-badge">NY</span>
+                    </div>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <div class="settings-item-simple-left">
+                        <span class="settings-item-title">Måleenheder</span>
+                        <span class="settings-item-value">Kilometer</span>
+                    </div>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item-simple">
+                    <div class="settings-item-simple-left">
+                        <span class="settings-item-title">Temperatur</span>
+                        <span class="settings-item-value">Celsius</span>
+                    </div>
+                    <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="settings-item">
+                    <div class="settings-item-content">
+                        <div class="settings-item-title">Standard fremhævet billede</div>
+                        <div class="settings-item-description">Fremhæv kortet eller et foto for at repræsentere dine uploadede aktiviteter i feedet.</div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="settings-item-value">Foto</span>
+                        <svg class="settings-item-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 3: Video Autoplay -->
+            <div class="settings-section">
+                <div class="settings-item-simple">
+                    <span class="settings-item-title">Automatisk afspilning af video</span>
+                    <div class="toggle-switch active" id="videoToggle">
+                        <div class="toggle-slider"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer Bar -->
+    <div class="footer-bar">
+        <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
+        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
+    </div>
+    
+    <script>
+        // Toggle switch functionality
+        const videoToggle = document.getElementById('videoToggle');
+        videoToggle.addEventListener('click', () => {
+            videoToggle.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
+
