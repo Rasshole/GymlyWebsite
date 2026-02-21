@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>Log ind | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <script src="auth.js"></script>
+</head>
+<body class="login-page login-fb-style">
+    <div class="login-fb-wrap">
+        <!-- Venstre kolonne: logo, overskrift, illustrationer -->
+        <div class="login-fb-left">
+            <a href="index.html" class="login-fb-logo-wrap" aria-label="Gymly">
+                <img src="assets/logo.png" alt="Gymly" class="login-fb-logo">
+            </a>
+            <h1 class="login-fb-heading">
+                <span class="login-fb-heading-line1">Træn sammen med dem,</span>
+                <span class="login-fb-heading-line2">du kender.</span>
+            </h1>
+            <div class="login-fb-illustrations">
+                <div class="login-fb-img login-fb-img-main" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=400&q=80');"></div>
+                <div class="login-fb-img login-fb-img-small" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="login-fb-img login-fb-img-round" style="background-image: url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=150&q=80');"></div>
+            </div>
+        </div>
+
+        <!-- Højre kolonne: login-formular -->
+        <div class="login-fb-right">
+            <div class="login-fb-form-wrap">
+                <h2 class="login-fb-form-title">Log på Gymly</h2>
+                <form id="loginForm" class="login-fb-form">
+                    <input type="email" id="email" name="email" placeholder="E-mail eller mobilnummer" required class="login-fb-input">
+                    <input type="password" id="password" name="password" placeholder="Adgangskode" required class="login-fb-input">
+                    <button type="submit" class="login-fb-btn-primary">Log på</button>
+                </form>
+                <a href="password.html" class="login-fb-forgot">Glemt adgangskode?</a>
+                <a href="signup.html" class="login-fb-btn-secondary">Opret ny konto</a>
+                <p class="login-fb-meta">Gymly – Dit fitness fælleskab</p>
+                <div class="login-fb-download">
+                    <p class="login-fb-download-label">Download appen</p>
+                    <div class="login-fb-download-btns">
+                        <a href="download.html" class="login-fb-download-btn">App Store</a>
+                        <a href="download.html" class="login-fb-download-btn">Google Play</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sprog + privatliv/vilkår footer -->
+    <footer class="login-fb-lang-footer">
+        <a href="privacy.html">Privatlivspolitik</a>
+        <a href="terms.html">Vilkår og betingelser</a>
+        <a href="samarbejde.html">Samarbejde</a>
+        <span class="login-fb-footer-sep">·</span>
+        <a href="#">Dansk</a>
+        <a href="#">English (US)</a>
+        <a href="#">Polski</a>
+        <a href="#">Deutsch</a>
+        <a href="#">Flere sprog...</a>
+    </footer>
+
+    <script>
+        if (window.isLoggedIn && window.isLoggedIn()) {
+            window.location.replace('index.html');
+        }
+        var form = document.getElementById('loginForm');
+        if (form) {
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                if (window.setLoggedIn) window.setLoggedIn();
+                window.location.replace('index.html');
+            });
+        }
+    </script>
+</body>
+</html>

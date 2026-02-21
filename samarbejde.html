@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samarbejde | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=5">
+    <style>
+        .samarbejde-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-white);
+        }
+        .samarbejde-header {
+            padding: 2rem 2rem 1rem;
+            text-align: center;
+        }
+        .samarbejde-header a {
+            display: inline-block;
+        }
+        .samarbejde-header img {
+            height: 72px;
+            width: auto;
+        }
+        .samarbejde-main {
+            flex: 1;
+            max-width: 560px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            width: 100%;
+        }
+        .samarbejde-main h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        .samarbejde-main .intro {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+        .samarbejde-form label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
+        }
+        .samarbejde-form input,
+        .samarbejde-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            margin-bottom: 1.25rem;
+            box-sizing: border-box;
+        }
+        .samarbejde-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .samarbejde-form input:focus,
+        .samarbejde-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-pastel);
+        }
+        .samarbejde-form .optional {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+        .samarbejde-form button[type="submit"] {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+        }
+        .samarbejde-form button[type="submit"]:hover {
+            background-color: var(--primary-dark);
+        }
+        .samarbejde-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+            justify-content: center;
+            background: var(--bg-white);
+        }
+        .samarbejde-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .samarbejde-footer a:hover {
+            text-decoration: underline;
+            color: var(--primary);
+        }
+        .samarbejde-footer .sep {
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="samarbejde-page">
+    <header class="samarbejde-header">
+        <a href="index.html" aria-label="Gymly">
+            <img src="assets/logo.png" alt="Gymly">
+        </a>
+    </header>
+
+    <main class="samarbejde-main">
+        <h1>Samarbejde</h1>
+        <p class="intro">Vil du samarbejde med Gymly? Udfyld formularen herunder, så vender vi tilbage til dig.</p>
+
+        <form id="samarbejdeForm" class="samarbejde-form">
+            <label for="navn">Navn <span class="optional">(påkrævet)</span></label>
+            <input type="text" id="navn" name="navn" required placeholder="Dit fulde navn">
+
+            <label for="email">E-mail <span class="optional">(påkrævet)</span></label>
+            <input type="email" id="email" name="email" required placeholder="din@email.dk">
+
+            <label for="virksomhed">Virksomhed / organisation <span class="optional">(valgfri)</span></label>
+            <input type="text" id="virksomhed" name="virksomhed" placeholder="F.eks. fitnesscenter, forening">
+
+            <label for="telefon">Telefon <span class="optional">(valgfri)</span></label>
+            <input type="tel" id="telefon" name="telefon" placeholder="12 34 56 78">
+
+            <label for="beskrivelse">Hvem er du, og hvad ønsker du at samarbejde om? <span class="optional">(påkrævet)</span></label>
+            <textarea id="beskrivelse" name="beskrivelse" required placeholder="Fortæl kort om dig selv og din idé til samarbejde..."></textarea>
+
+            <button type="submit">Send</button>
+        </form>
+    </main>
+
+    <footer class="samarbejde-footer">
+        <a href="privacy.html">Privatlivspolitik</a>
+        <a href="terms.html">Vilkår og betingelser</a>
+        <a href="samarbejde.html">Samarbejde</a>
+        <span class="sep">·</span>
+        <a href="#">Dansk</a>
+        <a href="#">English (US)</a>
+        <a href="#">Polski</a>
+        <a href="#">Deutsch</a>
+        <a href="#">Flere sprog...</a>
+    </footer>
+
+    <script>
+        document.getElementById('samarbejdeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var navn = document.getElementById('navn').value.trim();
+            var email = document.getElementById('email').value.trim();
+            var virksomhed = document.getElementById('virksomhed').value.trim();
+            var telefon = document.getElementById('telefon').value.trim();
+            var beskrivelse = document.getElementById('beskrivelse').value.trim();
+
+            var body = 'Samarbejde – tilmelding fra gymly.dk\n\n';
+            body += 'Navn: ' + navn + '\n';
+            body += 'E-mail: ' + email + '\n';
+            if (virksomhed) body += 'Virksomhed/organisation: ' + virksomhed + '\n';
+            if (telefon) body += 'Telefon: ' + telefon + '\n';
+            body += '\nBesked:\n' + beskrivelse;
+
+            var subject = 'Samarbejde – ' + (virksomhed || navn);
+            var mailto = 'mailto:appgymly@gmail.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            window.location.href = mailto;
+        });
+    </script>
+</body>
+</html>

@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
     <style>
         body {
             background: #FFFFFF;
@@ -24,12 +26,28 @@
         }
         
         .online-header {
-            background: transparent;
-            padding: 0.75rem 2rem;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             color: #000;
+        }
+        
+        .home-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .home-logo-link:hover {
+            opacity: 0.85;
+        }
+        .home-logo-img {
+            height: 56px;
+            width: auto;
+            display: block;
         }
         
         .header-left {
@@ -100,7 +118,7 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: #007AFF;
+            background: #976FFF;
             border-radius: 3px 3px 0 0;
         }
         
@@ -157,7 +175,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -230,7 +248,7 @@
         }
         
         .join-button {
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             border: none;
             border-radius: 20px;
             padding: 0.5rem 1.25rem;
@@ -243,7 +261,7 @@
         }
         
         .join-button:hover {
-            background: linear-gradient(135deg, #0056b3, #004494);
+            background: linear-gradient(135deg, #7B4BFF, #6B3FDF);
         }
         
         .icon-house {
@@ -298,7 +316,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .section-heading {
@@ -337,7 +355,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -419,7 +437,7 @@
         }
         
         .member-avatar.more {
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             color: white;
             font-size: 0.7rem;
             border: none;
@@ -477,7 +495,7 @@
         .community-icon {
             width: 40px;
             height: 40px;
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .community-name {
@@ -523,7 +541,7 @@
             width: 56px;
             height: 56px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -654,7 +672,7 @@
             right: 1rem;
             width: 40px;
             height: 40px;
-            background: #007AFF;
+            background: #976FFF;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -702,7 +720,7 @@
             right: -4px;
             width: 18px;
             height: 18px;
-            background: #007AFF;
+            background: #976FFF;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -777,7 +795,7 @@
         }
         
         .info-detail.location {
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .info-detail.active {
@@ -785,7 +803,7 @@
         }
         
         .info-detail.friends {
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .nearby-centers-bar {
@@ -813,7 +831,7 @@
         .nearby-header-icon {
             width: 20px;
             height: 20px;
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .nearby-header-text {
@@ -843,7 +861,7 @@
         }
         
         .nearby-centers-scroll::-webkit-scrollbar-thumb {
-            background: #007AFF;
+            background: #976FFF;
             border-radius: 2px;
         }
         
@@ -900,7 +918,7 @@
         }
         
         .nearby-center-detail.location {
-            color: #007AFF;
+            color: #976FFF;
         }
         
         .nearby-center-detail.active {
@@ -908,92 +926,20 @@
         }
         
         .nearby-center-detail.friends {
-            color: #007AFF;
+            color: #976FFF;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header class="header">
-        <div class="header-container">
-            <!-- Settings Icon -->
-            <button class="settings-icon" onclick="window.location.href='settings.html'" style="background: none; border: none; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
-                </svg>
-            </button>
-            
-            <!-- Logo -->
-            <a href="dashboard.html" class="logo-icon">
-                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-                    <circle cx="8" cy="10" r="1.5"/>
-                    <circle cx="16" cy="10" r="1.5"/>
-                    <path d="M12 16c-1.1 0-2-.9-2-2h4c0 1.1-.9 2-2 2z"/>
-                </svg>
-            </a>
-            
-            <!-- Search Bar -->
-            <div class="search-container">
-                <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"/>
-                    <path d="m21 21-4.35-4.35"/>
-                </svg>
-                <input type="text" class="search-input" placeholder="Søg">
-            </div>
-            
-            <!-- Navigation Icons -->
-            <nav class="nav-icons">
-                <a href="dashboard.html" class="nav-icon-item">
-                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
-                    <span class="nav-label">Hjem</span>
-                </a>
-                <a href="online.html" class="nav-icon-item active">
-                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <circle cx="12" cy="12" r="6"/>
-                        <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                    <span class="nav-label">Online</span>
-                </a>
-                <a href="checkin.html" class="nav-icon-item">
-                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <path d="M8 12l2 2 4-4"/>
-                    </svg>
-                    <span class="nav-label">Tjek ind</span>
-                </a>
-                <a href="messages.html" class="nav-icon-item">
-                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                    <span class="nav-label">Beskeder</span>
-                </a>
-                <a href="profile.html" class="nav-icon-item">
-                    <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                        <circle cx="12" cy="7" r="4"/>
-                    </svg>
-                    <span class="nav-label">Profil</span>
-                </a>
-            </nav>
-            
-            <!-- Action Buttons -->
-            <div class="header-actions">
-                <a href="splash.html" class="btn-black">Gå aktiv</a>
-                <a href="download.html" class="btn-black">Download</a>
-            </div>
-        </div>
-    </header>
-
     <!-- Online Page Content -->
     <div class="online-page">
         <!-- Online Header -->
         <div class="online-header">
-            <div class="header-left"></div>
+            <div class="header-left">
+                <a href="index.html" class="home-logo-link" aria-label="Hjem">
+                    <img src="assets/logo.png" alt="Gymly" class="home-logo-img">
+                </a>
+            </div>
             <div class="header-center">
                 <h1 class="header-title">Online</h1>
             </div>
@@ -1372,7 +1318,7 @@
                     
                     <!-- Map Controls -->
                     <div class="map-layers-btn" onclick="toggleMapLayers()" style="z-index: 1000;">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#007AFF">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#976FFF">
                             <rect x="3" y="3" width="7" height="7" rx="1"/>
                             <rect x="14" y="3" width="7" height="7" rx="1"/>
                             <rect x="3" y="14" width="7" height="7" rx="1"/>
@@ -1586,7 +1532,7 @@
                                 right: -4px;
                                 width: 18px;
                                 height: 18px;
-                                background: #007AFF;
+                                background: #976FFF;
                                 border-radius: 50%;
                                 border: 2px solid white;
                                 display: flex;
@@ -1657,7 +1603,7 @@
                             right: -4px;
                             width: 18px;
                             height: 18px;
-                            background: #007AFF;
+                            background: #976FFF;
                             border-radius: 50%;
                             border: 2px solid white;
                             display: flex;

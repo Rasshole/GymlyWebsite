@@ -7,7 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
     <style>
         .dashboard-container {
             margin-top: 0;
@@ -80,7 +82,7 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -115,7 +117,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: #007AFF;
+            color: #976FFF;
             font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
         }
@@ -138,7 +140,7 @@
         .check-in-button {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             color: white;
             border: none;
             border-radius: 12px;
@@ -178,7 +180,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #007AFF, #0056b3);
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -236,6 +238,11 @@
     </style>
 </head>
 <body>
+    <div class="header-bar">
+        <a href="index.html" class="header-bar-logo" aria-label="Hjem">
+            <img src="assets/logo.png" alt="Gymly" class="header-bar-logo-img">
+        </a>
+    </div>
     <!-- Header -->
     <header class="header">
         <div class="header-container">
