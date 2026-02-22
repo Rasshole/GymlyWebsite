@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=8">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
     <style>
@@ -516,12 +516,30 @@
             <div class="checkin-text">Tjek ind</div>
         </div>
     </div>
-    
-    <!-- Footer Bar -->
-    <div class="footer-bar">
-        <a href="privacy.html" class="footer-bar-link">Privatlivspolitik</a>
-        <a href="terms.html" class="footer-bar-link">Vilkår og betingelser</a>
-    </div>
+
+    <!-- Bund-navigation: 5 hovedikoner -->
+    <nav class="bottom-nav-bar">
+        <a href="index.html" class="nav-icon-item">
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-hjem" alt=""></span>
+            <span class="nav-label">Hjem</span>
+        </a>
+        <a href="online.html" class="nav-icon-item">
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-online" alt=""></span>
+            <span class="nav-label">Online</span>
+        </a>
+        <a href="checkin.html" class="nav-icon-item active">
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-checkin" alt=""></span>
+            <span class="nav-label">Tjek ind</span>
+        </a>
+        <a href="messages.html" class="nav-icon-item">
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-beskeder" alt=""></span>
+            <span class="nav-label">Beskeder</span>
+        </a>
+        <a href="profile.html" class="nav-icon-item">
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-profil" alt=""></span>
+            <span class="nav-label">Profil</span>
+        </a>
+    </nav>
     
     <script>
         // Muscle selection

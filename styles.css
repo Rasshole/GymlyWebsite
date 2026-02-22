@@ -118,6 +118,30 @@ body {
     border-color: var(--primary-dark);
 }
 
+/* Indstillinger: lilla tandhjul-ikon */
+.header-bar-btn-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    border: none;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.header-bar-btn-icon:hover {
+    background: var(--primary-dark);
+}
+
+.header-bar-btn-icon svg {
+    flex-shrink: 0;
+}
+
 /* Header */
 .header {
     background-color: var(--bg-white);
@@ -215,25 +239,7 @@ body {
     position: relative;
 }
 
-/* App-style: lilla cirkel bag aktivt ikon */
-.nav-icon-item.active::before {
-    content: '';
-    position: absolute;
-    top: 0.15rem;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: var(--primary);
-    z-index: 0;
-}
-
-.nav-icon-item.active .nav-icon,
-.nav-icon-item.active .nav-label {
-    position: relative;
-    z-index: 1;
-}
+/* Aktivt ikon: ingen cirkel – kun lilla ikon + lilla tekst */
 
 .nav-icon-item.active .nav-label {
     color: var(--primary);
@@ -244,7 +250,42 @@ body {
     fill: none;
 }
 
-/* Aktivt ikon: hvid på lilla baggrund (som i appen) */
+/* Nav ikoner fra sprite */
+.nav-icon-wrap {
+    display: block;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+}
+
+.nav-icon-img {
+    display: block;
+    width: 120px;
+    height: 24px;
+}
+
+.nav-icon-hjem { margin-left: 0; }
+.nav-icon-online { margin-left: -24px; }
+.nav-icon-checkin { margin-left: -48px; }
+.nav-icon-beskeder { margin-left: -72px; }
+.nav-icon-profil { margin-left: -96px; }
+
+/* Alle ikoner: lilla (som i appen) */
+.nav-icon-item .nav-icon-img {
+    opacity: 1;
+}
+
+/* Inaktiv tekst: grå */
+.nav-icon-item:not(.active) .nav-label {
+    color: var(--text-light);
+}
+
+/* Aktivt: lilla ikon + lilla tekst (ingen filter) */
+.nav-icon-item.active .nav-icon-img {
+    opacity: 1;
+}
+
+/* Aktivt ikon (SVG fallback) */
 .nav-icon-item.active .nav-icon {
     stroke: white;
     fill: white;
@@ -257,8 +298,8 @@ body {
 }
 
 .nav-label {
-    font-size: 0.7rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     font-family: 'Inter', sans-serif;
     color: var(--text-dark);
     transition: color 0.2s;
@@ -292,24 +333,29 @@ body {
     align-items: center;
     gap: 0.25rem;
     padding: 0.35rem 0;
-    color: var(--text-light);
 }
 
-.bottom-nav-bar .nav-icon-item .nav-icon {
+.bottom-nav-bar .nav-icon-item .nav-icon,
+.bottom-nav-bar .nav-icon-item .nav-icon-wrap {
     width: 24px;
     height: 24px;
 }
 
 .bottom-nav-bar .nav-icon-item .nav-label {
-    font-size: 0.7rem;
-    color: inherit;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
 }
 
-.bottom-nav-bar .nav-icon-item.active {
-    color: var(--primary);
+.bottom-nav-bar .nav-icon-item:not(.active) .nav-label {
+    color: var(--text-light);
 }
 
 .bottom-nav-bar .nav-icon-item.active .nav-label {
+    color: var(--primary);
+}
+
+.bottom-nav-bar .nav-icon-item.active {
     color: var(--primary);
 }
 
@@ -1622,5 +1668,198 @@ input[type="text"]:focus {
     .watch-mockup {
         transform: scale(0.7);
     }
+}
+
+/* ===== Hjem side (app-style) ===== */
+.home-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1.5rem 1.25rem 2rem;
+    padding-bottom: 100px;
+}
+
+.home-greeting {
+    margin-bottom: 2rem;
+}
+
+.home-greeting-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.home-greeting-subtitle {
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.home-section {
+    margin-bottom: 2rem;
+}
+
+.home-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.home-section-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.15rem;
+}
+
+.home-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-light);
+}
+
+.home-section-badge {
+    background: var(--online-green);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.friend-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.friend-card {
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-color);
+}
+
+.friend-card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.friend-card-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.friend-card-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.friend-card-location {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.15rem;
+}
+
+.friend-card-icons {
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.friend-card-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+}
+
+.friend-card-btn:hover {
+    background: var(--primary-dark);
+}
+
+.suggested-friends-scroll {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.suggested-friends-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.suggested-friends-scroll::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.suggested-friend-card {
+    flex-shrink: 0;
+    width: 140px;
+    background: var(--bg-white);
+    border-radius: 16px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-color);
+}
+
+.suggested-friend-avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.75rem;
+}
+
+.suggested-friend-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.suggested-friend-mutual {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+}
+
+.suggested-friend-gym {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 0.15rem;
 }
 

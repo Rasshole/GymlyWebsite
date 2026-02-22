@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=8">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
 </head>
 <body class="start-page">
-    <!-- Header: logo venstre, Profil + Indstillinger + Download højre -->
+    <!-- Header: logo venstre, Log ud + Profil + Indstillinger (tandhjul) + Download højre -->
     <div class="header-bar">
         <div class="header-bar-left">
             <a href="index.html" class="header-bar-logo" aria-label="Hjem">
@@ -20,47 +20,112 @@
             </a>
         </div>
         <div class="header-bar-right">
-            <a href="profile.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline">Profil</a>
-            <a href="settings.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline">Indstillinger</a>
-            <a href="download.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-primary">Download</a>
             <button type="button" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline" onclick="logout()">Log ud</button>
+            <a href="profile.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline">Profil</a>
+            <a href="settings.html" class="header-bar-btn header-bar-btn-icon" aria-label="Indstillinger">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+            </a>
+            <a href="download.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-primary">Download</a>
         </div>
     </div>
+
+    <!-- Hjem indhold -->
+    <main class="home-content">
+        <!-- Velkomst -->
+        <section class="home-greeting">
+            <h1 class="home-greeting-title">Hej, apple User! 👋</h1>
+            <p class="home-greeting-subtitle">Klar til at træne i dag?</p>
+        </section>
+
+        <!-- Venner i gym lige nu -->
+        <section class="home-section">
+            <div class="home-section-header">
+                <div>
+                    <h2 class="home-section-title">Venner i gym lige nu</h2>
+                    <p class="home-section-subtitle">Tryk for at se flere detaljer</p>
+                </div>
+                <span class="home-section-badge">3</span>
+            </div>
+            <div class="friend-cards">
+                <div class="friend-card">
+                    <div class="friend-card-avatar">P</div>
+                    <div class="friend-card-info">
+                        <div class="friend-card-name">Patrick</div>
+                        <div class="friend-card-location">SATS KBH Valby · 23 min</div>
+                        <div class="friend-card-icons">💪 🏃</div>
+                    </div>
+                    <button class="friend-card-btn">Deltag</button>
+                </div>
+                <div class="friend-card">
+                    <div class="friend-card-avatar">M</div>
+                    <div class="friend-card-info">
+                        <div class="friend-card-name">Marie</div>
+                        <div class="friend-card-location">PureGym Lygten · 45 min</div>
+                        <div class="friend-card-icons">🏋️ 💪</div>
+                    </div>
+                    <button class="friend-card-btn">Deltag</button>
+                </div>
+                <div class="friend-card">
+                    <div class="friend-card-avatar">L</div>
+                    <div class="friend-card-info">
+                        <div class="friend-card-name">Lars</div>
+                        <div class="friend-card-location">SATS KBH Adelgade · 12 min</div>
+                        <div class="friend-card-icons">🏋️</div>
+                    </div>
+                    <button class="friend-card-btn">Deltag</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forslåede venner -->
+        <section class="home-section">
+            <h2 class="home-section-title">Forslåede venner</h2>
+            <div class="suggested-friends-scroll">
+                <div class="suggested-friend-card">
+                    <div class="suggested-friend-avatar">L</div>
+                    <div class="suggested-friend-name">Lars</div>
+                    <div class="suggested-friend-mutual">3 fælles venner</div>
+                    <div class="suggested-friend-gym">PureGym Fields</div>
+                </div>
+                <div class="suggested-friend-card">
+                    <div class="suggested-friend-avatar">S</div>
+                    <div class="suggested-friend-name">Sofia</div>
+                    <div class="suggested-friend-mutual">5 fælles venner</div>
+                    <div class="suggested-friend-gym">Urban Gym</div>
+                </div>
+                <div class="suggested-friend-card">
+                    <div class="suggested-friend-avatar">T</div>
+                    <div class="suggested-friend-name">Thc</div>
+                    <div class="suggested-friend-mutual">2 fælles venner</div>
+                    <div class="suggested-friend-gym">Repeat Fitness</div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Bund-navigation: 5 hovedikoner -->
     <nav class="bottom-nav-bar">
         <a href="index.html" class="nav-icon-item active">
-            <svg class="nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-            </svg>
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-hjem" alt=""></span>
             <span class="nav-label">Hjem</span>
         </a>
         <a href="online.html" class="nav-icon-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <circle cx="12" cy="12" r="6"/>
-                <circle cx="12" cy="12" r="2"/>
-            </svg>
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-online" alt=""></span>
             <span class="nav-label">Online</span>
         </a>
         <a href="checkin.html" class="nav-icon-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M8 12l2 2 4-4"/>
-            </svg>
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-checkin" alt=""></span>
             <span class="nav-label">Tjek ind</span>
         </a>
         <a href="messages.html" class="nav-icon-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-beskeder" alt=""></span>
             <span class="nav-label">Beskeder</span>
         </a>
         <a href="profile.html" class="nav-icon-item">
-            <svg class="nav-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-            </svg>
+            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-profil" alt=""></span>
             <span class="nav-label">Profil</span>
         </a>
     </nav>
