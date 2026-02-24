@@ -250,29 +250,41 @@ body {
     fill: none;
 }
 
-/* Nav ikoner fra sprite */
+/* Footer ikoner – alle SVG, ens stil */
 .nav-icon-wrap {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
-    overflow: hidden;
 }
 
-.nav-icon-img {
-    display: block;
-    width: 120px;
+.nav-icon-svg {
+    width: 24px;
     height: 24px;
+    display: block;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
 }
-
-.nav-icon-hjem { margin-left: 0; }
-.nav-icon-online { margin-left: -24px; }
-.nav-icon-checkin { margin-left: -48px; }
-.nav-icon-beskeder { margin-left: -72px; }
-.nav-icon-profil { margin-left: -96px; }
-
-/* Alle ikoner: lilla (som i appen) */
-.nav-icon-item .nav-icon-img {
-    opacity: 1;
+.nav-icon-item:not(.active) .nav-icon-svg {
+    stroke: var(--text-light);
+    fill: none;
+}
+.nav-icon-item.active .nav-icon-svg,
+.nav-icon-item:hover .nav-icon-svg {
+    stroke: var(--primary);
+    fill: none;
+}
+.nav-icon-svg.fill-icon {
+    stroke: none;
+}
+.nav-icon-item:not(.active) .nav-icon-svg.fill-icon {
+    fill: var(--text-light);
+}
+.nav-icon-item.active .nav-icon-svg.fill-icon,
+.nav-icon-item:hover .nav-icon-svg.fill-icon {
+    fill: var(--primary);
 }
 
 /* Inaktiv tekst: grå */
@@ -280,12 +292,7 @@ body {
     color: var(--text-light);
 }
 
-/* Aktivt: lilla ikon + lilla tekst (ingen filter) */
-.nav-icon-item.active .nav-icon-img {
-    opacity: 1;
-}
-
-/* Aktivt ikon (SVG fallback) */
+/* Aktivt ikon (SVG) */
 .nav-icon-item.active .nav-icon {
     stroke: white;
     fill: white;
@@ -319,9 +326,9 @@ body {
     border-top: 1px solid var(--border-color);
     border-radius: 20px 20px 0 0;
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-around;
-    padding: 0.5rem 0.5rem max(0.5rem, env(safe-area-inset-bottom));
+    padding: 0.5rem 0.25rem max(0.5rem, env(safe-area-inset-bottom));
     z-index: 100;
     box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.06);
 }
@@ -331,20 +338,33 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
-    padding: 0.35rem 0;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.4rem 0.25rem;
+    min-width: 0;
+    text-decoration: none;
+    color: inherit;
 }
 
-.bottom-nav-bar .nav-icon-item .nav-icon,
 .bottom-nav-bar .nav-icon-item .nav-icon-wrap {
     width: 24px;
     height: 24px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.bottom-nav-bar .nav-icon-item .nav-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
 }
 
 .bottom-nav-bar .nav-icon-item .nav-label {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     font-weight: 600;
     line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
 }
 
 .bottom-nav-bar .nav-icon-item:not(.active) .nav-label {
@@ -1748,6 +1768,15 @@ input[type="text"]:focus {
     gap: 1rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     border: 1px solid var(--border-color);
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+a.friend-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fafafa;
 }
 
 .friend-card-avatar {
@@ -1803,6 +1832,16 @@ input[type="text"]:focus {
     background: var(--primary-dark);
 }
 
+.friend-card-btn.requested {
+    background: #9e9e9e;
+    color: white;
+    cursor: default;
+}
+
+.friend-card-btn.requested:hover {
+    background: #9e9e9e;
+}
+
 .suggested-friends-scroll {
     display: flex;
     gap: 1rem;
@@ -1829,6 +1868,47 @@ input[type="text"]:focus {
     text-align: center;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     border: 1px solid var(--border-color);
+    text-decoration: none !important;
+    color: inherit;
+    display: block;
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+.suggested-friend-card:hover,
+.suggested-friend-card:visited,
+.suggested-friend-card:focus {
+    text-decoration: none !important;
+}
+
+.suggested-friend-card .suggested-friend-avatar,
+.suggested-friend-card .suggested-friend-name,
+.suggested-friend-card .suggested-friend-mutual,
+.suggested-friend-card .suggested-friend-gym {
+    text-decoration: none !important;
+    border-bottom: none !important;
+    color: inherit;
+}
+
+.suggested-friend-card .suggested-friend-avatar {
+    color: white;
+}
+
+.suggested-friend-card .suggested-friend-name {
+    color: var(--text-dark);
+}
+
+.suggested-friend-card .suggested-friend-mutual {
+    color: var(--text-light);
+}
+
+.suggested-friend-card .suggested-friend-gym {
+    color: var(--text-secondary);
+}
+
+.suggested-friend-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background: #fafafa;
 }
 
 .suggested-friend-avatar {
