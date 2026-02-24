@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=10">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
     <style>
@@ -165,6 +165,12 @@
             align-items: center;
             gap: 1rem;
             backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .user-card:hover {
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .user-avatar-container {
@@ -259,10 +265,21 @@
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.2s;
+            text-decoration: none;
         }
         
         .join-button:hover {
             background: linear-gradient(135deg, #7B4BFF, #6B3FDF);
+        }
+        
+        .join-button.requested {
+            background: #9e9e9e;
+            color: white;
+            cursor: default;
+        }
+        
+        .join-button.requested:hover {
+            background: #9e9e9e;
         }
         
         .icon-house {
@@ -302,11 +319,12 @@
             gap: 0.5rem;
             background: none;
             border: none;
-            color: #4CAF50;
+            color: var(--primary);
             font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
+            text-decoration: none;
         }
         
         .create-icon {
@@ -341,6 +359,8 @@
             cursor: pointer;
             transition: background 0.2s;
             border: 1px solid #e0e0e0;
+            text-decoration: none;
+            color: inherit;
         }
         
         .group-card:hover {
@@ -528,6 +548,8 @@
             cursor: pointer;
             transition: background 0.2s;
             border: 1px solid #e0e0e0;
+            text-decoration: none;
+            color: inherit;
         }
         
         .center-card:hover {
@@ -632,6 +654,34 @@
             margin-left: 0.5rem;
         }
         
+        .center-details-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            color: #666;
+            margin-top: 0.35rem;
+        }
+        
+        .center-details-row svg {
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
+        }
+        
+        .center-details-row .icon-location { color: #2196F3; }
+        .center-details-row .icon-clock { color: #4CAF50; }
+        .center-details-row .icon-users { color: #4CAF50; }
+        .center-details-row .icon-checkin { color: #2196F3; }
+        
+        .center-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem 1rem;
+            margin-top: 0.75rem;
+        }
+        
         .map-container {
             position: relative;
             height: calc(100vh - 300px);
@@ -652,10 +702,16 @@
             z-index: 10;
         }
         
-        .map-layers-btn {
+        .map-controls-stack {
             position: absolute;
             top: 1rem;
             right: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+        .map-layers-btn {
             width: 40px;
             height: 40px;
             background: white;
@@ -666,25 +722,55 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
             cursor: pointer;
         }
-        
         .map-location-btn {
-            position: absolute;
-            bottom: 8rem;
-            right: 1rem;
             width: 40px;
             height: 40px;
-            background: #976FFF;
+            background: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             cursor: pointer;
-            z-index: 1000;
         }
         
         .map-location-btn svg {
-            color: white;
+            color: var(--primary);
+        }
+        
+        .map-layers-panel {
+            position: absolute;
+            top: 3.25rem;
+            right: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            padding: 0.5rem;
+            z-index: 1001;
+            min-width: 160px;
+            display: none;
+        }
+        .map-layers-panel.open {
+            display: block;
+        }
+        .map-layer-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            color: #333;
+        }
+        .map-layer-option:hover {
+            background: #f5f5f5;
+        }
+        .map-layer-option.active {
+            background: var(--primary-pastel);
+            color: var(--primary);
+            font-weight: 600;
         }
         
         .map-marker {
@@ -929,6 +1015,113 @@
         .nearby-center-detail.friends {
             color: #976FFF;
         }
+        
+        .clickable-detail {
+            cursor: pointer;
+            padding: 0.25rem 0;
+        }
+        .clickable-detail:hover {
+            text-decoration: underline;
+        }
+        .center-active-click {
+            cursor: pointer;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(151, 111, 255, 0.2);
+            padding: 0.25rem 0;
+            margin: -0.25rem 0;
+        }
+        .center-active-click:hover {
+            text-decoration: underline;
+        }
+        
+        .user-list-modal {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 20px 20px 0 0;
+            box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+            z-index: 1000;
+            max-height: 60vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .user-list-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+        .user-list-modal-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .user-list-modal-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+        }
+        .user-list-modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .user-list-modal-body {
+            overflow-y: auto;
+            padding: 1rem 1.5rem 2rem;
+        }
+        .user-list-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            text-decoration: none;
+            color: inherit;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .user-list-item:last-child {
+            border-bottom: none;
+        }
+        .user-list-item:hover {
+            background: #f8f9fa;
+            margin: 0 -1.5rem;
+            padding: 0.75rem 1.5rem;
+        }
+        .user-list-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .user-list-name {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #000;
+        }
     </style>
 </head>
 <body>
@@ -1004,7 +1197,7 @@
             </div>
             
             <!-- Jeff - Active -->
-            <div class="user-card">
+            <div class="user-card" data-user="jeff">
                 <div class="user-avatar-container">
                     <div class="user-avatar">J</div>
                     <div class="online-indicator"></div>
@@ -1026,7 +1219,7 @@
             </div>
             
             <!-- Sofia - Offline -->
-            <div class="user-card">
+            <div class="user-card" data-user="sofia">
                 <div class="user-avatar-container">
                     <div class="user-avatar">S</div>
                 </div>
@@ -1037,7 +1230,7 @@
             </div>
             
             <!-- Marie - Offline -->
-            <div class="user-card">
+            <div class="user-card" data-user="marie">
                 <div class="user-avatar-container">
                     <div class="user-avatar">M</div>
                 </div>
@@ -1054,7 +1247,7 @@
             <!-- Groups Header -->
             <div class="groups-header">
                 <h2 class="groups-title">Grupper</h2>
-                <button class="create-group-button">
+                <a href="create-group.html" class="create-group-button">
                     <div class="create-icon">
                         <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                             <line x1="12" y1="5" x2="12" y2="19"/>
@@ -1062,7 +1255,7 @@
                         </svg>
                     </div>
                     Opret
-                </button>
+                </a>
             </div>
             
             <!-- Search Bar -->
@@ -1079,7 +1272,7 @@
             <!-- Mine Grupper -->
             <div class="section-heading">Mine Grupper</div>
             
-            <div class="group-card">
+            <a href="group-details.html?group=weekend-warriors" class="group-card">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1107,12 +1300,12 @@
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
                 </div>
-            </div>
+            </a>
             
             <!-- Andre Grupper -->
             <div class="section-heading">Andre Grupper</div>
             
-            <div class="group-card">
+            <a href="group-details.html?group=morgenmotionister" class="group-card">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1139,9 +1332,9 @@
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
                 </div>
-            </div>
+            </a>
             
-            <div class="group-card">
+            <a href="group-details.html?group=community" class="group-card">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1169,7 +1362,7 @@
                         <path d="M9 18l6-6-6-6"/>
                     </svg>
                 </div>
-            </div>
+            </a>
         </div>
         
         <!-- Centers Section -->
@@ -1187,7 +1380,7 @@
             <div class="centers-section-title">Centre I Nærheden</div>
             
             <!-- PureGym Hjørring -->
-            <div class="center-card">
+            <a href="center-details.html?center=hjorring" class="center-card">
                 <div class="center-icon-container">
                     <div class="center-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1198,18 +1391,32 @@
                 <div class="center-info">
                     <div class="center-name">PureGym</div>
                     <div class="center-location">Hjørring • 8530.9 km</div>
-                    <div class="center-status">
-                        <div class="open-badge">Åbent</div>
-                        <div class="active-count">15 aktive</div>
+                    <div class="center-details-row">
+                        <svg class="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Hjørring</span>
+                    </div>
+                    <div class="center-details-row">
+                        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Åbent nu • 24 timer</span>
+                    </div>
+                    <div class="center-details-grid">
+                        <div class="center-details-row center-active-click" data-center="hjorring" onclick="event.preventDefault();event.stopPropagation();showActiveUsersFromCenter('hjorring')">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span><strong>15</strong> aktive</span>
+                        </div>
+                        <div class="center-details-row">
+                            <svg class="icon-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span><strong>0</strong> check-ins</span>
+                        </div>
                     </div>
                 </div>
                 <svg class="center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6"/>
                 </svg>
-            </div>
+            </a>
             
             <!-- PureGym Nørresundby -->
-            <div class="center-card">
+            <a href="center-details.html?center=norresundby" class="center-card">
                 <div class="center-icon-container">
                     <div class="center-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1220,19 +1427,32 @@
                 <div class="center-info">
                     <div class="center-name">PureGym</div>
                     <div class="center-location">Nørresundby • 8561.8 km</div>
-                    <div class="center-address">Strubjerg, 9400 Nørresundby</div>
-                    <div class="center-status">
-                        <div class="open-badge">Åbent</div>
-                        <div class="active-count">5 aktive</div>
+                    <div class="center-details-row">
+                        <svg class="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Strubjerg, 9400 Nørresundby</span>
+                    </div>
+                    <div class="center-details-row">
+                        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Åbent nu • 24 timer</span>
+                    </div>
+                    <div class="center-details-grid">
+                        <div class="center-details-row center-active-click" data-center="norresundby" onclick="event.preventDefault();event.stopPropagation();showActiveUsersFromCenter('norresundby')">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span><strong>5</strong> aktive</span>
+                        </div>
+                        <div class="center-details-row">
+                            <svg class="icon-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span><strong>0</strong> check-ins</span>
+                        </div>
                     </div>
                 </div>
                 <svg class="center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6"/>
                 </svg>
-            </div>
+            </a>
             
             <!-- PureGym Aalborg Dannebrogsgade -->
-            <div class="center-card">
+            <a href="center-details.html?center=aalborg-dannebrogsgade" class="center-card">
                 <div class="center-icon-container">
                     <div class="center-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1243,19 +1463,32 @@
                 <div class="center-info">
                     <div class="center-name">PureGym</div>
                     <div class="center-location">Aalborg Dannebrogsgade • 8562.7 km</div>
-                    <div class="center-address">Dannebrogsgade, 9000 Aalborg</div>
-                    <div class="center-status">
-                        <div class="open-badge">Åbent</div>
-                        <div class="active-count">10 aktive</div>
+                    <div class="center-details-row">
+                        <svg class="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Dannebrogsgade, 9000 Aalborg</span>
+                    </div>
+                    <div class="center-details-row">
+                        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Åbent nu • 24 timer</span>
+                    </div>
+                    <div class="center-details-grid">
+                        <div class="center-details-row center-active-click" data-center="aalborg-dannebrogsgade" onclick="event.preventDefault();event.stopPropagation();showActiveUsersFromCenter('aalborg-dannebrogsgade')">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span><strong>10</strong> aktive</span>
+                        </div>
+                        <div class="center-details-row">
+                            <svg class="icon-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span><strong>0</strong> check-ins</span>
+                        </div>
                     </div>
                 </div>
                 <svg class="center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6"/>
                 </svg>
-            </div>
+            </a>
             
             <!-- PureGym Aalborg Citycenter Friis Nytorv -->
-            <div class="center-card">
+            <a href="center-details.html?center=aalborg-nytorv" class="center-card">
                 <div class="center-icon-container">
                     <div class="center-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1266,19 +1499,32 @@
                 <div class="center-info">
                     <div class="center-name">PureGym</div>
                     <div class="center-location">Aalborg Citycenter Friis Nytorv • 8564 km</div>
-                    <div class="center-address">Nytorv, 9000 Aalborg</div>
-                    <div class="center-status">
-                        <div class="open-badge">Åbent</div>
-                        <div class="active-count">0 aktive</div>
+                    <div class="center-details-row">
+                        <svg class="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Nytorv, 9000 Aalborg</span>
+                    </div>
+                    <div class="center-details-row">
+                        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Åbent nu • 24 timer</span>
+                    </div>
+                    <div class="center-details-grid">
+                        <div class="center-details-row center-active-click" data-center="aalborg-nytorv" onclick="event.preventDefault();event.stopPropagation();showActiveUsersFromCenter('aalborg-nytorv')">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span><strong>0</strong> aktive</span>
+                        </div>
+                        <div class="center-details-row">
+                            <svg class="icon-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span><strong>0</strong> check-ins</span>
+                        </div>
                     </div>
                 </div>
                 <svg class="center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6"/>
                 </svg>
-            </div>
+            </a>
             
             <!-- PureGym Aalborg Eternitten -->
-            <div class="center-card">
+            <a href="center-details.html?center=aalborg-eternitten" class="center-card">
                 <div class="center-icon-container">
                     <div class="center-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1289,16 +1535,29 @@
                 <div class="center-info">
                     <div class="center-name">PureGym</div>
                     <div class="center-location">Aalborg Eternitten • 8565.2 km</div>
-                    <div class="center-address">Visionsvej, 9000 Aalborg</div>
-                    <div class="center-status">
-                        <div class="open-badge">Åbent</div>
-                        <div class="active-count">3 aktive</div>
+                    <div class="center-details-row">
+                        <svg class="icon-location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        <span>Visionsvej, 9000 Aalborg</span>
+                    </div>
+                    <div class="center-details-row">
+                        <svg class="icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        <span>Åbent nu • 24 timer</span>
+                    </div>
+                    <div class="center-details-grid">
+                        <div class="center-details-row center-active-click" data-center="aalborg-eternitten" onclick="event.preventDefault();event.stopPropagation();showActiveUsersFromCenter('aalborg-eternitten')">
+                            <svg class="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            <span><strong>3</strong> aktive</span>
+                        </div>
+                        <div class="center-details-row">
+                            <svg class="icon-checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <span><strong>0</strong> check-ins</span>
+                        </div>
                     </div>
                 </div>
                 <svg class="center-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M9 18l6-6-6-6"/>
                 </svg>
-            </div>
+            </a>
         </div>
         
         <!-- Map Section -->
@@ -1318,21 +1577,28 @@
                     <div id="map" style="width: 100%; height: 100%; z-index: 1;"></div>
                     
                     <!-- Map Controls -->
-                    <div class="map-layers-btn" onclick="toggleMapLayers()" style="z-index: 1000;">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="#976FFF">
-                            <rect x="3" y="3" width="7" height="7" rx="1"/>
-                            <rect x="14" y="3" width="7" height="7" rx="1"/>
-                            <rect x="3" y="14" width="7" height="7" rx="1"/>
-                            <rect x="14" y="14" width="7" height="7" rx="1"/>
-                        </svg>
-                    </div>
-                    
-                    <div class="map-location-btn" onclick="centerMapOnUser()" style="z-index: 1000;">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <circle cx="12" cy="12" r="6"/>
-                            <circle cx="12" cy="12" r="2"/>
-                        </svg>
+                    <div class="map-controls-stack">
+                        <div class="map-layers-btn" onclick="toggleMapLayersPanel()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="#976FFF">
+                                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            </svg>
+                        </div>
+                        <div class="map-layers-panel" id="mapLayersPanel">
+                            <div class="map-layer-option active" data-layer="standard">Standard</div>
+                            <div class="map-layer-option" data-layer="satellite">Satellit</div>
+                            <div class="map-layer-option" data-layer="terrain">Terræn</div>
+                            <div class="map-layer-option" data-layer="dark">Mørk</div>
+                        </div>
+                        <div class="map-location-btn" onclick="centerMapOnUser()">
+                            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <circle cx="12" cy="12" r="6"/>
+                                <circle cx="12" cy="12" r="2"/>
+                            </svg>
+                        </div>
                     </div>
                 </div>
                 
@@ -1354,8 +1620,8 @@
                 <div class="map-info-card" id="mapInfoCard" style="display: none;">
                     <div class="info-card-header">
                         <div style="flex: 1;">
-                            <div class="info-card-title">SATS KBH - Vesterport</div>
-                            <div class="info-card-address">Hammerichsgade, 1611 Køben...</div>
+                            <div class="info-card-title" id="infoCardTitle">SATS KBH - Vesterport</div>
+                            <div class="info-card-address" id="infoCardAddress">Hammerichsgade, 1611 Køben...</div>
                         </div>
                         <div class="info-card-icon">
                             <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#666" stroke-width="2">
@@ -1369,27 +1635,39 @@
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
-                            <span>318 m</span>
+                            <span id="infoCardDistance">318 m</span>
                         </div>
-                        <div class="info-detail active">
+                        <div class="info-detail active clickable-detail" id="infoCardActive" onclick="showActiveUsersModal()" title="Se hvem der er aktive">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                                 <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
                                 <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                             </svg>
-                            <span>15 aktive</span>
+                            <span id="infoCardActiveText">15 aktive</span>
                         </div>
-                        <div class="info-detail friends">
+                        <div class="info-detail friends clickable-detail" id="infoCardFriends" onclick="showFriendsOnlineModal()" title="Se dine venner der er online" style="display: none;">
                             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                 <circle cx="12" cy="7" r="4"/>
                             </svg>
-                            <span>3 venner online</span>
+                            <span id="infoCardFriendsText">3 venner online</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- User list modal (active users / friends online) -->
+        <div class="user-list-modal-backdrop" id="userListModalBackdrop" style="display: none;" onclick="closeUserListModal()"></div>
+        <div class="user-list-modal" id="userListModal" style="display: none;">
+            <div class="user-list-modal-header">
+                <h3 class="user-list-modal-title" id="userListModalTitle">Aktive brugere</h3>
+                <button class="user-list-modal-close" onclick="closeUserListModal()">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="user-list-modal-body" id="userListModalBody"></div>
         </div>
     </div>
     
@@ -1399,32 +1677,47 @@
         const tabs = document.querySelectorAll('.nav-tab');
         const sections = document.querySelectorAll('.content-section');
         
+        function switchToTab(tabName) {
+            tabs.forEach(t => t.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            const tab = document.querySelector('.nav-tab[data-tab="' + tabName + '"]');
+            const section = document.getElementById(tabName + '-section');
+            if (tab) tab.classList.add('active');
+            if (section) {
+                section.classList.add('active');
+                if (tabName === 'map' && !window.mapInitialized) {
+                    initMap();
+                    window.mapInitialized = true;
+                }
+            }
+        }
+        
+        if (window.location.hash === '#centers') {
+            switchToTab('centers');
+        } else if (window.location.hash === '#groups') {
+            switchToTab('groups');
+        } else if (window.location.hash === '#map') {
+            switchToTab('map');
+        }
+        
+        window.addEventListener('hashchange', function() {
+            if (window.location.hash === '#centers') switchToTab('centers');
+            else if (window.location.hash === '#groups') switchToTab('groups');
+            else if (window.location.hash === '#map') switchToTab('map');
+        });
+        
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                // Remove active class from all tabs and sections
-                tabs.forEach(t => t.classList.remove('active'));
-                sections.forEach(s => s.classList.remove('active'));
-                
-                // Add active class to clicked tab
-                tab.classList.add('active');
-                
-                // Show corresponding section
                 const tabName = tab.getAttribute('data-tab');
-                const section = document.getElementById(tabName + '-section');
-                if (section) {
-                    section.classList.add('active');
-                    // Initialize map when map tab is opened
-                    if (tabName === 'map' && !window.mapInitialized) {
-                        initMap();
-                        window.mapInitialized = true;
-                    }
-                }
+                switchToTab(tabName);
             });
         });
         
         // Map initialization
         let map;
         let selectedMarker = null;
+        let selectedCenter = null;
+        let userLocationMarker = null;
         
         // User's current location (default to Copenhagen center)
         let userLocation = { lat: 55.6761, lng: 12.5683 };
@@ -1450,43 +1743,135 @@
             }
         }
         
-        function initMap() {
-            // Initialize map centered on Copenhagen
-            map = L.map('map').setView([55.6761, 12.5683], 13);
-            
-            // Add OpenStreetMap tiles
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '© OpenStreetMap contributors',
-                maxZoom: 19
+        function updateUserLocationMarker() {
+            if (!map) return;
+            if (userLocationMarker) map.removeLayer(userLocationMarker);
+            var blueDot = L.circleMarker([userLocation.lat, userLocation.lng], {
+                radius: 10,
+                fillColor: '#2196F3',
+                color: '#fff',
+                weight: 3,
+                opacity: 1,
+                fillOpacity: 0.9
             }).addTo(map);
+            userLocationMarker = blueDot;
+        }
+        
+        var mapLayers = {};
+        var currentMapLayer = 'standard';
+        
+        function initMap() {
+            // Initialize map centered on Denmark (whole country visible)
+            map = L.map('map').setView([56.0, 10.5], 7);
             
-            // Try to get user's location
+            // 4 kortlag
+            mapLayers.standard = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap',
+                maxZoom: 19
+            });
+            mapLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+                attribution: '© Esri',
+                maxZoom: 19
+            });
+            mapLayers.terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenTopoMap',
+                maxZoom: 17
+            });
+            mapLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+                attribution: '© CARTO',
+                maxZoom: 19
+            });
+            
+            mapLayers.standard.addTo(map);
+            
+            // Try to get user's location (keep Denmark view, just update distances)
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
-                    map.setView([userLocation.lat, userLocation.lng], 13);
-                    updateNearbyCenters();
-                }, () => {
-                    // Use default location if geolocation fails
-                    updateNearbyCenters();
-                });
+                    updateUserLocationMarker();
+                    if (window.fitnessCenters) {
+                        window.fitnessCenters.forEach(function(c) {
+                            c.distance = calculateDistance(userLocation.lat, userLocation.lng, c.lat, c.lng);
+                            c.distanceFormatted = formatDistance(c.distance);
+                        });
+                        updateNearbyCenters();
+                    }
+                }, () => { updateNearbyCenters(); });
             } else {
                 updateNearbyCenters();
             }
+            updateUserLocationMarker();
             
-            // Sample fitness centers in Denmark with coordinates
+            // Fitness centers across Denmark
+            const userPool = [
+                { name: 'Lars', userId: 'lars', initial: 'L' },
+                { name: 'Jeff', userId: 'jeff', initial: 'J' },
+                { name: 'Marie', userId: 'marie', initial: 'M' },
+                { name: 'Patrick', userId: 'patrick', initial: 'P' },
+                { name: 'Sofia', userId: 'sofia', initial: 'S' },
+                { name: 'Thomas', userId: 'thomas', initial: 'T' },
+                { name: 'Anna', userId: 'anna', initial: 'A' },
+                { name: 'Mads', userId: 'mads', initial: 'M' },
+                { name: 'Sarah', userId: 'sarah', initial: 'S' },
+                { name: 'Emil', userId: 'emil', initial: 'E' },
+                { name: 'Clara', userId: 'clara', initial: 'C' },
+                { name: 'Oliver', userId: 'oliver', initial: 'O' },
+                { name: 'Emma', userId: 'emma', initial: 'E' },
+                { name: 'Nicolai', userId: 'nicolai', initial: 'N' },
+                { name: 'Kirsten', userId: 'kirsten', initial: 'K' }
+            ];
+            const friendIds = ['lars', 'jeff', 'marie', 'sofia'];
+            function pickActiveUsers(count) {
+                var out = []; var p = userPool.slice();
+                for (var i = 0; i < count && p.length; i++) {
+                    out.push(p.splice(Math.floor(Math.random() * p.length), 1)[0]);
+                }
+                return out;
+            }
+            function pickFriends(count) {
+                return friendIds.slice(0, Math.min(count, friendIds.length))
+                    .map(function(id) { return userPool.find(function(u) { return u.userId === id; }); }).filter(Boolean);
+            }
             const fitnessCenters = [
                 { name: 'SATS KBH - Vesterport', lat: 55.6761, lng: 12.5683, active: 15, friends: 3, address: 'Hammerichsgade, 1611 København' },
                 { name: 'PureGym Nørrebro', lat: 55.6942, lng: 12.5517, active: 10, friends: 1, address: 'Nørrebrogade, 2200 København' },
-                { name: 'Fitness World Frederiksberg', lat: 55.6770, lng: 12.5300, active: 5, friends: 3, address: 'Falkoner Allé, 2000 Frederiksberg' },
+                { name: 'Fitness World Frederiksberg', lat: 55.6770, lng: 12.5300, active: 5, friends: 2, address: 'Falkoner Allé, 2000 Frederiksberg' },
                 { name: 'PureGym Vesterbro', lat: 55.6710, lng: 12.5510, active: 8, friends: 0, address: 'Vesterbrogade, 1620 København' },
                 { name: 'SATS KBH - Østerbro', lat: 55.6910, lng: 12.5780, active: 12, friends: 2, address: 'Østerbrogade, 2100 København' },
                 { name: 'Fitness World Amager', lat: 55.6610, lng: 12.5910, active: 7, friends: 1, address: 'Amagerbrogade, 2300 København' },
-                { name: 'PureGym Aarhus', lat: 56.1567, lng: 10.2039, active: 20, friends: 5, address: 'Søndergade, 8000 Aarhus' },
+                { name: 'PureGym Valby', lat: 55.6580, lng: 12.5150, active: 4, friends: 1, address: 'Valby Langgade, 2500 Valby' },
+                { name: 'Fitness World Roskilde', lat: 55.6415, lng: 12.0803, active: 9, friends: 0, address: 'Algade, 4000 Roskilde' },
+                { name: 'PureGym Helsingør', lat: 56.0361, lng: 12.6136, active: 6, friends: 1, address: 'Stengade, 3000 Helsingør' },
+                { name: 'Fitness World Hillerød', lat: 55.9281, lng: 12.2992, active: 5, friends: 0, address: 'Slotsgade, 3400 Hillerød' },
+                { name: 'PureGym Næstved', lat: 55.2298, lng: 11.7601, active: 8, friends: 0, address: 'Rådhusstræde, 4700 Næstved' },
                 { name: 'Fitness World Odense', lat: 55.4038, lng: 10.4024, active: 14, friends: 2, address: 'Vestergade, 5000 Odense' },
+                { name: 'PureGym Odense', lat: 55.3959, lng: 10.3883, active: 11, friends: 1, address: 'Kongensgade, 5000 Odense' },
+                { name: 'Fitness World Svendborg', lat: 55.0596, lng: 10.6065, active: 4, friends: 0, address: 'Vestergade, 5700 Svendborg' },
+                { name: 'PureGym Aarhus', lat: 56.1567, lng: 10.2039, active: 20, friends: 5, address: 'Søndergade, 8000 Aarhus' },
+                { name: 'Fitness World Aarhus', lat: 56.1592, lng: 10.2101, active: 18, friends: 4, address: 'Ryesgade, 8000 Aarhus' },
                 { name: 'PureGym Aalborg', lat: 57.0488, lng: 9.9217, active: 9, friends: 1, address: 'Boulevarden, 9000 Aalborg' },
-                { name: 'SATS Esbjerg', lat: 55.4869, lng: 8.4514, active: 6, friends: 0, address: 'Torvegade, 6700 Esbjerg' }
+                { name: 'PureGym Aalborg Dannebrogsgade', lat: 57.0490, lng: 9.9180, active: 10, friends: 1, address: 'Dannebrogsgade, 9000 Aalborg' },
+                { name: 'PureGym Nørresundby', lat: 57.0592, lng: 9.9350, active: 5, friends: 0, address: 'Strubjerg, 9400 Nørresundby' },
+                { name: 'PureGym Hjørring', lat: 57.4584, lng: 9.9826, active: 6, friends: 0, address: 'Søndergade, 9800 Hjørring' },
+                { name: 'SATS Esbjerg', lat: 55.4869, lng: 8.4514, active: 6, friends: 0, address: 'Torvegade, 6700 Esbjerg' },
+                { name: 'PureGym Esbjerg', lat: 55.4670, lng: 8.4500, active: 8, friends: 1, address: 'Skolegade, 6700 Esbjerg' },
+                { name: 'Fitness World Vejle', lat: 55.7089, lng: 9.5357, active: 12, friends: 2, address: 'Dæmningen, 7100 Vejle' },
+                { name: 'PureGym Kolding', lat: 55.4904, lng: 9.4721, active: 10, friends: 1, address: 'Skovbrynet, 6000 Kolding' },
+                { name: 'Fitness World Horsens', lat: 55.8607, lng: 9.8501, active: 7, friends: 1, address: 'Søndergade, 8700 Horsens' },
+                { name: 'PureGym Randers', lat: 56.4607, lng: 10.0369, active: 9, friends: 0, address: 'Erik Menveds Plads, 8900 Randers' },
+                { name: 'Fitness World Herning', lat: 56.1381, lng: 8.9762, active: 6, friends: 0, address: 'Bredgade, 7400 Herning' },
+                { name: 'PureGym Silkeborg', lat: 56.1694, lng: 9.5494, active: 5, friends: 0, address: 'Havnegade, 8600 Silkeborg' },
+                { name: 'Fitness World Viborg', lat: 56.4522, lng: 9.4029, active: 4, friends: 0, address: 'Sct. Mogens Gade, 8800 Viborg' },
+                { name: 'PureGym Thisted', lat: 56.9545, lng: 8.6940, active: 3, friends: 0, address: 'Torvet, 7700 Thisted' },
+                { name: 'Fitness World Fredericia', lat: 55.5657, lng: 9.7526, active: 7, friends: 0, address: 'Vestergade, 7000 Fredericia' },
+                { name: 'PureGym Middelfart', lat: 55.5050, lng: 9.7306, active: 4, friends: 0, address: 'Havnegade, 5500 Middelfart' },
+                { name: 'Fitness World Slagelse', lat: 55.4028, lng: 11.3536, active: 5, friends: 0, address: 'Algade, 4200 Slagelse' },
+                { name: 'PureGym Køge', lat: 55.4583, lng: 12.1822, active: 6, friends: 0, address: 'Vestergade, 4600 Køge' }
             ];
+            fitnessCenters.forEach(function(c) {
+                c.activeUsers = pickActiveUsers(c.active);
+                c.friendsOnline = pickFriends(c.friends);
+            });
             
             // Store centers globally
             window.fitnessCenters = fitnessCenters;
@@ -1570,6 +1955,23 @@
                 document.getElementById('nearbyCentersBar').style.display = 'block';
                 document.getElementById('mapInfoCard').style.display = 'none';
             });
+            
+            // Kortlag-panel: klik på valg
+            document.querySelectorAll('.map-layer-option').forEach(function(el) {
+                el.addEventListener('click', function() {
+                    var layerId = this.getAttribute('data-layer');
+                    if (layerId) switchMapLayer(layerId);
+                });
+            });
+            
+            // Luk panel ved klik udenfor
+            document.addEventListener('click', function(e) {
+                var panel = document.getElementById('mapLayersPanel');
+                var btn = document.querySelector('.map-layers-btn');
+                if (panel && panel.classList.contains('open') && btn && !panel.contains(e.target) && !btn.contains(e.target)) {
+                    panel.classList.remove('open');
+                }
+            });
         }
         
         function createMarkerIcon(center, color, size) {
@@ -1629,81 +2031,140 @@
             
             scrollContainer.innerHTML = '';
             
-            nearest5.forEach(center => {
-                const card = document.createElement('div');
+            nearest5.forEach(function(center) {
+                var card = document.createElement('div');
                 card.className = 'nearby-center-card';
-                card.onclick = () => {
+                card.onclick = function(e) {
+                    if (e.target.closest('.clickable-nearby')) {
+                        e.stopPropagation();
+                        return;
+                    }
+                    selectedCenter = center;
                     showCenterInfo(center);
                     map.setView([center.lat, center.lng], 15);
-                    // Hide nearby bar and show info card
                     document.getElementById('nearbyCentersBar').style.display = 'none';
                     document.getElementById('mapInfoCard').style.display = 'block';
                 };
                 
-                card.innerHTML = `
-                    <div class="nearby-center-name">${center.name}</div>
-                    <div class="nearby-center-address">${center.address}</div>
-                    <div class="nearby-center-details">
-                        <div class="nearby-center-detail location">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                <circle cx="12" cy="10" r="3"/>
-                            </svg>
-                            <span>${center.distanceFormatted}</span>
-                        </div>
-                        <div class="nearby-center-detail active">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-                            </svg>
-                            <span>${center.active} aktive</span>
-                        </div>
-                        ${center.friends > 0 ? `
-                        <div class="nearby-center-detail friends">
-                            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                                <circle cx="12" cy="7" r="4"/>
-                            </svg>
-                            <span>${center.friends} venner online</span>
-                        </div>
-                        ` : ''}
-                    </div>
-                `;
+                card.innerHTML = 
+                    '<div class="nearby-center-name">' + center.name + '</div>' +
+                    '<div class="nearby-center-address">' + center.address + '</div>' +
+                    '<div class="nearby-center-details">' +
+                    '<div class="nearby-center-detail location"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>' + center.distanceFormatted + '</span></div>' +
+                    '<div class="nearby-center-detail active clickable-nearby clickable-detail" data-center-id="' + center.name + '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>' + center.active + ' aktive</span></div>' +
+                    (center.friends > 0 ? '<div class="nearby-center-detail friends clickable-nearby clickable-detail" data-center-id="' + center.name + '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>' + center.friends + ' venner online</span></div>' : '') +
+                    '</div>';
                 
                 scrollContainer.appendChild(card);
+                
+                [].slice.call(card.querySelectorAll('.clickable-nearby')).forEach(function(el) {
+                    el.addEventListener('click', function(ev) {
+                        ev.stopPropagation();
+                        ev.preventDefault();
+                        selectedCenter = center;
+                        showCenterInfo(center);
+                        document.getElementById('nearbyCentersBar').style.display = 'none';
+                        document.getElementById('mapInfoCard').style.display = 'block';
+                        if (el.classList.contains('friends')) showFriendsOnlineModal();
+                        else showActiveUsersModal();
+                    });
+                });
             });
         }
         
         function showCenterInfo(center) {
-            const infoCard = document.getElementById('mapInfoCard');
+            selectedCenter = center;
+            var infoCard = document.getElementById('mapInfoCard');
             if (infoCard) {
-                infoCard.querySelector('.info-card-title').textContent = center.name;
-                infoCard.querySelector('.info-card-address').textContent = center.address;
-                const locationDetail = infoCard.querySelector('.info-detail.location span');
-                if (locationDetail) locationDetail.textContent = center.distanceFormatted || center.distance;
-                const activeDetail = infoCard.querySelector('.info-detail.active span');
-                if (activeDetail) activeDetail.textContent = center.active + ' aktive';
-                const friendsDetail = infoCard.querySelector('.info-detail.friends span');
-                if (friendsDetail) friendsDetail.textContent = center.friends + ' venner online';
+                document.getElementById('infoCardTitle').textContent = center.name;
+                document.getElementById('infoCardAddress').textContent = center.address;
+                document.getElementById('infoCardDistance').textContent = center.distanceFormatted || formatDistance(center.distance);
+                document.getElementById('infoCardActiveText').textContent = center.active + ' aktive';
+                var friendsRow = document.getElementById('infoCardFriends');
+                if (center.friends > 0) {
+                    friendsRow.style.display = 'flex';
+                    document.getElementById('infoCardFriendsText').textContent = center.friends + ' venner online';
+                } else {
+                    friendsRow.style.display = 'none';
+                }
                 infoCard.style.display = 'block';
-                // Hide nearby bar when showing info card
                 document.getElementById('nearbyCentersBar').style.display = 'none';
             }
         }
         
-        function toggleMapLayers() {
-            // Toggle between different map layers (satellite, street, etc.)
-            alert('Kortlag-funktion kommer snart!');
+        var centersListData = {
+            hjorring: { name: 'PureGym Hjørring', activeUsers: [{ name: 'Lars', userId: 'lars', initial: 'L' }, { name: 'Jeff', userId: 'jeff', initial: 'J' }, { name: 'Marie', userId: 'marie', initial: 'M' }, { name: 'Patrick', userId: 'patrick', initial: 'P' }, { name: 'Sofia', userId: 'sofia', initial: 'S' }, { name: 'Thomas', userId: 'thomas', initial: 'T' }, { name: 'Anna', userId: 'anna', initial: 'A' }, { name: 'Mads', userId: 'mads', initial: 'M' }, { name: 'Sarah', userId: 'sarah', initial: 'S' }, { name: 'Emil', userId: 'emil', initial: 'E' }, { name: 'Clara', userId: 'clara', initial: 'C' }, { name: 'Oliver', userId: 'oliver', initial: 'O' }, { name: 'Emma', userId: 'emma', initial: 'E' }, { name: 'Nicolai', userId: 'nicolai', initial: 'N' }, { name: 'Kirsten', userId: 'kirsten', initial: 'K' }] },
+            norresundby: { name: 'PureGym Nørresundby', activeUsers: [{ name: 'Lars', userId: 'lars', initial: 'L' }, { name: 'Jeff', userId: 'jeff', initial: 'J' }, { name: 'Marie', userId: 'marie', initial: 'M' }, { name: 'Patrick', userId: 'patrick', initial: 'P' }, { name: 'Sofia', userId: 'sofia', initial: 'S' }] },
+            'aalborg-dannebrogsgade': { name: 'PureGym Aalborg Dannebrogsgade', activeUsers: [{ name: 'Lars', userId: 'lars', initial: 'L' }, { name: 'Jeff', userId: 'jeff', initial: 'J' }, { name: 'Marie', userId: 'marie', initial: 'M' }, { name: 'Patrick', userId: 'patrick', initial: 'P' }, { name: 'Sofia', userId: 'sofia', initial: 'S' }, { name: 'Thomas', userId: 'thomas', initial: 'T' }, { name: 'Anna', userId: 'anna', initial: 'A' }, { name: 'Mads', userId: 'mads', initial: 'M' }, { name: 'Sarah', userId: 'sarah', initial: 'S' }, { name: 'Emil', userId: 'emil', initial: 'E' }] },
+            'aalborg-nytorv': { name: 'PureGym Aalborg Citycenter Friis Nytorv', activeUsers: [] },
+            'aalborg-eternitten': { name: 'PureGym Aalborg Eternitten', activeUsers: [{ name: 'Lars', userId: 'lars', initial: 'L' }, { name: 'Jeff', userId: 'jeff', initial: 'J' }, { name: 'Marie', userId: 'marie', initial: 'M' }] }
+        };
+        
+        function showActiveUsersFromCenter(centerId) {
+            var center = centersListData[centerId];
+            if (!center) return;
+            var users = center.activeUsers || [];
+            document.getElementById('userListModalTitle').textContent = 'Aktive ved ' + center.name;
+            var body = document.getElementById('userListModalBody');
+            body.innerHTML = users.length ? users.map(function(u) {
+                return '<a href="profile.html?user=' + u.userId + '" class="user-list-item"><span class="user-list-avatar">' + u.initial + '</span><span class="user-list-name">' + u.name + '</span></a>';
+            }).join('') : '<p style="color:#666;">Ingen aktive lige nu</p>';
+            document.getElementById('userListModal').style.display = 'flex';
+            document.getElementById('userListModalBackdrop').style.display = 'block';
+        }
+        
+        function showActiveUsersModal() {
+            if (!selectedCenter) return;
+            var users = selectedCenter.activeUsers || [];
+            document.getElementById('userListModalTitle').textContent = 'Aktive ved ' + selectedCenter.name;
+            var body = document.getElementById('userListModalBody');
+            body.innerHTML = users.length ? users.map(function(u) {
+                return '<a href="profile.html?user=' + u.userId + '" class="user-list-item"><span class="user-list-avatar">' + u.initial + '</span><span class="user-list-name">' + u.name + '</span></a>';
+            }).join('') : '<p style="color:#666;">Ingen aktive lige nu</p>';
+            document.getElementById('userListModal').style.display = 'flex';
+            document.getElementById('userListModalBackdrop').style.display = 'block';
+        }
+        
+        function showFriendsOnlineModal() {
+            if (!selectedCenter) return;
+            var friends = selectedCenter.friendsOnline || [];
+            document.getElementById('userListModalTitle').textContent = 'Venner online ved ' + selectedCenter.name;
+            var body = document.getElementById('userListModalBody');
+            body.innerHTML = friends.length ? friends.map(function(u) {
+                return '<a href="profile.html?user=' + u.userId + '" class="user-list-item"><span class="user-list-avatar">' + u.initial + '</span><span class="user-list-name">' + u.name + '</span></a>';
+            }).join('') : '<p style="color:#666;">Ingen venner online</p>';
+            document.getElementById('userListModal').style.display = 'flex';
+            document.getElementById('userListModalBackdrop').style.display = 'block';
+        }
+        
+        function closeUserListModal() {
+            document.getElementById('userListModal').style.display = 'none';
+            document.getElementById('userListModalBackdrop').style.display = 'none';
+        }
+        
+        function toggleMapLayersPanel() {
+            var panel = document.getElementById('mapLayersPanel');
+            if (panel) panel.classList.toggle('open');
+        }
+        
+        function switchMapLayer(layerId) {
+            if (!map || !mapLayers[layerId]) return;
+            map.removeLayer(mapLayers[currentMapLayer]);
+            mapLayers[layerId].addTo(map);
+            currentMapLayer = layerId;
+            document.querySelectorAll('.map-layer-option').forEach(function(el) {
+                el.classList.toggle('active', el.getAttribute('data-layer') === layerId);
+            });
+            var panel = document.getElementById('mapLayersPanel');
+            if (panel) panel.classList.remove('open');
         }
         
         function centerMapOnUser() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition((position) => {
                     userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
+                    updateUserLocationMarker();
                     map.setView([userLocation.lat, userLocation.lng], 13);
-                    // Recalculate distances and update nearby centers
                     if (window.fitnessCenters) {
                         window.fitnessCenters.forEach(center => {
                             center.distance = calculateDistance(userLocation.lat, userLocation.lng, center.lat, center.lng);
@@ -1712,11 +2173,9 @@
                         updateNearbyCenters();
                     }
                 }, () => {
-                    // Default to Copenhagen if geolocation fails
                     map.setView([55.6761, 12.5683], 13);
                 });
             } else {
-                // Default to Copenhagen if geolocation not supported
                 map.setView([55.6761, 12.5683], 13);
             }
         }
@@ -1726,26 +2185,62 @@
     <!-- Bund-navigation: 5 hovedikoner -->
     <nav class="bottom-nav-bar">
         <a href="index.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-hjem" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
             <span class="nav-label">Hjem</span>
         </a>
         <a href="online.html" class="nav-icon-item active">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-online" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></span>
             <span class="nav-label">Online</span>
         </a>
         <a href="checkin.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-checkin" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
             <span class="nav-label">Tjek ind</span>
         </a>
         <a href="messages.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-beskeder" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
             <span class="nav-label">Beskeder</span>
         </a>
         <a href="profile.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-profil" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
             <span class="nav-label">Profil</span>
         </a>
     </nav>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.join-button').forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (this.classList.contains('requested')) return;
+                    var userName = this.closest('.user-card').querySelector('.user-name')?.textContent || 'personen';
+                    this.textContent = 'Anmodet';
+                    this.classList.add('requested');
+                    this.disabled = true;
+                    // TODO: Send anmodning til backend/API
+                    console.log('Anmodning sendt til ' + userName);
+                });
+            });
+            document.querySelectorAll('.user-card[data-user]').forEach(function(card) {
+                card.addEventListener('click', function(e) {
+                    if (e.target.closest('.user-actions')) return;
+                    var user = this.getAttribute('data-user');
+                    if (user) window.location.href = 'profile.html?user=' + user;
+                });
+            });
+            document.querySelectorAll('.center-active-click').forEach(function(el) {
+                var centerId = el.getAttribute('data-center');
+                if (!centerId) return;
+                el.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    if (typeof showActiveUsersFromCenter === 'function') {
+                        showActiveUsersFromCenter(centerId);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 

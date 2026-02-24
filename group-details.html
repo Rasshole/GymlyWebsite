@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gruppe detaljer | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        body { background: #f0f0f0; min-height: 100vh; margin: 0; padding: 0; }
+        .group-details-page { padding: 0 1.5rem 2rem; max-width: 500px; margin: 0 auto; }
+        .group-details-header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #000;
+        }
+        .back-button { background: none; border: none; cursor: pointer; display: flex; align-items: center; padding: 0.5rem; color: #000; }
+        .back-button svg { width: 24px; height: 24px; }
+        .header-title { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: #000; margin: 0; }
+        .header-spacer { width: 40px; }
+        .detail-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .group-name-card { text-align: center; padding: 2rem; }
+        .group-name-card .group-name { font-family: 'Manrope', sans-serif; font-size: 1.75rem; font-weight: 800; color: #000; margin: 0 0 0.25rem 0; }
+        .group-name-card .group-members { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #666; }
+        .detail-row { display: flex; align-items: flex-start; gap: 1rem; }
+        .detail-icon { width: 24px; height: 24px; flex-shrink: 0; margin-top: 0.15rem; }
+        .detail-icon.bio { color: var(--primary); }
+        .detail-icon.calendar { color: #2196F3; }
+        .detail-icon.clock { color: #4CAF50; }
+        .detail-icon.checkin { color: var(--primary); }
+        .detail-icon.users { color: #4CAF50; }
+        .detail-content { flex: 1; min-width: 0; }
+        .detail-title { font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; color: #000; margin: 0 0 0.5rem 0; }
+        .detail-value { font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #666; margin: 0; line-height: 1.5; }
+        .detail-number { font-family: 'Manrope', sans-serif; font-size: 1.5rem; font-weight: 800; color: #000; margin: 0; }
+        .members-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 0.5rem; }
+        .member-link {
+            display: flex; align-items: center; gap: 0.5rem;
+            background: #f5f5f5; border-radius: 24px; padding: 0.5rem 1rem;
+            text-decoration: none; color: inherit; font-family: 'Inter', sans-serif; font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .member-link:hover { background: var(--primary-pastel); color: var(--primary); }
+        .member-avatar-sm {
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
+            color: white; font-weight: 600; font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="group-details-header">
+        <button class="back-button" onclick="window.location.href='online.html#groups'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <h1 class="header-title">Gruppe detaljer</h1>
+        <div class="header-spacer"></div>
+    </header>
+    
+    <main class="group-details-page">
+        <div id="groupContent">
+            <div class="detail-card group-name-card">
+                <h2 class="group-name">Weekend Warriors</h2>
+                <p class="group-members">7 medlemmer</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon bio" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Biografi</h3>
+                        <p class="detail-value" id="bio">En gruppe for dem der elsker at træne i weekenden. Vi mødes lørdag og søndag for træning, hygge og motivation.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Oprettet</h3>
+                        <p class="detail-value" id="created">15. januar 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Aktive minutter sammen</h3>
+                        <p class="detail-number" id="activeMin">1.247</p>
+                        <p class="detail-value">minutter trænet i gruppen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Check-ins sammen</h3>
+                        <p class="detail-number" id="checkins">48</p>
+                        <p class="detail-value">gange tjekket ind som gruppe</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Gruppe medlemmer</h3>
+                        <div class="members-grid" id="membersList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        (function() {
+        var groups = {
+            'weekend-warriors': {
+                name: 'Weekend Warriors',
+                members: 7,
+                bio: 'En gruppe for dem der elsker at træne i weekenden. Vi mødes lørdag og søndag for træning, hygge og motivation.',
+                created: '15. januar 2025',
+                activeMinutes: 1247,
+                checkins: 48,
+                memberList: [
+                    { name: 'Jeff', userId: 'jeff', initial: 'J' },
+                    { name: 'Lars', userId: 'lars', initial: 'L' },
+                    { name: 'Marie', userId: 'marie', initial: 'M' },
+                    { name: 'Patrick', userId: 'patrick', initial: 'P' },
+                    { name: 'Sofia', userId: 'sofia', initial: 'S' },
+                    { name: 'Thomas', userId: 'thomas', initial: 'T' },
+                    { name: 'Anna', userId: 'anna', initial: 'A' }
+                ]
+            },
+            morgenmotionister: {
+                name: 'Morgenmotionister',
+                members: 3,
+                bio: 'Start dagen stærkt! Vi mødes tidligt om morgenen for træning før arbejde. Perfekt for early birds.',
+                created: '3. marts 2025',
+                activeMinutes: 892,
+                checkins: 23,
+                memberList: [
+                    { name: 'Jeff', userId: 'jeff', initial: 'J' },
+                    { name: 'Marie', userId: 'marie', initial: 'M' },
+                    { name: 'Anna', userId: 'anna', initial: 'A' }
+                ]
+            },
+            community: {
+                name: 'Community',
+                members: 12,
+                bio: 'Gymlys fællesgruppe for alle der vil dele erfaringer, tips og motivation. Åben for alle træningsformer.',
+                created: '1. december 2024',
+                activeMinutes: 3456,
+                checkins: 156,
+                memberList: [
+                    { name: 'Jeff', userId: 'jeff', initial: 'J' },
+                    { name: 'Lars', userId: 'lars', initial: 'L' },
+                    { name: 'Marie', userId: 'marie', initial: 'M' },
+                    { name: 'Patrick', userId: 'patrick', initial: 'P' },
+                    { name: 'Sofia', userId: 'sofia', initial: 'S' },
+                    { name: 'Thomas', userId: 'thomas', initial: 'T' },
+                    { name: 'Anna', userId: 'anna', initial: 'A' },
+                    { name: 'Mads', userId: 'mads', initial: 'M' },
+                    { name: 'Sarah', userId: 'sarah', initial: 'S' },
+                    { name: 'Thc', userId: 'thc', initial: 'T' },
+                    { name: 'Lucas', userId: 'lucas', initial: 'L' },
+                    { name: 'Emma', userId: 'emma', initial: 'E' }
+                ]
+            }
+        };
+        var urlParams = new URLSearchParams(window.location.search);
+        var groupId = urlParams.get('group') || 'weekend-warriors';
+        var group = groups[groupId] || groups['weekend-warriors'];
+        document.title = group.name + ' | Gymly';
+        var gn = document.querySelector('.group-name');
+        var gm = document.querySelector('.group-members');
+        var bio = document.getElementById('bio');
+        var created = document.getElementById('created');
+        var activeMin = document.getElementById('activeMin');
+        var checkinsEl = document.getElementById('checkins');
+        var membersList = document.getElementById('membersList');
+        if (gn) gn.textContent = group.name;
+        if (gm) gm.textContent = group.members + ' medlemmer';
+        if (bio) bio.textContent = group.bio;
+        if (created) created.textContent = group.created;
+        if (activeMin) activeMin.textContent = group.activeMinutes.toLocaleString('da-DK');
+        if (checkinsEl) checkinsEl.textContent = (group.checkins || 0).toLocaleString('da-DK');
+        if (membersList && group.memberList) {
+            membersList.innerHTML = group.memberList.map(function(m) {
+                return '<a href="profile.html?user=' + m.userId + '" class="member-link">' +
+                    '<span class="member-avatar-sm">' + m.initial + '</span>' +
+                    '<span>' + m.name + '</span></a>';
+            }).join('');
+        }
+        })();
+    </script>
+</body>
+</html>

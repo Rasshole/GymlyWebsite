@@ -7,12 +7,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=10">
+    <style>
+        .suggested-friend-card,
+        .suggested-friend-card * {
+            text-decoration: none !important;
+        }
+    </style>
     <script src="auth.js"></script>
     <script>requireAuth();</script>
 </head>
 <body class="start-page">
-    <!-- Header: logo venstre, Log ud + Profil + Indstillinger (tandhjul) + Download højre -->
+    <!-- Header: logo venstre, Indstillinger (tandhjul) + Download + Log ud højre -->
     <div class="header-bar">
         <div class="header-bar-left">
             <a href="index.html" class="header-bar-logo" aria-label="Hjem">
@@ -20,8 +26,6 @@
             </a>
         </div>
         <div class="header-bar-right">
-            <button type="button" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline" onclick="logout()">Log ud</button>
-            <a href="profile.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline">Profil</a>
             <a href="settings.html" class="header-bar-btn header-bar-btn-icon" aria-label="Indstillinger">
                 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="3"/>
@@ -29,6 +33,7 @@
                 </svg>
             </a>
             <a href="download.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-primary">Download</a>
+            <button type="button" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline" onclick="logout()">Log ud</button>
         </div>
     </div>
 
@@ -50,33 +55,33 @@
                 <span class="home-section-badge">3</span>
             </div>
             <div class="friend-cards">
-                <div class="friend-card">
+                <a href="profile.html?user=patrick" class="friend-card">
                     <div class="friend-card-avatar">P</div>
                     <div class="friend-card-info">
                         <div class="friend-card-name">Patrick</div>
                         <div class="friend-card-location">SATS KBH Valby · 23 min</div>
                         <div class="friend-card-icons">💪 🏃</div>
                     </div>
-                    <button class="friend-card-btn">Deltag</button>
-                </div>
-                <div class="friend-card">
+                    <button type="button" class="friend-card-btn">Deltag</button>
+                </a>
+                <a href="profile.html?user=marie" class="friend-card">
                     <div class="friend-card-avatar">M</div>
                     <div class="friend-card-info">
                         <div class="friend-card-name">Marie</div>
                         <div class="friend-card-location">PureGym Lygten · 45 min</div>
                         <div class="friend-card-icons">🏋️ 💪</div>
                     </div>
-                    <button class="friend-card-btn">Deltag</button>
-                </div>
-                <div class="friend-card">
+                    <button type="button" class="friend-card-btn">Deltag</button>
+                </a>
+                <a href="profile.html?user=lars" class="friend-card">
                     <div class="friend-card-avatar">L</div>
                     <div class="friend-card-info">
                         <div class="friend-card-name">Lars</div>
                         <div class="friend-card-location">SATS KBH Adelgade · 12 min</div>
                         <div class="friend-card-icons">🏋️</div>
                     </div>
-                    <button class="friend-card-btn">Deltag</button>
-                </div>
+                    <button type="button" class="friend-card-btn">Deltag</button>
+                </a>
             </div>
         </section>
 
@@ -84,24 +89,24 @@
         <section class="home-section">
             <h2 class="home-section-title">Forslåede venner</h2>
             <div class="suggested-friends-scroll">
-                <div class="suggested-friend-card">
+                <a href="profile.html?user=lars" class="suggested-friend-card">
                     <div class="suggested-friend-avatar">L</div>
                     <div class="suggested-friend-name">Lars</div>
                     <div class="suggested-friend-mutual">3 fælles venner</div>
                     <div class="suggested-friend-gym">PureGym Fields</div>
-                </div>
-                <div class="suggested-friend-card">
+                </a>
+                <a href="profile.html?user=sofia" class="suggested-friend-card">
                     <div class="suggested-friend-avatar">S</div>
                     <div class="suggested-friend-name">Sofia</div>
                     <div class="suggested-friend-mutual">5 fælles venner</div>
                     <div class="suggested-friend-gym">Urban Gym</div>
-                </div>
-                <div class="suggested-friend-card">
+                </a>
+                <a href="profile.html?user=thc" class="suggested-friend-card">
                     <div class="suggested-friend-avatar">T</div>
                     <div class="suggested-friend-name">Thc</div>
                     <div class="suggested-friend-mutual">2 fælles venner</div>
                     <div class="suggested-friend-gym">Repeat Fitness</div>
-                </div>
+                </a>
             </div>
         </section>
     </main>
@@ -109,27 +114,42 @@
     <!-- Bund-navigation: 5 hovedikoner -->
     <nav class="bottom-nav-bar">
         <a href="index.html" class="nav-icon-item active">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-hjem" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
             <span class="nav-label">Hjem</span>
         </a>
         <a href="online.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-online" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></span>
             <span class="nav-label">Online</span>
         </a>
         <a href="checkin.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-checkin" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
             <span class="nav-label">Tjek ind</span>
         </a>
         <a href="messages.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-beskeder" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
             <span class="nav-label">Beskeder</span>
         </a>
         <a href="profile.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><img src="assets/nav-icons-icononly.png?v=5" class="nav-icon-img nav-icon-profil" alt=""></span>
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
             <span class="nav-label">Profil</span>
         </a>
     </nav>
 
+    <script>
+        document.querySelectorAll('.friend-card-btn').forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (this.classList.contains('requested')) return;
+                var userName = this.closest('.friend-card').querySelector('.friend-card-name')?.textContent || 'personen';
+                this.textContent = 'Anmodet';
+                this.classList.add('requested');
+                this.disabled = true;
+                // TODO: Send anmodning til backend/API
+                console.log('Anmodning sendt til ' + userName);
+            });
+        });
+    </script>
 </body>
 </html>
 

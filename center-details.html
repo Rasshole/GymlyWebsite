@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Center detaljer | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        body {
+            background: #f0f0f0;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .center-details-page {
+            padding: 0 1.5rem 2rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .center-details-header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #000;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            color: #000;
+        }
+        
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .header-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+        }
+        
+        .header-spacer {
+            width: 40px;
+        }
+        
+        .detail-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .center-name-card {
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .center-name-card .center-name {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0 0 0.25rem 0;
+        }
+        
+        .center-name-card .center-brand {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #20a0a0;
+        }
+        
+        .detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .detail-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+        
+        .detail-icon.location { color: #2196F3; }
+        .detail-icon.clock { color: #4CAF50; }
+        .detail-icon.users { color: #4CAF50; }
+        .detail-icon.checkin { color: #2196F3; }
+        
+        .detail-content {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .detail-title {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #000;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .detail-value {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        .open-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #e8f5e9;
+            color: #4CAF50;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .open-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+        }
+        
+        .detail-number {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+        }
+        
+        .detail-number + .detail-value {
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="center-details-header">
+        <button class="back-button" onclick="window.location.href='online.html#centers'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+        </button>
+        <h1 class="header-title">Center detaljer</h1>
+        <div class="header-spacer"></div>
+    </header>
+    
+    <main class="center-details-page">
+        <div id="centerContent">
+            <div class="detail-card center-name-card">
+                <h2 class="center-name">PureGym</h2>
+                <p class="center-brand">PureGym</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon location" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Adresse</h3>
+                        <p class="detail-value" id="addr">Hjørring</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Åbningstider</h3>
+                        <div class="open-badge">Åbent nu</div>
+                        <p class="detail-value" id="hours">Åbent 24 timer i døgnet</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Aktive brugere</h3>
+                        <p class="detail-number" id="active">15</p>
+                        <p class="detail-value">aktive brugere lige nu</p>
+                    </div>
+                </div>
+            </div>
+            <div class="detail-card">
+                <div class="detail-row">
+                    <svg class="detail-icon checkin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <div class="detail-content">
+                        <h3 class="detail-title">Mine check-ins</h3>
+                        <p class="detail-number" id="checkins">0</p>
+                        <p class="detail-value">gange tjekket ind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        (function() {
+        var centers = {
+            hjorring: {
+                name: 'PureGym Hjørring',
+                brand: 'PureGym',
+                address: 'Hjørring',
+                openingHours: 'Åbent 24 timer i døgnet',
+                isOpen: true,
+                activeUsers: 15,
+                myCheckins: 0
+            },
+            norresundby: {
+                name: 'PureGym Nørresundby',
+                brand: 'PureGym',
+                address: 'Strubjerg, 9400 Nørresundby',
+                openingHours: 'Åbent 24 timer i døgnet',
+                isOpen: true,
+                activeUsers: 5,
+                myCheckins: 0
+            },
+            'aalborg-dannebrogsgade': {
+                name: 'PureGym Aalborg Dannebrogsgade',
+                brand: 'PureGym',
+                address: 'Dannebrogsgade, 9000 Aalborg',
+                openingHours: 'Åbent 24 timer i døgnet',
+                isOpen: true,
+                activeUsers: 10,
+                myCheckins: 0
+            },
+            'aalborg-nytorv': {
+                name: 'PureGym Aalborg Citycenter Friis Nytorv',
+                brand: 'PureGym',
+                address: 'Nytorv, 9000 Aalborg',
+                openingHours: 'Åbent 24 timer i døgnet',
+                isOpen: true,
+                activeUsers: 0,
+                myCheckins: 0
+            },
+            'aalborg-eternitten': {
+                name: 'PureGym Aalborg Eternitten',
+                brand: 'PureGym',
+                address: 'Visionsvej, 9000 Aalborg',
+                openingHours: 'Åbent 24 timer i døgnet',
+                isOpen: true,
+                activeUsers: 3,
+                myCheckins: 0
+            }
+        };
+        
+        var urlParams = new URLSearchParams(window.location.search);
+        var centerId = urlParams.get('center') || 'hjorring';
+        var center = centers[centerId] || centers.hjorring;
+        
+        document.title = center.name + ' - Center detaljer | Gymly';
+        
+        var nc = document.querySelector('.center-name');
+        var nb = document.querySelector('.center-brand');
+        var addr = document.getElementById('addr');
+        var hours = document.getElementById('hours');
+        var active = document.getElementById('active');
+        var checkins = document.getElementById('checkins');
+        var openBadge = document.querySelector('.open-badge');
+        
+        if (nc) nc.textContent = center.name;
+        if (nb) nb.textContent = center.brand;
+        if (addr) addr.textContent = center.address;
+        if (hours) hours.textContent = center.openingHours;
+        if (active) active.textContent = center.activeUsers;
+        if (checkins) checkins.textContent = center.myCheckins;
+        if (openBadge) openBadge.style.display = center.isOpen ? '' : 'none';
+        })();
+    </script>
+</body>
+</html>

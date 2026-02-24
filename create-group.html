@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opret gruppe | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=8">
+    <script src="auth.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        body {
+            background: #FFFFFF;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .create-group-page {
+            padding-bottom: 100px;
+        }
+        
+        .create-group-header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #000;
+        }
+        
+        .back-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            padding: 0.5rem;
+            color: #000;
+        }
+        
+        .back-button svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .header-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #000;
+            margin: 0;
+        }
+        
+        .header-spacer {
+            width: 40px;
+        }
+        
+        .create-group-content {
+            padding: 2rem 1.5rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .group-image-upload {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .group-image-placeholder {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .group-image-placeholder img.group-image-default {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: contain;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .group-image-placeholder img:not(.group-image-default) {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .group-image-add-btn {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid white;
+        }
+        
+        .group-image-add-btn svg {
+            width: 20px;
+            height: 20px;
+            color: white;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            background: #f8f9fa;
+            box-sizing: border-box;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+        
+        .form-input::placeholder {
+            color: #999;
+        }
+        
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .visibility-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .visibility-section h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin: 0 0 1rem 0;
+        }
+        
+        .visibility-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+        
+        .visibility-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #666;
+            flex: 1;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #ccc;
+            border-radius: 14px;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background 0.2s;
+        }
+        
+        .toggle-switch.active {
+            background: var(--primary);
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(22px);
+        }
+        
+        .submit-button {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            margin-top: 2rem;
+            background: linear-gradient(135deg, #976FFF, #7B4BFF);
+            border: none;
+            border-radius: 24px;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .submit-button:hover {
+            background: linear-gradient(135deg, #7B4BFF, #6B3FDF);
+        }
+    </style>
+</head>
+<body>
+    <div class="create-group-page">
+        <header class="create-group-header">
+            <button class="back-button" onclick="window.location.href='online.html#groups'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+            </button>
+            <h1 class="header-title">Opret gruppe</h1>
+            <div class="header-spacer"></div>
+        </header>
+        
+        <main class="create-group-content">
+            <form id="createGroupForm" onsubmit="handleCreateGroup(event)">
+                <div class="group-image-upload">
+                    <div class="group-image-placeholder" onclick="document.getElementById('groupImageInput').click()">
+                        <img id="groupImagePreview" src="assets/logo.png" alt="Gymly" class="group-image-default">
+                        <div class="group-image-add-btn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19"/>
+                                <line x1="5" y1="12" x2="19" y2="12"/>
+                            </svg>
+                        </div>
+                        <input type="file" id="groupImageInput" accept="image/*" style="display: none;" onchange="previewGroupImage(this)">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="groupName" class="form-label">Gruppenavn *</label>
+                    <input type="text" id="groupName" name="groupName" class="form-input" placeholder="F.eks. Weekend Warriors" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="groupBio" class="form-label">Biografi</label>
+                    <textarea id="groupBio" name="groupBio" class="form-input form-textarea" placeholder="Beskriv din gruppe..."></textarea>
+                </div>
+                
+                <div class="visibility-section">
+                    <h3>Gruppe synlighed</h3>
+                    <div class="visibility-row">
+                        <span class="visibility-text">Offentlig - Alle kan se og søge efter gruppen</span>
+                        <div class="toggle-switch active" id="visibilityToggle" onclick="this.classList.toggle('active')">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-button">Opret gruppe</button>
+            </form>
+        </main>
+    </div>
+    
+    <script>
+        function previewGroupImage(input) {
+            var preview = document.getElementById('groupImagePreview');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.classList.remove('group-image-default');
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = 'assets/logo.png';
+                preview.classList.add('group-image-default');
+            }
+        }
+        function handleCreateGroup(e) {
+            e.preventDefault();
+            var groupName = document.getElementById('groupName').value;
+            var groupBio = document.getElementById('groupBio').value;
+            var isPublic = document.getElementById('visibilityToggle').classList.contains('active');
+            // TODO: Send til backend/API
+            console.log('Opretter gruppe:', { groupName, groupBio, isPublic });
+            alert('Gruppen "' + groupName + '" er oprettet!');
+            window.location.href = 'online.html#groups';
+        }
+    </script>
+</body>
+</html>
