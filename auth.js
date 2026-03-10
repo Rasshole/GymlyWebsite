@@ -26,4 +26,9 @@
     }
     return true;
   };
+
+  /** Nuværende bruger (til demo – kan udvides med rigtig auth) */
+  window.getCurrentUserId = function () {
+    return localStorage.getItem('gymly_user') || 'patrick';
+  };
 })();

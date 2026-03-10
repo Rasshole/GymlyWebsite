@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=5">
+    <script src="lang.js"></script>
     <style>
         .samarbejde-page {
             min-height: 100vh;
@@ -127,8 +128,8 @@
     </header>
 
     <main class="samarbejde-main">
-        <h1>Samarbejde</h1>
-        <p class="intro">Vil du samarbejde med Gymly? Udfyld formularen herunder, så vender vi tilbage til dig.</p>
+        <h1 data-i18n="samarbejde.title">Samarbejde</h1>
+        <p class="intro" data-i18n="samarbejde.intro">Vil du samarbejde med Gymly? Udfyld formularen herunder, så vender vi tilbage til dig.</p>
 
         <form id="samarbejdeForm" class="samarbejde-form">
             <label for="navn">Navn <span class="optional">(påkrævet)</span></label>
@@ -151,16 +152,16 @@
     </main>
 
     <footer class="samarbejde-footer">
-        <a href="privacy.html">Privatlivspolitik</a>
-        <a href="terms.html">Vilkår og betingelser</a>
-        <a href="samarbejde.html">Samarbejde</a>
-        <a href="support.html">Support</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
+        <a href="terms.html" data-i18n="footer.terms">Vilkår og betingelser</a>
+        <a href="samarbejde.html" data-i18n="footer.collab">Samarbejde</a>
+        <a href="support.html" data-i18n="footer.support">Support</a>
         <span class="sep">·</span>
-        <a href="#">Dansk</a>
-        <a href="#">English (US)</a>
-        <a href="#">Polski</a>
-        <a href="#">Deutsch</a>
-        <a href="#">Flere sprog...</a>
+        <a href="#" data-lang="da">Dansk</a>
+        <a href="#" data-lang="en">English (US)</a>
+        <a href="#" data-lang="pl">Polski</a>
+        <a href="#" data-lang="de">Deutsch</a>
+        <a href="#" data-lang-more>Flere sprog...</a>
     </footer>
 
     <script>

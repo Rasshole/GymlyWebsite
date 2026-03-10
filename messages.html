@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=10">
     <script src="auth.js"></script>
+    <script src="lang.js"></script>
     <script>requireAuth();</script>
     <style>
         body {
@@ -238,6 +239,25 @@
             font-family: 'Inter', sans-serif;
             font-size: 1rem;
         }
+        .messages-section-heading {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: #000;
+            margin: 2rem 0 0.25rem;
+        }
+        .messages-section-heading:first-of-type { margin-top: 0; }
+        .messages-section-desc {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0 0 1rem;
+            line-height: 1.4;
+        }
+        .message-avatar-group {
+            background: var(--primary-pastel) !important;
+            color: var(--primary) !important;
+        }
+        .message-avatar-group svg { flex-shrink: 0; }
     </style>
 </head>
 <body>
@@ -253,6 +273,20 @@
             <div class="header-center">
                 <h1 class="header-title">Beskeder</h1>
             </div>
+            <div class="header-right">
+                <a href="notifications.html" class="header-bar-btn header-bar-btn-icon" aria-label="Notifikationer">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </a>
+                <a href="settings.html" class="header-bar-btn header-bar-btn-icon" aria-label="Indstillinger">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </a>
+            </div>
         </div>
         
         <div class="messages-content">
@@ -267,7 +301,57 @@
                 </div>
             </div>
             
-            <!-- Messages List -->
+            <!-- Section: Gruppebeskeder -->
+            <div class="messages-section-heading">Gruppebeskeder</div>
+            <p class="messages-section-desc">Chat med alle i gruppen – alle medlemmer kan skrive og deltage i samtalen.</p>
+            <div class="messages-list">
+                <a href="chat.html?group=weekend-warriors" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card message-card-group">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar message-avatar-group">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Weekend Warriors</div>
+                                <div class="message-time">5 min</div>
+                            </div>
+                            <div class="message-preview">Lars: Skal vi lave en gruppetræning næste uge?</div>
+                        </div>
+                        <div class="message-badge">3</div>
+                    </div>
+                </a>
+                <a href="chat.html?group=morgenmotionister" style="text-decoration: none; color: inherit; display: block;">
+                    <div class="message-card message-card-group">
+                        <div class="message-avatar-container">
+                            <div class="message-avatar message-avatar-group">
+                                <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="9" cy="7" r="4"/>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="message-info">
+                            <div class="message-header">
+                                <div class="message-name">Morgenmotionister</div>
+                                <div class="message-time">I går</div>
+                            </div>
+                            <div class="message-preview">Marie: Hvem kommer i morgen?</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            
+            <!-- Section: Privat beskeder -->
+            <div class="messages-section-heading">Privat beskeder</div>
             <div class="messages-list">
                 <!-- Message 1 - Unread -->
                 <a href="chat.html?user=mads" style="text-decoration: none; color: inherit; display: block;">

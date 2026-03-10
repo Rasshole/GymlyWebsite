@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=5">
     <script src="auth.js"></script>
+    <script src="lang.js"></script>
 </head>
 <body class="login-page login-fb-style">
     <div class="login-fb-wrap">
@@ -20,8 +21,8 @@
                 <img src="assets/logo.png" alt="Gymly" class="login-fb-logo">
             </a>
             <h1 class="login-fb-heading">
-                <span class="login-fb-heading-line1">Træn sammen med dem,</span>
-                <span class="login-fb-heading-line2">du kender.</span>
+                <span class="login-fb-heading-line1" data-i18n="login.heading1">Træn sammen med dem,</span>
+                <span class="login-fb-heading-line2" data-i18n="login.heading2">du kender.</span>
             </h1>
             <div class="login-fb-illustrations">
                 <div class="login-fb-img login-fb-img-main" style="background-image: url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=400&q=80');"></div>
@@ -33,17 +34,17 @@
         <!-- Højre kolonne: login-formular -->
         <div class="login-fb-right">
             <div class="login-fb-form-wrap">
-                <h2 class="login-fb-form-title">Log på Gymly</h2>
+                <h2 class="login-fb-form-title" data-i18n="login.title">Log på Gymly</h2>
                 <form id="loginForm" class="login-fb-form">
-                    <input type="email" id="email" name="email" placeholder="E-mail eller mobilnummer" required class="login-fb-input">
-                    <input type="password" id="password" name="password" placeholder="Adgangskode" required class="login-fb-input">
-                    <button type="submit" class="login-fb-btn-primary">Log på</button>
+                    <input type="email" id="email" name="email" data-i18n-placeholder="login.emailPlaceholder" placeholder="E-mail eller mobilnummer" required class="login-fb-input">
+                    <input type="password" id="password" name="password" data-i18n-placeholder="login.passwordPlaceholder" placeholder="Adgangskode" required class="login-fb-input">
+                    <button type="submit" class="login-fb-btn-primary" data-i18n="login.loginBtn">Log på</button>
                 </form>
-                <a href="password.html" class="login-fb-forgot">Glemt adgangskode?</a>
-                <a href="signup.html" class="login-fb-btn-secondary">Opret ny konto</a>
-                <p class="login-fb-meta">Gymly – Dit fitness fælleskab</p>
+                <a href="password.html" class="login-fb-forgot" data-i18n="login.forgotPw">Glemt adgangskode?</a>
+                <a href="signup.html" class="login-fb-btn-secondary" data-i18n="login.signup">Opret ny konto</a>
+                <p class="login-fb-meta" data-i18n="login.meta">Gymly – Dit fitness fælleskab</p>
                 <div class="login-fb-download">
-                    <p class="login-fb-download-label">Download appen</p>
+                    <p class="login-fb-download-label" data-i18n="login.downloadApp">Download appen</p>
                     <div class="login-fb-download-btns">
                         <a href="download.html" class="login-fb-download-btn">App Store</a>
                         <a href="download.html" class="login-fb-download-btn">Google Play</a>
@@ -55,16 +56,16 @@
 
     <!-- Sprog + privatliv/vilkår footer -->
     <footer class="login-fb-lang-footer">
-        <a href="privacy.html">Privatlivspolitik</a>
-        <a href="terms.html">Vilkår og betingelser</a>
-        <a href="samarbejde.html">Samarbejde</a>
-        <a href="support.html">Support</a>
+        <a href="privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
+        <a href="terms.html" data-i18n="footer.terms">Vilkår og betingelser</a>
+        <a href="samarbejde.html" data-i18n="footer.collab">Samarbejde</a>
+        <a href="support.html" data-i18n="footer.support">Support</a>
         <span class="login-fb-footer-sep">·</span>
-        <a href="#">Dansk</a>
-        <a href="#">English (US)</a>
-        <a href="#">Polski</a>
-        <a href="#">Deutsch</a>
-        <a href="#">Flere sprog...</a>
+        <a href="#" data-lang="da">Dansk</a>
+        <a href="#" data-lang="en">English (US)</a>
+        <a href="#" data-lang="pl">Polski</a>
+        <a href="#" data-lang="de">Deutsch</a>
+        <a href="#" data-lang-more data-i18n="footer.moreLangs">Flere sprog...</a>
     </footer>
 
     <script>

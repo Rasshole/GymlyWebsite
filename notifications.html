@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifikationer | Gymly</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=10">
+    <script src="auth.js"></script>
+    <script src="lang.js"></script>
+    <script>requireAuth();</script>
+    <style>
+        body { background: #f0f0f0; min-height: 100vh; margin: 0; padding: 0; }
+        .notif-page { padding: 0 1.5rem 2rem; max-width: 500px; margin: 0 auto; }
+        .notif-header {
+            background: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .back-button { background: none; border: none; cursor: pointer; display: flex; align-items: center; padding: 0.5rem; color: #000; }
+        .back-button svg { width: 24px; height: 24px; }
+        .header-title { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: #000; margin: 0; }
+        .header-spacer { width: 40px; }
+        .notif-intro {
+            padding: 1rem 0;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .notif-list { display: flex; flex-direction: column; gap: 0.75rem; }
+        .notif-item {
+            padding: 1rem 1.25rem;
+            background: white;
+            border-radius: 14px;
+            color: #000;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background 0.2s;
+            border: 1px solid #eee;
+        }
+        .notif-item:hover { background: #fafafa; }
+        .notif-item.unread { border-left: 4px solid var(--primary); }
+        .notif-item-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        .notif-icon {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .notif-icon.message { background: var(--primary-pastel); color: var(--primary); }
+        .notif-icon.checkin { background: rgba(76, 175, 80, 0.15); color: #4CAF50; }
+        .notif-icon.group { background: rgba(33, 150, 243, 0.15); color: #2196F3; }
+        .notif-icon svg { width: 20px; height: 20px; }
+        .notif-content { flex: 1; min-width: 0; }
+        .notif-title { font-weight: 600; font-size: 0.95rem; margin: 0; }
+        .notif-text { font-size: 0.9rem; color: #666; margin: 0.25rem 0 0; line-height: 1.4; }
+        .notif-time { font-size: 0.75rem; color: #999; margin-top: 0.25rem; }
+        .notif-empty {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="notif-header">
+        <button class="back-button" onclick="history.back()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <h1 class="header-title">Notifikationer</h1>
+        <div class="header-spacer"></div>
+    </header>
+    
+    <main class="notif-page">
+        <p class="notif-intro">Her er alle dine notifikationer – nye beskeder, når venner tjekker ind, og planlagte gruppetræninger.</p>
+        
+        <div class="notif-list">
+            <a href="messages.html" class="notif-item unread">
+                <div class="notif-item-header">
+                    <div class="notif-icon message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Ny besked fra Lars</div>
+                        <div class="notif-text">Lars: "Skal vi træne sammen i morgen?"</div>
+                        <div class="notif-time">For 5 min siden</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="online.html#map" class="notif-item unread">
+                <div class="notif-item-header">
+                    <div class="notif-icon checkin">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Marie tjekkede ind</div>
+                        <div class="notif-text">Marie er nu tjekket ind i PureGym Hjørring</div>
+                        <div class="notif-time">For 23 min siden</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="online.html#groups" class="notif-item unread">
+                <div class="notif-item-header">
+                    <div class="notif-icon group">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Ny gruppetræning planlagt</div>
+                        <div class="notif-text">Weekend Warriors har planlagt træning lørdag kl. 10:00</div>
+                        <div class="notif-time">I går 14:30</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="online.html#map" class="notif-item">
+                <div class="notif-item-header">
+                    <div class="notif-icon checkin">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Jeff tjekkede ind</div>
+                        <div class="notif-text">Jeff er nu tjekket ind i PureGym Nørresundby</div>
+                        <div class="notif-time">I går 18:45</div>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="messages.html" class="notif-item">
+                <div class="notif-item-header">
+                    <div class="notif-icon message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Ny besked i Weekend Warriors</div>
+                        <div class="notif-text">Lars: "Skal vi lave en gruppetræning næste uge?"</div>
+                        <div class="notif-time">I går 10:00</div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </main>
+</body>
+</html>

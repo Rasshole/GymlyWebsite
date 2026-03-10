@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <link rel="stylesheet" href="styles.css?v=10">
     <script src="auth.js"></script>
+    <script src="lang.js"></script>
     <script>requireAuth();</script>
     <style>
         body {
@@ -1138,16 +1139,18 @@
                 <h1 class="header-title">Online</h1>
             </div>
             <div class="header-right">
-                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                    <line x1="16" y1="2" x2="16" y2="6"/>
-                    <line x1="8" y1="2" x2="8" y2="6"/>
-                    <line x1="3" y1="10" x2="21" y2="10"/>
-                </svg>
-                <svg class="header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
+                <a href="notifications.html" class="header-bar-btn header-bar-btn-icon" aria-label="Notifikationer">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </a>
+                <a href="settings.html" class="header-bar-btn header-bar-btn-icon" aria-label="Indstillinger">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                </a>
             </div>
         </div>
         
@@ -1271,8 +1274,8 @@
             
             <!-- Mine Grupper -->
             <div class="section-heading">Mine Grupper</div>
-            
-            <a href="group-details.html?group=weekend-warriors" class="group-card">
+            <div id="my-groups-list">
+            <a href="group-details.html?group=weekend-warriors" class="group-card" data-group-id="weekend-warriors">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1301,11 +1304,12 @@
                     </svg>
                 </div>
             </a>
+            </div>
             
             <!-- Andre Grupper -->
             <div class="section-heading">Andre Grupper</div>
-            
-            <a href="group-details.html?group=morgenmotionister" class="group-card">
+            <div id="other-groups-list">
+            <a href="group-details.html?group=morgenmotionister" class="group-card" data-group-id="morgenmotionister">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1334,7 +1338,7 @@
                 </div>
             </a>
             
-            <a href="group-details.html?group=community" class="group-card">
+            <a href="group-details.html?group=community" class="group-card" data-group-id="community">
                 <div class="group-icon-container">
                     <div class="group-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1363,6 +1367,7 @@
                     </svg>
                 </div>
             </a>
+            </div>
         </div>
         
         <!-- Centers Section -->
@@ -2239,6 +2244,20 @@
                     }
                 });
             });
+            var approved = {};
+            try { approved = JSON.parse(localStorage.getItem('gymly_group_approved') || '{}'); } catch(e) {}
+            var currentUser = (window.getCurrentUserId && window.getCurrentUserId()) || 'patrick';
+            var myList = document.getElementById('my-groups-list');
+            var otherList = document.getElementById('other-groups-list');
+            if (myList && otherList) {
+                [].slice.call(otherList.querySelectorAll('.group-card[data-group-id]')).forEach(function(card) {
+                    var gid = card.getAttribute('data-group-id');
+                    if (approved[gid] && approved[gid].indexOf(currentUser) >= 0) {
+                        otherList.removeChild(card);
+                        myList.appendChild(card);
+                    }
+                });
+            }
         });
     </script>
 </body>

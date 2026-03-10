@@ -76,6 +76,17 @@
             position: relative;
         }
         
+        .chat-avatar.group-avatar {
+            background: var(--primary-pastel, rgba(151, 111, 255, 0.2)) !important;
+            color: var(--primary, #976FFF) !important;
+        }
+        .chat-avatar.group-avatar svg { flex-shrink: 0; }
+        .message-sender-name {
+            font-size: 0.75rem;
+            color: var(--primary, #976FFF);
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
         .chat-avatar.online::after {
             content: '';
             position: absolute;
@@ -370,22 +381,55 @@
             }
         };
         
-        // Get user from URL parameter
+        // Group chat data
+        const groupChatData = {
+            'weekend-warriors': {
+                name: 'Weekend Warriors',
+                members: 7,
+                messages: [
+                    { text: 'Weekend Warriors gruppen træner lørdag kl. 10', sent: false, sender: 'Anna', initials: 'AN', time: '15:30' },
+                    { text: 'Fedt! Jeg kommer med!', sent: true, sender: 'Dig', initials: 'DU', time: '15:32' },
+                    { text: 'Skal vi lave en gruppetræning næste uge?', sent: false, sender: 'Lars', initials: 'LA', time: '16:00' },
+                    { text: 'Ja, det er en god idé! Hvornår passer det?', sent: true, sender: 'Dig', initials: 'DU', time: '16:05' },
+                    { text: 'Hvad med lørdag kl. 10 som sædvanlig?', sent: false, sender: 'Jeff', initials: 'JE', time: '16:10' },
+                    { text: 'Perfekt, jeg er med! 💪', sent: false, sender: 'Marie', initials: 'M', time: '5 min' }
+                ]
+            },
+            'morgenmotionister': {
+                name: 'Morgenmotionister',
+                members: 3,
+                messages: [
+                    { text: 'Hvem kommer i morgen?', sent: false, sender: 'Marie', initials: 'M', time: 'I går 20:00' },
+                    { text: 'Jeg er med!', sent: true, sender: 'Dig', initials: 'DU', time: 'I går 20:15' },
+                    { text: 'Mig også – ses kl. 6!', sent: false, sender: 'Jeff', initials: 'JE', time: 'I går 20:30' }
+                ]
+            }
+        };
+        
+        // Get user or group from URL parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const userId = urlParams.get('user') || 'mads';
-        const currentChat = chatData[userId] || chatData['mads'];
+        const userId = urlParams.get('user');
+        const groupId = urlParams.get('group');
+        const isGroupChat = !!groupId;
+        const currentChat = isGroupChat ? (groupChatData[groupId] || groupChatData['weekend-warriors']) : (chatData[userId] || chatData['mads']);
         
         // Initialize chat
         function initChat() {
-            // Set user info
-            document.getElementById('chatUserName').textContent = currentChat.name;
-            document.getElementById('chatAvatar').textContent = currentChat.initials;
-            if (currentChat.online) {
-                document.getElementById('chatAvatar').classList.add('online');
-                document.getElementById('chatUserStatus').textContent = 'Online';
+            if (isGroupChat) {
+                document.getElementById('chatUserName').textContent = currentChat.name;
+                document.getElementById('chatAvatar').innerHTML = '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>';
+                document.getElementById('chatAvatar').classList.add('group-avatar');
+                document.getElementById('chatUserStatus').textContent = currentChat.members + ' medlemmer';
             } else {
-                document.getElementById('chatAvatar').classList.remove('online');
-                document.getElementById('chatUserStatus').textContent = 'Offline';
+                document.getElementById('chatUserName').textContent = currentChat.name;
+                document.getElementById('chatAvatar').textContent = currentChat.initials;
+                if (currentChat.online) {
+                    document.getElementById('chatAvatar').classList.add('online');
+                    document.getElementById('chatUserStatus').textContent = 'Online';
+                } else {
+                    document.getElementById('chatAvatar').classList.remove('online');
+                    document.getElementById('chatUserStatus').textContent = 'Offline';
+                }
             }
             
             // Load messages
@@ -393,7 +437,11 @@
             messagesContainer.innerHTML = '';
             
             currentChat.messages.forEach(message => {
-                addMessage(message.text, message.sent, message.time);
+                if (isGroupChat && message.sender) {
+                    addGroupMessage(message.text, message.sent, message.sender, message.initials, message.time);
+                } else {
+                    addMessage(message.text, message.sent, message.time);
+                }
             });
             
             // Scroll to bottom
@@ -419,6 +467,27 @@
             scrollToBottom();
         }
         
+        function addGroupMessage(text, sent, sender, initials, time) {
+            const messagesContainer = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sent ? 'sent' : 'received'}`;
+            
+            const avatar = sent ? 'DU' : initials;
+            const senderLabel = sent ? '' : `<div class="message-sender-name">${sender}</div>`;
+            
+            messageDiv.innerHTML = `
+                <div class="message-avatar-small">${avatar}</div>
+                <div class="message-content">
+                    ${senderLabel}
+                    <div class="message-bubble">${text}</div>
+                    <div class="message-time">${time}</div>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            scrollToBottom();
+        }
+        
         function sendMessage() {
             const input = document.getElementById('chatInput');
             const text = input.value.trim();
@@ -428,24 +497,42 @@
             const now = new Date();
             const time = now.getHours() + ':' + String(now.getMinutes()).padStart(2, '0');
             
-            addMessage(text, true, time);
+            if (isGroupChat) {
+                addGroupMessage(text, true, 'Dig', 'DU', time);
+            } else {
+                addMessage(text, true, time);
+            }
             input.value = '';
             input.style.height = 'auto';
             
             // Simulate response after 1-2 seconds
-            setTimeout(() => {
-                const responses = [
-                    'Lyder godt! 👍',
-                    'Perfekt!',
-                    'Okay, vi ses!',
-                    'Fedt! 💪',
-                    'Tak!'
-                ];
-                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-                const responseTime = new Date();
-                const responseTimeStr = responseTime.getHours() + ':' + String(responseTime.getMinutes()).padStart(2, '0');
-                addMessage(randomResponse, false, responseTimeStr);
-            }, 1000 + Math.random() * 1000);
+            if (!isGroupChat) {
+                setTimeout(() => {
+                    const responses = [
+                        'Lyder godt! 👍',
+                        'Perfekt!',
+                        'Okay, vi ses!',
+                        'Fedt! 💪',
+                        'Tak!'
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    const responseTime = new Date();
+                    const responseTimeStr = responseTime.getHours() + ':' + String(responseTime.getMinutes()).padStart(2, '0');
+                    addMessage(randomResponse, false, responseTimeStr);
+                }, 1000 + Math.random() * 1000);
+            } else {
+                setTimeout(() => {
+                    const groupResponses = [
+                        { text: 'Lyder godt! 👍', sender: 'Lars', initials: 'LA' },
+                        { text: 'Jeg er med!', sender: 'Marie', initials: 'M' },
+                        { text: 'Perfekt!', sender: 'Jeff', initials: 'JE' }
+                    ];
+                    const r = groupResponses[Math.floor(Math.random() * groupResponses.length)];
+                    const responseTime = new Date();
+                    const responseTimeStr = responseTime.getHours() + ':' + String(responseTime.getMinutes()).padStart(2, '0');
+                    addGroupMessage(r.text, false, r.sender, r.initials, responseTimeStr);
+                }, 1000 + Math.random() * 1000);
+            }
         }
         
         function scrollToBottom() {
@@ -467,6 +554,9 @@
                 sendMessage();
             }
         });
+        
+        // Set page title
+        document.title = currentChat.name + ' | Gymly';
         
         // Initialize on load
         initChat();
