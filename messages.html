@@ -7,13 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="styles.css?v=14">
     <script src="auth.js"></script>
     <script src="lang.js"></script>
     <script>requireAuth();</script>
     <style>
         body {
-            background: #FFFFFF;
+            background: var(--bg);
             min-height: 100vh;
             margin: 0;
             padding: 0;
@@ -266,7 +266,7 @@
         <!-- Messages Header -->
         <div class="messages-header">
             <div class="header-left">
-                <a href="index.html" class="home-logo-link" aria-label="Hjem">
+                <a href="home.html" class="home-logo-link" aria-label="Hjem">
                     <img src="assets/logo.png" alt="Gymly" class="home-logo-img">
                 </a>
             </div>
@@ -458,13 +458,13 @@
 
     <!-- Bund-navigation: 5 hovedikoner -->
     <nav class="bottom-nav-bar">
-        <a href="index.html" class="nav-icon-item">
+        <a href="home.html" class="nav-icon-item">
             <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
             <span class="nav-label">Hjem</span>
         </a>
-        <a href="online.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></span>
-            <span class="nav-label">Online</span>
+        <a href="activity.html" class="nav-icon-item">
+            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+            <span class="nav-label">Aktivitet</span>
         </a>
         <a href="checkin.html" class="nav-icon-item">
             <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>

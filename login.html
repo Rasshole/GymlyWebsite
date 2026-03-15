@@ -17,7 +17,7 @@
     <div class="login-fb-wrap">
         <!-- Venstre kolonne: logo, overskrift, illustrationer -->
         <div class="login-fb-left">
-            <a href="index.html" class="login-fb-logo-wrap" aria-label="Gymly">
+            <a href="index.html" class="login-fb-logo-wrap" aria-label="Gymly" title="Forside">
                 <img src="assets/logo.png" alt="Gymly" class="login-fb-logo">
             </a>
             <h1 class="login-fb-heading">
@@ -70,14 +70,14 @@
 
     <script>
         if (window.isLoggedIn && window.isLoggedIn()) {
-            window.location.replace('index.html');
+            window.location.replace('home.html');
         }
         var form = document.getElementById('loginForm');
         if (form) {
             form.addEventListener('submit', function (e) {
                 e.preventDefault();
                 if (window.setLoggedIn) window.setLoggedIn();
-                window.location.replace('index.html');
+                window.location.replace('home.html');
             });
         }
     </script>

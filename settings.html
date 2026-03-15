@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=10">
+    <link rel="stylesheet" href="styles.css?v=14">
     <script src="auth.js"></script>
     <script src="lang.js"></script>
     <script>requireAuth();</script>
     <style>
-        body { background: #fff; min-height: 100vh; margin: 0; padding: 0; }
+        body { background: var(--bg); min-height: 100vh; margin: 0; padding: 0; }
         .settings-page { padding-bottom: 100px; }
         .settings-header {
             background: var(--bg-white);
@@ -43,11 +43,11 @@
             padding: 0 0.5rem 0.5rem;
         }
         .settings-card {
-            background: white;
-            border-radius: 16px;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            border: 1px solid #eee;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border);
         }
         .settings-item {
             display: flex;
@@ -116,7 +116,7 @@
     <div class="settings-page">
         <header class="settings-header">
             <div class="header-left">
-                <a href="index.html" class="home-logo-link" aria-label="Hjem">
+                <a href="home.html" class="home-logo-link" aria-label="Hjem">
                     <img src="assets/logo.png" alt="Gymly" class="home-logo-img">
                 </a>
             </div>

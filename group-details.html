@@ -7,11 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=14">
     <script src="auth.js"></script>
     <script>requireAuth();</script>
     <style>
-        body { background: #f0f0f0; min-height: 100vh; margin: 0; padding: 0; }
+        body { background: var(--bg); min-height: 100vh; margin: 0; padding: 0; }
         .group-details-page { padding: 0 1.5rem 2rem; max-width: 500px; margin: 0 auto; }
         .group-details-header {
             background-color: var(--bg-white);
@@ -27,8 +27,8 @@
         .header-title { font-family: 'Manrope', sans-serif; font-size: 1.25rem; font-weight: 800; color: #000; margin: 0; }
         .header-spacer { width: 40px; }
         .detail-card {
-            background: white;
-            border-radius: 16px;
+            background: var(--surface);
+            border-radius: var(--radius-lg);
             padding: 1.25rem 1.5rem;
             margin-bottom: 1rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);

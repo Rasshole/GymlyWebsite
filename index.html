@@ -1,162 +1,255 @@
 <!DOCTYPE html>
-<html lang="da" class="start-page">
+<html lang="da" class="landing-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gymly | Fitness Tracking & Fællesskab</title>
+    <title>Gymly | Træn sammen med dem, du kender</title>
+    <meta name="description" content="Gymly – dit sociale fitness-fællesskab. Tjek ind, følg venner, hold dig motiveret.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=10">
-    <style>
-        .suggested-friend-card,
-        .suggested-friend-card * {
-            text-decoration: none !important;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=12">
     <script src="auth.js"></script>
     <script src="lang.js"></script>
-    <script>requireAuth();</script>
 </head>
-<body class="start-page">
-    <!-- Header: logo venstre, Indstillinger (tandhjul) + Download + Log ud højre -->
-    <div class="header-bar">
-        <div class="header-bar-left">
-            <a href="index.html" class="header-bar-logo" aria-label="Hjem">
-                <img src="assets/logo.png" alt="Gymly" class="header-bar-logo-img">
-            </a>
+<body class="landing-page">
+    <!-- Sticky header med CTA -->
+    <header class="landing-header" id="landingHeader">
+        <a href="index.html" class="landing-logo-link">
+            <img src="assets/logo.png" alt="Gymly" class="landing-logo">
+        </a>
+        <nav class="landing-nav">
+            <a href="leaderboard.html">Ranglister</a>
+            <a href="support.html">Support</a>
+        </nav>
+        <div class="landing-cta">
+            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
+            <a href="download.html" class="btn-primary">Download appen</a>
+            <a href="login.html" class="btn-secondary">Log ind</a>
         </div>
-        <div class="header-bar-right">
-            <a href="notifications.html" class="header-bar-btn header-bar-btn-icon" aria-label="Notifikationer">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
-            </a>
-            <a href="settings.html" class="header-bar-btn header-bar-btn-icon" aria-label="Indstillinger">
-                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="12" r="3"/>
-                    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-                </svg>
-            </a>
-            <a href="download.html" class="header-bar-btn header-bar-btn-pill header-bar-btn-primary" data-i18n="nav.download">Download</a>
-            <button type="button" class="header-bar-btn header-bar-btn-pill header-bar-btn-outline" onclick="logout()" data-i18n="nav.logout">Log ud</button>
-        </div>
-    </div>
+    </header>
 
-    <!-- Hjem indhold -->
-    <main class="home-content">
-        <!-- Velkomst -->
-        <section class="home-greeting">
-            <h1 class="home-greeting-title" data-i18n="home.greeting">Hej, apple User! 👋</h1>
-            <p class="home-greeting-subtitle" data-i18n="home.subtitle">Klar til at træne i dag?</p>
-        </section>
-
-        <!-- Venner i gym lige nu -->
-        <section class="home-section">
-            <div class="home-section-header">
-                <div>
-                    <h2 class="home-section-title" data-i18n="home.friendsNow">Venner i gym lige nu</h2>
-                    <p class="home-section-subtitle" data-i18n="home.seeDetails">Tryk for at se flere detaljer</p>
+    <!-- Hero -->
+    <section class="hero-section">
+        <div class="hero-inner">
+            <div class="hero-content">
+                <h1>Træn sammen med <span>dem</span>, du kender.</h1>
+                <p>Fitness-fællesskab der holder dig motiveret. Tjek ind, følg venner, hold dig konsistent – og se dig selv blive stærkere.</p>
+                <div class="hero-buttons">
+                    <a href="download.html" class="btn-primary">Download appen</a>
+                    <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
                 </div>
-                <span class="home-section-badge">3</span>
             </div>
-            <div class="friend-cards">
-                <a href="profile.html?user=patrick" class="friend-card">
-                    <div class="friend-card-avatar">P</div>
-                    <div class="friend-card-info">
-                        <div class="friend-card-name">Patrick</div>
-                        <div class="friend-card-location">SATS KBH Valby · 23 min</div>
-                        <div class="friend-card-icons">💪 🏃</div>
-                    </div>
-                    <button type="button" class="friend-card-btn" data-i18n="home.join">Deltag</button>
-                </a>
-                <a href="profile.html?user=marie" class="friend-card">
-                    <div class="friend-card-avatar">M</div>
-                    <div class="friend-card-info">
-                        <div class="friend-card-name">Marie</div>
-                        <div class="friend-card-location">PureGym Lygten · 45 min</div>
-                        <div class="friend-card-icons">🏋️ 💪</div>
-                    </div>
-                    <button type="button" class="friend-card-btn" data-i18n="home.join">Deltag</button>
-                </a>
-                <a href="profile.html?user=lars" class="friend-card">
-                    <div class="friend-card-avatar">L</div>
-                    <div class="friend-card-info">
-                        <div class="friend-card-name">Lars</div>
-                        <div class="friend-card-location">SATS KBH Adelgade · 12 min</div>
-                        <div class="friend-card-icons">🏋️</div>
-                    </div>
-                    <button type="button" class="friend-card-btn" data-i18n="home.join">Deltag</button>
-                </a>
+            <div class="hero-preview">
+                <div class="hero-preview-card">
+                    <div class="hero-preview-avatar">P</div>
+                    <div class="hero-preview-name">Patrick</div>
+                    <div class="hero-preview-meta">SATS Valby · 23 min</div>
+                </div>
+                <div class="hero-preview-card">
+                    <div class="hero-preview-avatar">M</div>
+                    <div class="hero-preview-name">Marie</div>
+                    <div class="hero-preview-meta">PureGym · 45 min</div>
+                </div>
+                <div class="hero-preview-card">
+                    <div class="hero-preview-avatar">L</div>
+                    <div class="hero-preview-name">Lars</div>
+                    <div class="hero-preview-meta">SATS Adelgade · 12 min</div>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Forslåede venner -->
-        <section class="home-section">
-            <h2 class="home-section-title" data-i18n="home.suggested">Forslåede venner</h2>
-            <div class="suggested-friends-scroll">
-                <a href="profile.html?user=lars" class="suggested-friend-card">
-                    <div class="suggested-friend-avatar">L</div>
-                    <div class="suggested-friend-name">Lars</div>
-                    <div class="suggested-friend-mutual">3 fælles venner</div>
-                    <div class="suggested-friend-gym">PureGym Fields</div>
-                </a>
-                <a href="profile.html?user=sofia" class="suggested-friend-card">
-                    <div class="suggested-friend-avatar">S</div>
-                    <div class="suggested-friend-name">Sofia</div>
-                    <div class="suggested-friend-mutual">5 fælles venner</div>
-                    <div class="suggested-friend-gym">Urban Gym</div>
-                </a>
-                <a href="profile.html?user=thc" class="suggested-friend-card">
-                    <div class="suggested-friend-avatar">T</div>
-                    <div class="suggested-friend-name">Thc</div>
-                    <div class="suggested-friend-mutual">2 fælles venner</div>
-                    <div class="suggested-friend-gym">Repeat Fitness</div>
-                </a>
+    <!-- Hvordan det virker -->
+    <section class="section">
+        <h2 class="section-title">Sådan virker det</h2>
+        <p class="section-subtitle">Tre simple steps til at blive en del af fællesskabet</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Download appen</h3>
+                <p>Hent Gymly gratis på App Store eller Google Play. Opret hurtigt din konto.</p>
             </div>
-        </section>
-    </main>
+            <div class="feature-card">
+                <div class="feature-icon">📍</div>
+                <h3>Tjek ind</h3>
+                <p>Når du er i gym, tjek ind med ét swipe. Dine venner og grupper kan se det.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔥</div>
+                <h3>Hold dig konsistent</h3>
+                <p>Byg streaks, konkurrér på ranglister og få motivation fra dit netværk.</p>
+            </div>
+        </div>
+    </section>
 
-    <!-- Bund-navigation: 5 hovedikoner -->
-    <nav class="bottom-nav-bar">
-        <a href="index.html" class="nav-icon-item active">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
-            <span class="nav-label" data-i18n="nav.home">Hjem</span>
-        </a>
-        <a href="online.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></span>
-            <span class="nav-label" data-i18n="nav.online">Online</span>
-        </a>
-        <a href="checkin.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 12l2 2 4-4"/></svg></span>
-            <span class="nav-label" data-i18n="nav.checkin">Tjek ind</span>
-        </a>
-        <a href="messages.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
-            <span class="nav-label" data-i18n="nav.messages">Beskeder</span>
-        </a>
-        <a href="profile.html" class="nav-icon-item">
-            <span class="nav-icon-wrap"><svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
-            <span class="nav-label" data-i18n="nav.profile">Profil</span>
-        </a>
-    </nav>
+    <!-- Features grid -->
+    <section class="section">
+        <h2 class="section-title">Alt, du har brug for</h2>
+        <p class="section-subtitle">Social fitness, der faktisk virker</p>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Venner i gym</h3>
+                <p>Se hvem der træner lige nu. Deltag eller planlæg træning sammen.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Ranglister</h3>
+                <p>Konkurrér med venner, lokalt eller globalt. Top 3 får speciale.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Grupper & chat</h3>
+                <p>Opret grupper, chat med medlemmer og hold hinanden ansvarlige.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social proof / community -->
+    <section class="section">
+        <div class="social-proof-section">
+            <h2 class="section-title">Sammen er vi stærkere</h2>
+            <p class="section-subtitle">Tusindvis af trænere bruger allerede Gymly til at holde sig motiverede</p>
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-value">50K+</div>
+                    <div class="stat-label">Aktive brugere</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">2M+</div>
+                    <div class="stat-label">Check-ins</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">4.8</div>
+                    <div class="stat-label">App Store rating</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aktivitetsfeed preview -->
+    <section class="section">
+        <h2 class="section-title">Levende aktivitet</h2>
+        <p class="section-subtitle">Se hvad der sker i dit netværk – i realtid</p>
+        <div class="features-grid" style="max-width: 600px; margin: 0 auto;">
+            <div class="activity-feed-card">
+                <div class="activity-feed-avatar">P</div>
+                <div class="activity-feed-content">
+                    <div class="activity-feed-text"><strong>Patrick</strong> checkede ind i SATS Nørrebro</div>
+                    <div class="activity-feed-time">2 min siden</div>
+                </div>
+            </div>
+            <div class="activity-feed-card">
+                <div class="activity-feed-avatar">M</div>
+                <div class="activity-feed-content">
+                    <div class="activity-feed-text"><strong>Mia</strong> ramte 14 dages streak 🔥</div>
+                    <div class="activity-feed-time">14 min siden</div>
+                </div>
+            </div>
+            <div class="activity-feed-card">
+                <div class="activity-feed-avatar">J</div>
+                <div class="activity-feed-content">
+                    <div class="activity-feed-text"><strong>Jonas</strong> trænede ben i 92 min</div>
+                    <div class="activity-feed-time">32 min siden</div>
+                </div>
+            </div>
+            <div class="activity-feed-card">
+                <div class="activity-feed-avatar">S</div>
+                <div class="activity-feed-content">
+                    <div class="activity-feed-text"><strong>Sara</strong> joined Group: Copenhagen Cut Club</div>
+                    <div class="activity-feed-time">1 time siden</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leaderboard preview -->
+    <section class="section">
+        <h2 class="section-title">Ranglister</h2>
+        <p class="section-subtitle">Konkurrér med venner og hold dig motiveret</p>
+        <div class="leaderboard-preview" style="max-width: 400px; margin: 0 auto;">
+            <div class="leaderboard-preview-row">
+                <span class="leaderboard-rank gold">1</span>
+                <div class="leaderboard-preview-avatar">P</div>
+                <div class="leaderboard-preview-info">
+                    <div class="leaderboard-preview-name">Patrick</div>
+                    <div class="leaderboard-preview-meta">SATS Valby · 47 check-ins</div>
+                </div>
+                <span class="leaderboard-preview-streak">🔥 21 dage</span>
+            </div>
+            <div class="leaderboard-preview-row">
+                <span class="leaderboard-rank silver">2</span>
+                <div class="leaderboard-preview-avatar">M</div>
+                <div class="leaderboard-preview-info">
+                    <div class="leaderboard-preview-name">Marie</div>
+                    <div class="leaderboard-preview-meta">PureGym · 42 check-ins</div>
+                </div>
+                <span class="leaderboard-preview-streak">🔥 14 dage</span>
+            </div>
+            <div class="leaderboard-preview-row">
+                <span class="leaderboard-rank bronze">3</span>
+                <div class="leaderboard-preview-avatar">L</div>
+                <div class="leaderboard-preview-info">
+                    <div class="leaderboard-preview-name">Lars</div>
+                    <div class="leaderboard-preview-meta">SATS Adelgade · 38 check-ins</div>
+                </div>
+                <span class="leaderboard-preview-streak">🔥 7 dage</span>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 1.5rem;">
+            <a href="leaderboard.html" class="btn-secondary">Se fuld rangliste</a>
+        </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="cta-section">
+        <h2>Klar til at træne sammen?</h2>
+        <p>Download Gymly nu og bliv en del af fællesskabet</p>
+        <div class="hero-buttons" style="justify-content: center;">
+            <a href="download.html" class="btn-primary">Download appen</a>
+            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="landing-footer-inner">
+            <div>
+                <div class="landing-footer-logo">Gymly</div>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Træn sammen med dem, du kender.</p>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="privacy.html">Privatlivspolitik</a>
+                    <a href="terms.html">Vilkår og betingelser</a>
+                    <a href="samarbejde.html">Samarbejde</a>
+                    <a href="support.html">Support</a>
+                </div>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="download.html">Download appen</a>
+                    <a href="login.html">Log ind</a>
+                    <a href="leaderboard.html">Ranglister</a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        document.querySelectorAll('.friend-card-btn').forEach(function(btn) {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                if (this.classList.contains('requested')) return;
-                var userName = this.closest('.friend-card').querySelector('.friend-card-name')?.textContent || 'personen';
-                this.textContent = 'Anmodet';
-                this.classList.add('requested');
-                this.disabled = true;
-                // TODO: Send anmodning til backend/API
-                console.log('Anmodning sendt til ' + userName);
-            });
-        });
+        (function() {
+            var header = document.getElementById('landingHeader');
+            if (!header) return;
+            function onScroll() {
+                header.classList.toggle('scrolled', window.scrollY > 20);
+            }
+            window.addEventListener('scroll', onScroll);
+            onScroll();
+        })();
+        if (window.isLoggedIn && window.isLoggedIn()) {
+            window.location.replace('home.html');
+        }
     </script>
 </body>
 </html>
-
