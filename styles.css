@@ -829,6 +829,18 @@ input[type="text"]:focus {
     flex-direction: column;
     justify-content: center;
     border-right: 1px solid var(--border-color);
+    background: linear-gradient(180deg, #f8f7ff 0%, var(--bg-white) 100%);
+    position: relative;
+}
+.login-fb-left::before {
+    content: '';
+    position: absolute;
+    top: -10%;
+    right: -20%;
+    width: 50%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(151,111,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .login-fb-logo-wrap {
@@ -915,11 +927,17 @@ input[type="text"]:focus {
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    background: linear-gradient(180deg, var(--background) 0%, #f8f7ff 100%);
 }
 
 .login-fb-form-wrap {
     width: 100%;
     max-width: 396px;
+    padding: 1.5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
 }
 
 .login-fb-form-title {
