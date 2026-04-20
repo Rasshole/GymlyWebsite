@@ -1,0 +1,10 @@
+---
+description: Git og deploy til gymlyapp.com (Cloudflare Pages fra GitHub)
+alwaysApply: true
+---
+
+# Gymly website – git og production
+
+- Production er **gymlyapp.com** via **GitHub** `Rasshole/GymlyWebsite` og Cloudflare Pages (**branch `main`**).
+- Efter relevante ændringsopgaver: **commit** på `patti` (eller den aktuelle arbejdsbranch), **push** til `origin`, derefter **merge til `main`** (fx `git checkout main && git merge patti && git push origin main`) og **push `main`**, så sitet opdateres.
+- Skift tilbage til arbejdsbranch bagefter hvis det er projektets vane.
