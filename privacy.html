@@ -1,275 +1,468 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" class="landing-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privatlivspolitik | Gymly</title>
+    <meta name="description" content="Gymlys privatlivspolitik – hvordan vi behandler dine personoplysninger.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=12">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
+        html {
+            scroll-behavior: smooth;
         }
-        
-        .content-wrapper {
-            display: flex;
-            flex: 1;
-            margin-top: 0;
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
         }
-        
-        .sidebar {
-            width: 250px;
-            background-color: #f8f9fa;
-            padding: 2rem 1rem;
+
+        .privacy-layout {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #f8f7ff 0%, var(--background) 28%, var(--background) 100%);
+            position: relative;
+        }
+
+        .privacy-layout::before {
+            content: '';
             position: fixed;
-            left: 0;
-            top: 0;
-            height: calc(100vh - 60px);
+            top: -20%;
+            right: -15%;
+            width: 55%;
+            height: 70%;
+            background: radial-gradient(circle, rgba(151, 111, 255, 0.1) 0%, transparent 68%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .privacy-shell {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+            gap: 0;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 5.5rem 1.5rem 4rem;
+            align-items: start;
+        }
+
+        @media (max-width: 900px) {
+            .privacy-shell {
+                grid-template-columns: 1fr;
+                padding: 5rem 1.15rem 3rem;
+            }
+        }
+
+        .privacy-sidebar {
+            position: sticky;
+            top: 5.25rem;
+            align-self: start;
+            padding: 1.35rem 1.25rem;
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(151, 111, 255, 0.12);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            max-height: calc(100vh - 6rem);
             overflow-y: auto;
-            border-right: 1px solid #e0e0e0;
         }
-        
-        .sidebar::-webkit-scrollbar {
-            width: 6px;
+
+        @media (max-width: 900px) {
+            .privacy-sidebar {
+                position: relative;
+                top: 0;
+                max-height: none;
+                margin-bottom: 1.5rem;
+            }
         }
-        
-        .sidebar::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        .sidebar::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 3px;
-        }
-        
-        .sidebar::-webkit-scrollbar-thumb:hover {
-            background: #555;
-        }
-        
-        .sidebar h3 {
+
+        .privacy-sidebar h3 {
             font-family: 'Manrope', sans-serif;
-            font-size: 1.2rem;
+            font-size: 0.8125rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            color: #000;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+            margin: 0 0 1rem;
         }
-        
-        .sidebar-nav {
+
+        .privacy-sidebar-nav {
             list-style: none;
             padding: 0;
             margin: 0;
         }
-        
-        .sidebar-nav li {
-            margin-bottom: 0.5rem;
+
+        .privacy-sidebar-nav li {
+            margin-bottom: 0.2rem;
         }
-        
-        .sidebar-nav a {
+
+        .privacy-sidebar-nav a {
             display: block;
-            padding: 0.75rem 1rem;
-            color: #333;
-            text-decoration: none;
+            padding: 0.55rem 0.65rem;
             font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            border-radius: 6px;
-            transition: background-color 0.2s ease, color 0.2s ease;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            border-left: 3px solid transparent;
+            transition:
+                color 0.2s ease,
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
         }
-        
-        .sidebar-nav a:hover {
-            background-color: #e0e0e0;
+
+        .privacy-sidebar-nav a:hover {
+            color: var(--primary-dark);
+            background: var(--primary-pastel);
+        }
+
+        .privacy-sidebar-nav a.is-active {
+            color: var(--primary-dark);
+            font-weight: 600;
+            background: rgba(151, 111, 255, 0.1);
+            border-left-color: var(--primary);
+        }
+
+        .privacy-doc {
+            padding: 0 0 0 2rem;
+            min-width: 0;
+        }
+
+        @media (max-width: 900px) {
+            .privacy-doc {
+                padding: 0;
+            }
+        }
+
+        .privacy-doc-inner {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(151, 111, 255, 0.1);
+            border-radius: var(--radius-lg);
+            padding: 2.5rem 2.25rem 3rem;
+            box-shadow: var(--shadow-md);
+            animation: privacyDocIn 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .privacy-doc-inner { animation: none; }
+        }
+
+        @keyframes privacyDocIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .privacy-doc h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(1.85rem, 4vw, 2.5rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin: 0 0 0.75rem;
+            color: var(--text);
+        }
+
+        .privacy-doc h1 span {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .privacy-doc .last-updated {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-light);
+            margin: 0 0 1.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .privacy-doc .lead {
+            font-size: 1.05rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin: 0 0 2rem;
+        }
+
+        .privacy-doc h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin: 2.25rem 0 0.85rem;
+            color: var(--text);
+            scroll-margin-top: 6rem;
+        }
+
+        .privacy-doc h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .privacy-doc p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.975rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin: 0 0 1rem;
+        }
+
+        .privacy-doc ul {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.975rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin: 0 0 1.15rem;
+            padding-left: 1.25rem;
+        }
+
+        .privacy-doc li {
+            margin-bottom: 0.45rem;
+        }
+
+        .privacy-doc li::marker {
             color: var(--primary);
         }
-        
-        .sidebar-nav a.active {
-            background-color: var(--primary);
-            color: white;
+
+        .privacy-doc strong {
+            color: var(--text);
+            font-weight: 600;
         }
-        
-        .privacy-page {
-            flex: 1;
-            min-height: calc(100vh - 60px);
-            padding: 2rem;
-            padding-top: 4rem;
-            padding-bottom: 100px;
-            padding-left: 290px;
-            max-width: 1200px;
-            margin: 0 auto;
+
+        .privacy-contact {
+            margin-top: 0.5rem;
+            padding: 1.25rem 1.35rem;
+            background: linear-gradient(135deg, rgba(151, 111, 255, 0.08) 0%, rgba(123, 75, 255, 0.05) 100%);
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(151, 111, 255, 0.15);
         }
-        
-        .privacy-page h1 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-        }
-        
-        .privacy-page .last-updated {
-            font-family: 'Inter', sans-serif;
-            color: #666;
-            margin-bottom: 2rem;
-            font-size: 0.9rem;
-        }
-        
-        .privacy-page h2 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            scroll-margin-top: 100px;
-        }
-        
-        .privacy-page p {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
-        
-        .privacy-page ul {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            margin-bottom: 1rem;
-            padding-left: 1.5rem;
-        }
-        
-        .privacy-page li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .privacy-page .contact-email {
-            font-family: 'Inter', sans-serif;
+
+        .privacy-contact a {
             font-weight: 600;
             color: var(--primary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .privacy-contact a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .privacy-footer-note {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.8125rem;
+            color: var(--text-light);
+        }
+
+        .privacy-footer-note a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .privacy-footer-note a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
-<body>
-    <div class="content-wrapper">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <h3>Indhold</h3>
-            <nav>
-                <ul class="sidebar-nav">
-                    <li><a href="#section-1">1. Hvilke oplysninger indsamler vi?</a></li>
-                    <li><a href="#section-2">2. Hvordan bruger vi dine data?</a></li>
-                    <li><a href="#section-3">3. Deling af data</a></li>
-                    <li><a href="#section-4">4. Opbevaring af data</a></li>
-                    <li><a href="#section-5">5. Dine rettigheder</a></li>
-                    <li><a href="#section-6">6. Datasikkerhed</a></li>
-                    <li><a href="#section-7">7. Børn</a></li>
-                    <li><a href="#section-8">8. Ændringer i privatlivspolitikken</a></li>
-                    <li><a href="#section-9">9. Kontakt</a></li>
-                </ul>
-            </nav>
-        </aside>
+<body class="landing-page">
+    <header class="landing-header" id="landingHeader">
+        <a href="index.html" class="landing-logo-link">
+            <img src="assets/logo.png" alt="Gymly" class="landing-logo">
+        </a>
+        <nav class="landing-nav">
+            <a href="leaderboard.html">Ranglister</a>
+            <a href="support.html">Support</a>
+        </nav>
+        <div class="landing-cta">
+            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
+            <a href="download.html" class="btn-primary">Download appen</a>
+            <a href="login.html" class="btn-secondary">Log ind</a>
+        </div>
+    </header>
 
-        <main class="privacy-page">
-        <h1>🔐 Privatlivspolitik for Gymly</h1>
-        <p class="last-updated">Sidst opdateret: 21. dec. 2025</p>
-        
-        <p>Gymly respekterer dit privatliv. Denne privatlivspolitik forklarer, hvordan vi indsamler, bruger og beskytter dine personoplysninger i overensstemmelse med GDPR og App Store-krav.</p>
-        
-        <h2 id="section-1">1. Hvilke oplysninger indsamler vi?</h2>
-        <p>Vi kan indsamle følgende oplysninger:</p>
-        <p><strong>Oplysninger du selv giver:</strong></p>
-        <ul>
-            <li>Navn eller brugernavn</li>
-            <li>E-mailadresse</li>
-            <li>Profiloplysninger</li>
-            <li>Træningsdata og check-ins</li>
-        </ul>
-        <p><strong>Automatisk indsamlede oplysninger:</strong></p>
-        <ul>
-            <li>Enhedsoplysninger</li>
-            <li>App-brug og interaktion</li>
-            <li>Omtrentlig lokation (kun til check-in-funktion)</li>
-        </ul>
-        <p>Vi indsamler ikke præcis GPS-sporing i baggrunden, medmindre det tydeligt er aktiveret af brugeren.</p>
-        
-        <h2 id="section-2">2. Hvordan bruger vi dine data?</h2>
-        <p>Vi bruger dine data til at:</p>
-        <ul>
-            <li>Drive og forbedre Appen</li>
-            <li>Muliggøre sociale funktioner</li>
-            <li>Vise check-ins og aktivitet</li>
-            <li>Sikre appens stabilitet og sikkerhed</li>
-            <li>Overholde juridiske krav</li>
-        </ul>
-        
-        <h2 id="section-3">3. Deling af data</h2>
-        <p>Vi deler ikke dine personoplysninger med tredjeparter til markedsføring.</p>
-        <p>Data kan deles med:</p>
-        <ul>
-            <li>Tekniske serviceudbydere (hosting, analytics)</li>
-            <li>Myndigheder, hvis loven kræver det</li>
-        </ul>
-        <p>Alle partnere er GDPR-compliant.</p>
-        
-        <h2 id="section-4">4. Opbevaring af data</h2>
-        <p>Vi opbevarer kun dine data, så længe:</p>
-        <ul>
-            <li>Din konto er aktiv</li>
-            <li>Det er nødvendigt af juridiske eller tekniske årsager</li>
-        </ul>
-        <p>Du kan til enhver tid anmode om sletning.</p>
-        
-        <h2 id="section-5">5. Dine rettigheder</h2>
-        <p>Du har ret til:</p>
-        <ul>
-            <li>Indsigt i dine data</li>
-            <li>Rettelse af forkerte oplysninger</li>
-            <li>Sletning af dine data</li>
-            <li>Dataportabilitet</li>
-            <li>At trække samtykke tilbage</li>
-        </ul>
-        <p>Kontakt os for at udøve dine rettigheder.</p>
-        
-        <h2 id="section-6">6. Datasikkerhed</h2>
-        <p>Vi anvender tekniske og organisatoriske sikkerhedsforanstaltninger for at beskytte dine data mod misbrug, tab og uautoriseret adgang.</p>
-        
-        <h2 id="section-7">7. Børn</h2>
-        <p>Gymly er ikke rettet mod børn under 13 år.</p>
-        <p>Vi indsamler ikke bevidst data fra børn under denne alder.</p>
-        
-        <h2 id="section-8">8. Ændringer i privatlivspolitikken</h2>
-        <p>Vi kan opdatere denne privatlivspolitik.</p>
-        <p>Væsentlige ændringer vil blive kommunikeret i Appen.</p>
-        
-        <h2 id="section-9">9. Kontakt</h2>
-        <p>📧 <a href="mailto:appgymly@gmail.com" class="contact-email">appgymly@gmail.com</a></p>
-        <p>📞 <a href="tel:51257627" class="contact-email">51 25 76 27</a></p>
-        </main>
+    <div class="privacy-layout">
+        <div class="privacy-shell">
+            <aside class="privacy-sidebar" aria-label="Indholdsfortegnelse">
+                <h3>Indhold</h3>
+                <nav>
+                    <ul class="privacy-sidebar-nav">
+                        <li><a href="#section-1">1. Hvilke oplysninger indsamler vi?</a></li>
+                        <li><a href="#section-2">2. Hvordan bruger vi dine data?</a></li>
+                        <li><a href="#section-3">3. Deling af data</a></li>
+                        <li><a href="#section-4">4. Opbevaring af data</a></li>
+                        <li><a href="#section-5">5. Dine rettigheder</a></li>
+                        <li><a href="#section-6">6. Datasikkerhed</a></li>
+                        <li><a href="#section-7">7. Børn</a></li>
+                        <li><a href="#section-8">8. Ændringer i privatlivspolitikken</a></li>
+                        <li><a href="#section-9">9. Kontakt</a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="privacy-doc">
+                <article class="privacy-doc-inner">
+                    <h1>Privatlivspolitik for <span>Gymly</span></h1>
+                    <p class="last-updated">Sidst opdateret: 21. dec. 2025</p>
+
+                    <p class="lead">Gymly respekterer dit privatliv. Denne privatlivspolitik forklarer, hvordan vi indsamler, bruger og beskytter dine personoplysninger i overensstemmelse med GDPR og App Store-krav.</p>
+
+                    <h2 id="section-1">1. Hvilke oplysninger indsamler vi?</h2>
+                    <p>Vi kan indsamle følgende oplysninger:</p>
+                    <p><strong>Oplysninger du selv giver:</strong></p>
+                    <ul>
+                        <li>Navn eller brugernavn</li>
+                        <li>E-mailadresse</li>
+                        <li>Profiloplysninger</li>
+                        <li>Træningsdata og check-ins</li>
+                    </ul>
+                    <p><strong>Automatisk indsamlede oplysninger:</strong></p>
+                    <ul>
+                        <li>Enhedsoplysninger</li>
+                        <li>App-brug og interaktion</li>
+                        <li>Omtrentlig lokation (kun til check-in-funktion)</li>
+                    </ul>
+                    <p>Vi indsamler ikke præcis GPS-sporing i baggrunden, medmindre det tydeligt er aktiveret af brugeren.</p>
+
+                    <h2 id="section-2">2. Hvordan bruger vi dine data?</h2>
+                    <p>Vi bruger dine data til at:</p>
+                    <ul>
+                        <li>Drive og forbedre Appen</li>
+                        <li>Muliggøre sociale funktioner</li>
+                        <li>Vise check-ins og aktivitet</li>
+                        <li>Sikre appens stabilitet og sikkerhed</li>
+                        <li>Overholde juridiske krav</li>
+                    </ul>
+
+                    <h2 id="section-3">3. Deling af data</h2>
+                    <p>Vi deler ikke dine personoplysninger med tredjeparter til markedsføring.</p>
+                    <p>Data kan deles med:</p>
+                    <ul>
+                        <li>Tekniske serviceudbydere (hosting, analytics)</li>
+                        <li>Myndigheder, hvis loven kræver det</li>
+                    </ul>
+                    <p>Alle partnere er GDPR-compliant.</p>
+
+                    <h2 id="section-4">4. Opbevaring af data</h2>
+                    <p>Vi opbevarer kun dine data, så længe:</p>
+                    <ul>
+                        <li>Din konto er aktiv</li>
+                        <li>Det er nødvendigt af juridiske eller tekniske årsager</li>
+                    </ul>
+                    <p>Du kan til enhver tid anmode om sletning.</p>
+
+                    <h2 id="section-5">5. Dine rettigheder</h2>
+                    <p>Du har ret til:</p>
+                    <ul>
+                        <li>Indsigt i dine data</li>
+                        <li>Rettelse af forkerte oplysninger</li>
+                        <li>Sletning af dine data</li>
+                        <li>Dataportabilitet</li>
+                        <li>At trække samtykke tilbage</li>
+                    </ul>
+                    <p>Kontakt os for at udøve dine rettigheder.</p>
+
+                    <h2 id="section-6">6. Datasikkerhed</h2>
+                    <p>Vi anvender tekniske og organisatoriske sikkerhedsforanstaltninger for at beskytte dine data mod misbrug, tab og uautoriseret adgang.</p>
+
+                    <h2 id="section-7">7. Børn</h2>
+                    <p>Gymly er ikke rettet mod børn under 13 år.</p>
+                    <p>Vi indsamler ikke bevidst data fra børn under denne alder.</p>
+
+                    <h2 id="section-8">8. Ændringer i privatlivspolitikken</h2>
+                    <p>Vi kan opdatere denne privatlivspolitik.</p>
+                    <p>Væsentlige ændringer vil blive kommunikeret i Appen.</p>
+
+                    <h2 id="section-9">9. Kontakt</h2>
+                    <div class="privacy-contact">
+                        <p style="margin-bottom: 0.65rem;"><strong>E-mail</strong><br><a href="mailto:appgymly@gmail.com">appgymly@gmail.com</a></p>
+                        <p style="margin-bottom: 0;"><strong>Telefon</strong><br><a href="tel:+4551257627">51 25 76 27</a></p>
+                    </div>
+
+                    <p class="privacy-footer-note">Tilbage til <a href="index.html">forsiden</a> · <a href="terms.html">Vilkår og betingelser</a></p>
+                </article>
+            </main>
+        </div>
     </div>
-    
+
+    <footer class="landing-footer">
+        <div class="landing-footer-inner">
+            <div>
+                <div class="landing-footer-logo">Gymly</div>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Træn sammen med dem, du kender.</p>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="privacy.html">Privatlivspolitik</a>
+                    <a href="terms.html">Vilkår og betingelser</a>
+                    <a href="samarbejde.html">Samarbejde</a>
+                    <a href="support.html">Support</a>
+                </div>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="download.html">Download appen</a>
+                    <a href="login.html">Log ind</a>
+                    <a href="leaderboard.html">Ranglister</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        // Highlight active section in sidebar on scroll
-        const sections = document.querySelectorAll('.privacy-page h2[id]');
-        const navLinks = document.querySelectorAll('.sidebar-nav a');
-        
-        function updateActiveSection() {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - 150)) {
-                    current = section.getAttribute('id');
+        (function () {
+            var header = document.getElementById('landingHeader');
+            if (header) {
+                function onScroll() {
+                    header.classList.toggle('scrolled', window.scrollY > 20);
                 }
-            });
-            
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
+                window.addEventListener('scroll', onScroll, { passive: true });
+                onScroll();
+            }
+
+            var sections = document.querySelectorAll('.privacy-doc h2[id]');
+            var navLinks = document.querySelectorAll('.privacy-sidebar-nav a');
+            var ticking = false;
+
+            function updateActiveSection() {
+                var y = window.scrollY;
+                var current = '';
+                sections.forEach(function (section) {
+                    var top = section.getBoundingClientRect().top + window.scrollY;
+                    if (y >= top - 120) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(function (link) {
+                    link.classList.toggle('is-active', link.getAttribute('href') === '#' + current);
+                });
+                ticking = false;
+            }
+
+            window.addEventListener('scroll', function () {
+                if (!ticking) {
+                    requestAnimationFrame(updateActiveSection);
+                    ticking = true;
                 }
-            });
-        }
-        
-        window.addEventListener('scroll', updateActiveSection);
-        updateActiveSection(); // Call once on load
+            }, { passive: true });
+            updateActiveSection();
+        })();
     </script>
 </body>
 </html>
-
