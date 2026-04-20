@@ -7,7 +7,78 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=12">
+    <style>
+        .download-stores {
+            margin-top: 2rem;
+            padding: 1.75rem;
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+            text-align: left;
+        }
+        .download-stores-inner {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.75rem 2rem;
+            align-items: center;
+        }
+        @media (max-width: 640px) {
+            .download-stores-inner {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+            }
+            .download-store-copy { max-width: 100%; }
+        }
+        .download-qr-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .download-qr {
+            width: 180px;
+            height: 180px;
+            border-radius: var(--radius-md);
+            background: #fff;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+        .download-qr-caption {
+            font-size: 0.8125rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+        .download-store-copy h2 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0 0 0.5rem;
+        }
+        .download-store-copy p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin: 0 0 1rem;
+            line-height: 1.55;
+        }
+        .download-appstore {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .download-appstore svg {
+            flex-shrink: 0;
+        }
+        .download-fineprint {
+            font-size: 0.8125rem !important;
+            color: var(--text-light) !important;
+            margin: 0.85rem 0 0 !important;
+        }
+    </style>
 </head>
 <body class="landing-page">
     <header class="landing-header" id="landingHeader">
@@ -20,7 +91,8 @@
         </nav>
         <div class="landing-cta">
             <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
-            <a href="login.html" class="btn-primary">Log ind</a>
+            <a href="download.html" class="btn-primary">Download appen</a>
+            <a href="login.html" class="btn-secondary">Log ind</a>
         </div>
     </header>
 
@@ -31,12 +103,29 @@
                 <h1>Download <span>Gymly</span></h1>
                 <p>Få Gymly på din telefon og begynd at træne sammen med vennerne. Tjek ind når du rammer centeret, se hvem der er aktive, og del dine resultater.</p>
                 <div class="hero-buttons" style="justify-content: center;">
-                    <a href="index.html" class="btn-primary">Tilbage til forsiden</a>
+                    <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary download-appstore" target="_blank" rel="noopener noreferrer">
+                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Hent i App Store
+                    </a>
+                    <a href="index.html" class="btn-secondary">Tilbage til forsiden</a>
                     <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
                 </div>
-                <div class="download-soon" style="margin-top: 2rem; padding: 1.25rem; background: var(--primary-pastel); border-radius: var(--radius-lg); border: 1px solid rgba(151,111,255,0.2);">
-                    <p style="font-weight: 600; color: var(--primary-dark); margin-bottom: 0.25rem;">Gymly kommer snart</p>
-                    <p style="font-size: 0.95rem; color: var(--text-muted); margin: 0;">App Store og Google Play – følg med her for at være blandt de første.</p>
+                <div class="download-stores">
+                    <div class="download-stores-inner">
+                        <div class="download-qr-block">
+                            <img class="download-qr" width="180" height="180" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;margin=8&amp;data=https%3A%2F%2Fapps.apple.com%2Fdk%2Fapp%2Fgymly-st%C3%A6rkere-sammen%2Fid6757790972%3Fl%3Dda" alt="QR-kode til Gymly i App Store" loading="lazy" decoding="async">
+                            <span class="download-qr-caption">Scan med telefonen</span>
+                        </div>
+                        <div class="download-store-copy">
+                            <h2>Hent Gymly nu</h2>
+                            <p>Åbn linket på din iPhone, eller scan QR-koden for at gå direkte til <strong>Gymly – Stærkere Sammen</strong> i App Store.</p>
+                            <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary download-appstore" target="_blank" rel="noopener noreferrer">
+                                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                                Åbn i App Store
+                            </a>
+                            <p class="download-fineprint">Gymly er kun tilgængelig til iPhone via Apple App Store.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -50,7 +139,7 @@
             <div class="feature-card">
                 <div class="feature-icon">📦</div>
                 <h3>Download appen</h3>
-                <p>Hent Gymly gratis på App Store eller Google Play. Opret hurtigt din konto.</p>
+                <p>Hent Gymly gratis på App Store til iPhone. Opret hurtigt din konto og kom i gang.</p>
             </div>
             <div class="feature-card">
                 <div class="feature-icon">📍</div>
