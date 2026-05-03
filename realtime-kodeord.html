@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gymly Realtime Kodeord</title>
+    <meta name="description" content="Gymly landing page med realtime opdatering af officielt kodeord.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #976FFF;
+            --primary-dark: #7B4BFF;
+            --primary-pastel: rgba(151, 111, 255, 0.14);
+            --bg: #FAFBFC;
+            --surface: #ffffff;
+            --text: #0f0f14;
+            --muted: #5c5c6d;
+            --border: #E8E8EC;
+            --success: #22c55e;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background: linear-gradient(180deg, #f8f7ff 0%, var(--bg) 45%);
+            min-height: 100vh;
+        }
+
+        .wrap {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 2rem 1.25rem 3rem;
+        }
+
+        .topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 2.5rem;
+        }
+
+        .logo {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.5rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .hero {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 8px 28px rgba(151, 111, 255, 0.08);
+            padding: 2rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .hero h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero p {
+            color: var(--muted);
+            max-width: 62ch;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.1rem;
+        }
+
+        .label {
+            font-size: 0.8rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.35rem;
+            font-weight: 600;
+        }
+
+        .codeword {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+            word-break: break-word;
+        }
+
+        .meta {
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .form-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem;
+        }
+
+        form {
+            display: grid;
+            gap: 0.75rem;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            font-size: 1rem;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-pastel);
+        }
+
+        button {
+            border: none;
+            background: var(--primary);
+            color: #fff;
+            padding: 0.85rem 1.1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+        }
+
+        .status {
+            margin-top: 0.75rem;
+            min-height: 1.3rem;
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        @media (max-width: 760px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="wrap">
+        <div class="topbar">
+            <a class="logo" href="index.html">Gymly</a>
+            <a class="back-link" href="index.html">Til forsiden</a>
+        </div>
+
+        <section class="hero">
+            <h1>Gymly landing page med realtime kodeord</h1>
+            <p>Skift kodeordet herunder, og det bliver opdateret som det officielle kodeord i realtime. Hvis siden er aaben i flere faner, bliver alle opdateret live med det samme.</p>
+
+            <div class="grid">
+                <article class="card">
+                    <div class="label">Officielt kodeord</div>
+                    <div class="codeword" id="officialCodeword">-</div>
+                </article>
+                <article class="card">
+                    <div class="label">Senest opdateret</div>
+                    <div class="meta" id="updatedAt">Ikke opdateret endnu</div>
+                </article>
+            </div>
+        </section>
+
+        <section class="form-card">
+            <div class="label">Opdater kodeord</div>
+            <form id="codewordForm">
+                <input
+                    id="codewordInput"
+                    type="text"
+                    maxlength="64"
+                    autocomplete="off"
+                    placeholder="Skriv nyt kodeord (fx GYMLY-2026)"
+                    required
+                >
+                <button type="submit">Gem og opdater realtime</button>
+            </form>
+            <p class="status" id="statusMessage"></p>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            var STORAGE_KEY = "gymly_official_codeword";
+            var CHANNEL_NAME = "gymly_codeword_updates";
+            var officialCodewordEl = document.getElementById("officialCodeword");
+            var updatedAtEl = document.getElementById("updatedAt");
+            var statusMessageEl = document.getElementById("statusMessage");
+            var codewordInput = document.getElementById("codewordInput");
+            var codewordForm = document.getElementById("codewordForm");
+            var channel = null;
+
+            function nowFormatted() {
+                return new Date().toLocaleString("da-DK");
+            }
+
+            function getState() {
+                try {
+                    var raw = localStorage.getItem(STORAGE_KEY);
+                    return raw ? JSON.parse(raw) : null;
+                } catch (error) {
+                    return null;
+                }
+            }
+
+            function setState(nextState) {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(nextState));
+            }
+
+            function render(state) {
+                if (!state || !state.value) {
+                    officialCodewordEl.textContent = "Ikke sat endnu";
+                    updatedAtEl.textContent = "Ikke opdateret endnu";
+                    return;
+                }
+                officialCodewordEl.textContent = state.value;
+                updatedAtEl.textContent = state.updatedAt;
+            }
+
+            function broadcast(state) {
+                if (channel) {
+                    channel.postMessage(state);
+                }
+            }
+
+            function updateCodeword(newValue, sourceLabel) {
+                var trimmed = (newValue || "").trim();
+                if (!trimmed) {
+                    statusMessageEl.textContent = "Skriv et kodeord for at gemme.";
+                    return;
+                }
+
+                var nextState = {
+                    value: trimmed,
+                    updatedAt: nowFormatted()
+                };
+
+                setState(nextState);
+                render(nextState);
+                broadcast(nextState);
+                statusMessageEl.textContent = "Opdateret realtime via " + sourceLabel + ".";
+                codewordInput.value = "";
+            }
+
+            codewordForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                updateCodeword(codewordInput.value, "denne side");
+            });
+
+            window.addEventListener("storage", function (event) {
+                if (event.key !== STORAGE_KEY || !event.newValue) return;
+                try {
+                    var state = JSON.parse(event.newValue);
+                    render(state);
+                    statusMessageEl.textContent = "Kodeord modtaget realtime fra en anden fane.";
+                } catch (error) {
+                    /* ignore invalid payload */
+                }
+            });
+
+            if ("BroadcastChannel" in window) {
+                channel = new BroadcastChannel(CHANNEL_NAME);
+                channel.addEventListener("message", function (event) {
+                    var state = event.data;
+                    if (!state || !state.value) return;
+                    render(state);
+                    statusMessageEl.textContent = "Kodeord synkroniseret realtime.";
+                });
+            }
+
+            render(getState());
+        })();
+    </script>
+</body>
+</html>
