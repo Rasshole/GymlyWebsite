@@ -114,7 +114,7 @@
             }
         })();
         if (window.isLoggedIn && window.isLoggedIn()) {
-            window.location.replace('home.html');
+            window.location.replace('download.html');
         }
         var form = document.getElementById('loginForm');
         if (form) {
@@ -125,7 +125,7 @@
                     localStorage.setItem('gymly_user_email', emailEl.value.trim());
                 }
                 if (window.setLoggedIn) window.setLoggedIn();
-                window.location.replace('home.html');
+                window.location.replace('download.html');
             });
         }
     </script>

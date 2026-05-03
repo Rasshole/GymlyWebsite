@@ -1,176 +1,123 @@
 <!DOCTYPE html>
-<html lang="da" class="landing-page">
+<html lang="da" class="landing-page landing-premium page-download">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Gymly | Fitness Tracking & Fællesskab</title>
+    <title>Download Gymly | App Store</title>
+    <meta name="description" content="Download Gymly til iPhone. QR-kode til App Store. Se hvem der træner live, swipe tjek-ind og træn sammen.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=12">
-    <style>
-        .download-stores {
-            margin-top: 2rem;
-            padding: 1.75rem;
-            background: var(--card-bg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            box-shadow: var(--shadow-md);
-            text-align: left;
-        }
-        .download-stores-inner {
-            display: grid;
-            grid-template-columns: auto 1fr;
-            gap: 1.75rem 2rem;
-            align-items: center;
-        }
-        @media (max-width: 640px) {
-            .download-stores-inner {
-                grid-template-columns: 1fr;
-                justify-items: center;
-                text-align: center;
-            }
-            .download-store-copy { max-width: 100%; }
-        }
-        .download-qr-block {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .download-qr {
-            width: 180px;
-            height: 180px;
-            border-radius: var(--radius-md);
-            background: #fff;
-            padding: 0.5rem;
-            box-shadow: var(--shadow-sm);
-        }
-        .download-qr-caption {
-            font-size: 0.8125rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-        .download-store-copy h2 {
-            font-family: 'Manrope', sans-serif;
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: var(--text);
-            margin: 0 0 0.5rem;
-        }
-        .download-store-copy p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin: 0 0 1rem;
-            line-height: 1.55;
-        }
-        .download-appstore {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        .download-appstore svg {
-            flex-shrink: 0;
-        }
-        .download-fineprint {
-            font-size: 0.8125rem !important;
-            color: var(--text-light) !important;
-            margin: 0.85rem 0 0 !important;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=14">
 </head>
-<body class="landing-page">
-    <header class="landing-header" id="landingHeader">
-        <a href="index.html" class="landing-logo-link">
-            <img src="assets/logo.png" alt="Gymly" class="landing-logo">
-        </a>
-        <nav class="landing-nav">
-            <a href="leaderboard.html">Ranglister</a>
-            <a href="support.html">Support</a>
-        </nav>
-        <div class="landing-cta">
-            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
-            <a href="download.html" class="btn-primary">Download appen</a>
-            <a href="login.html" class="btn-secondary">Log ind</a>
+<body class="landing-page landing-premium page-download">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="index.html" class="landing-logo-link">
+                <img src="assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="index.html#features">Features</a>
+                <a href="download.html" aria-current="page">Download</a>
+                <a href="support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero – samme layout som forsiden -->
-    <section class="hero-section">
-        <div class="hero-inner" style="grid-template-columns: 1fr; max-width: 560px; margin: 0 auto; text-align: center;">
-            <div class="hero-content">
-                <h1>Download <span>Gymly</span></h1>
-                <p>Få Gymly på din telefon og begynd at træne sammen med vennerne. Tjek ind når du rammer centeret, se hvem der er aktive, og del dine resultater.</p>
-                <div class="hero-buttons" style="justify-content: center;">
-                    <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary download-appstore" target="_blank" rel="noopener noreferrer">
-                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                        Hent i App Store
-                    </a>
-                    <a href="index.html" class="btn-secondary">Tilbage til forsiden</a>
+    <main class="dl-page">
+        <section class="dl-hero-tight">
+            <p class="lp-kicker">Gymly på iPhone</p>
+            <h1 class="dl-h1">Se hvem der træner i dit gym – live <span aria-hidden="true">👀</span></h1>
+            <p class="dl-lead">Download appen og få tjek-ind, live aktivitet, streaks og chat med venner i én oplevelse.</p>
+            <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-xl dl-primary" target="_blank" rel="noopener noreferrer">
+                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                Download på App Store
+            </a>
+        </section>
+
+        <section class="dl-panel">
+            <div class="dl-panel-grid">
+                <div class="dl-qr-block">
+                    <img width="200" height="200" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&amp;margin=8&amp;data=https%3A%2F%2Fapps.apple.com%2Fdk%2Fapp%2Fgymly-st%C3%A6rkere-sammen%2Fid6757790972%3Fl%3Dda" alt="QR-kode til Gymly i App Store" loading="lazy" decoding="async" class="dl-qr-img">
+                    <p class="dl-qr-txt">Scan med telefonen — åbner App Store.</p>
                 </div>
-                <div class="download-stores">
-                    <div class="download-stores-inner">
-                        <div class="download-qr-block">
-                            <img class="download-qr" width="180" height="180" src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;margin=8&amp;data=https%3A%2F%2Fapps.apple.com%2Fdk%2Fapp%2Fgymly-st%C3%A6rkere-sammen%2Fid6757790972%3Fl%3Dda" alt="QR-kode til Gymly i App Store" loading="lazy" decoding="async">
-                            <span class="download-qr-caption">Scan med telefonen</span>
-                        </div>
-                        <div class="download-store-copy">
-                            <h2>Hent Gymly nu</h2>
-                            <p>Åbn linket på din iPhone, eller scan QR-koden for at gå direkte til <strong>Gymly – Stærkere Sammen</strong> i App Store.</p>
-                            <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary download-appstore" target="_blank" rel="noopener noreferrer">
-                                <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-                                Åbn i App Store
-                            </a>
-                            <p class="download-fineprint">Gymly er kun tilgængelig til iPhone via Apple App Store.</p>
+                <div>
+                    <h2 class="dl-h2">Tre grunde til at hente Gymly nu</h2>
+                    <ol class="dl-ol">
+                        <li><strong>Live i gymmet</strong> — se hvem der er aktive, før du går ud ad døren.</li>
+                        <li><strong>Swipe tjek-ind</strong> — hurtigt, tydeligt, bygget til centeret.</li>
+                        <li><strong>Stærkere sammen</strong> — streaks, ranglister og beskeder der holder dig i game.</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <section class="dl-shots" aria-label="Forhåndsvisning">
+            <h2 class="dl-h2 dl-center">Sådan ser det ud i appen</h2>
+            <div class="dl-shot-row">
+                <figure class="dl-fig">
+                    <div class="lp-device lp-device--sm lp-drift">
+                        <div class="lp-device-bezel"><div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-checkin">
+                                <div class="lp-sc-bar">Check-in</div>
+                                <div class="lp-sc-swipe"><span class="lp-sc-knob"></span> Swipe</div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <figcaption>Tjek ind</figcaption>
+                </figure>
+                <figure class="dl-fig">
+                    <div class="lp-device lp-device--sm lp-drift-slow">
+                        <div class="lp-device-bezel"><div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-live">
+                                <div class="lp-sc-bar">Live</div>
+                                <div class="lp-sc-row"><span class="lp-pulse"></span> Venner aktive</div>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>Live aktivitet</figcaption>
+                </figure>
+                <figure class="dl-fig">
+                    <div class="lp-device lp-device--sm lp-drift">
+                        <div class="lp-device-bezel"><div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-chat">
+                                <div class="lp-sc-bar">Chat</div>
+                                <div class="lp-bub lp-bub-them">I dag?</div>
+                                <div class="lp-bub lp-bub-you">Yes 💪</div>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption>Beskeder</figcaption>
+                </figure>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Samme features som forsiden -->
-    <section class="section">
-        <h2 class="section-title">Sådan virker det</h2>
-        <p class="section-subtitle">Tre simple steps til at blive en del af fællesskabet</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📦</div>
-                <h3>Download appen</h3>
-                <p>Hent Gymly gratis på App Store til iPhone. Opret hurtigt din konto og kom i gang.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📍</div>
-                <h3>Tjek ind</h3>
-                <p>Når du er i gym, tjek ind med ét swipe. Dine venner og grupper kan se det.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔥</div>
-                <h3>Hold dig konsistent</h3>
-                <p>Byg streaks, konkurrér på ranglister og få motivation fra dit netværk.</p>
-            </div>
-        </div>
-    </section>
+        <p class="dl-back"><a href="index.html">← Til forsiden</a></p>
+    </main>
 
     <footer class="landing-footer">
         <div class="landing-footer-inner">
             <div>
                 <div class="landing-footer-logo">Gymly</div>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Træn sammen med dem, du kender.</p>
+                <p class="lp-footer-line">Swipe ind. Træn. Del.</p>
             </div>
             <div>
                 <div class="landing-footer-links">
                     <a href="privacy.html">Privatlivspolitik</a>
-                    <a href="terms.html">Vilkår og betingelser</a>
+                    <a href="terms.html">Vilkår</a>
                     <a href="samarbejde.html">Samarbejde</a>
                     <a href="support.html">Support</a>
                 </div>
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="download.html">Download appen</a>
-                    <a href="login.html">Log ind</a>
+                    <a href="download.html">Download</a>
                     <a href="leaderboard.html">Ranglister</a>
                 </div>
             </div>
@@ -179,11 +126,11 @@
 
     <script>
         (function() {
-            var header = document.getElementById('landingHeader');
-            if (!header) return;
-            function onScroll() { header.classList.toggle('scrolled', window.scrollY > 20); }
-            window.addEventListener('scroll', onScroll);
-            onScroll();
+            var h = document.getElementById('landingHeader');
+            if (!h) return;
+            function s() { h.classList.toggle('scrolled', window.scrollY > 16); }
+            window.addEventListener('scroll', s);
+            s();
         })();
     </script>
 </body>

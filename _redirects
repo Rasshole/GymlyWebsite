@@ -1,0 +1,13 @@
+# Web app routes → conversion (Gymly er mobil-app; undgå offentlige "dashboard"-sider)
+/home /download.html 302
+/home.html /download.html 302
+/activity /download.html 302
+/activity.html /download.html 302
+/checkin /download.html 302
+/checkin.html /download.html 302
+/messages /download.html 302
+/messages.html /download.html 302
+/profile /download.html 302
+/profile.html /download.html 302
+/settings /download.html 302
+/settings.html /download.html 302

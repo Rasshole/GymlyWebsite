@@ -1,223 +1,269 @@
 <!DOCTYPE html>
-<html lang="da" class="landing-page">
+<html lang="da" class="landing-page landing-premium">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gymly · Stærkere sammen | Træn med dine venner</title>
-    <meta name="description" content="Gymly er social fitness til iPhone: tjek ind, byg streaks, lås badges op, følg venner og konkurrér på ranglister. Hent appen i App Store.">
+    <title>Gymly · Download appen | Se hvem der træner live</title>
+    <meta name="description" content="Hent Gymly i App Store. Se hvem der træner i dit gym live, swipe tjek-ind, streaks og chat med venner. Stærkere sammen.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=12">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=14">
     <script src="auth.js" defer></script>
     <script src="lang.js" defer></script>
 </head>
-<body class="landing-page">
-    <!-- Sticky header med CTA -->
-    <header class="landing-header" id="landingHeader">
-        <a href="index.html" class="landing-logo-link">
-            <img src="assets/logo.png" alt="Gymly" class="landing-logo">
-        </a>
-        <nav class="landing-nav">
-            <a href="leaderboard.html">Ranglister</a>
-            <a href="support.html">Support</a>
-        </nav>
-        <div class="landing-cta">
-            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
-            <a href="download.html" class="btn-primary">Download appen</a>
-            <a href="login.html" class="btn-secondary">Log ind</a>
+<body class="landing-page landing-premium">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="index.html" class="landing-logo-link">
+                <img src="assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="#features">Features</a>
+                <a href="download.html">Download</a>
+                <a href="support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero-section">
-        <div class="hero-inner">
-            <div class="hero-content">
-                <h1>Træn sammen med <span>dem</span>, du kender.</h1>
-                <p><strong>Stærkere sammen</strong> — find ud af, hvem der træner lige nu, byg streaks og hold motivationen oppe. Gymly samler træning og venner i én app.</p>
-                <p style="margin-top: 1rem; font-size: 0.9rem; font-weight: 600; color: var(--text-muted); letter-spacing: 0.03em;">Ny i Gymly&nbsp;2.0: badges, finpudset tjek-ind og hurtigere oplevelse.</p>
-                <div class="hero-buttons">
-                    <a href="download.html" class="btn-primary">Download appen</a>
-                    <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
+    <main>
+        <section class="lp-hero" aria-labelledby="lp-hero-title">
+            <div class="lp-hero-glow" aria-hidden="true"></div>
+            <div class="lp-hero-inner">
+                <div class="lp-hero-copy">
+                    <p class="lp-kicker">Stærkere sammen · Swipe ind. Træn. Del.</p>
+                    <h1 id="lp-hero-title">Se hvem der træner i dit gym – live <span class="lp-hero-emoji" aria-hidden="true">👀</span></h1>
+                    <p class="lp-hero-sub">Gymly gør fitness socialt. Tjek ind, se hvem der er aktive, og træn sammen.</p>
+                    <div class="lp-hero-ctas">
+                        <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-xl" target="_blank" rel="noopener noreferrer">
+                            <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                            Download på App Store
+                        </a>
+                        <a href="#value" class="btn-secondary lp-btn-xl">Se hvordan det virker</a>
+                    </div>
+                </div>
+                <div class="lp-hero-phones" aria-hidden="true">
+                    <div class="lp-device lp-device--shadow lp-drift-slow">
+                        <div class="lp-device-bezel">
+                            <div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-checkin">
+                                <div class="lp-sc-bar">Check-in</div>
+                                <div class="lp-sc-swipe"><span class="lp-sc-knob"></span> Swipe for at tjekke ind</div>
+                                <div class="lp-sc-foot">Se hvem der er aktive lige nu</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lp-device lp-drift">
+                        <div class="lp-device-bezel">
+                            <div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-feed">
+                                <div class="lp-sc-bar">Live</div>
+                                <div class="lp-sc-row"><span class="lp-pulse"></span> Ven · I gym</div>
+                                <div class="lp-sc-row"><span class="lp-pulse lp-pulse--hot"></span> Streak · 10 dage</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="hero-preview">
-                <div class="hero-preview-card">
-                    <div class="hero-preview-avatar">P</div>
-                    <div class="hero-preview-name">Patrick</div>
-                    <div class="hero-preview-meta">SATS Valby · 23 min</div>
-                </div>
-                <div class="hero-preview-card">
-                    <div class="hero-preview-avatar">M</div>
-                    <div class="hero-preview-name">Marie</div>
-                    <div class="hero-preview-meta">PureGym · 45 min</div>
-                </div>
-                <div class="hero-preview-card">
-                    <div class="hero-preview-avatar">L</div>
-                    <div class="hero-preview-name">Lars</div>
-                    <div class="hero-preview-meta">SATS Adelgade · 12 min</div>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Hvordan det virker -->
-    <section class="section">
-        <h2 class="section-title">Sådan virker det</h2>
-        <p class="section-subtitle">Tre simple steps til at blive en del af fællesskabet</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📦</div>
-                <h3>Download appen</h3>
-                <p>Hent Gymly gratis i <strong>App Store</strong> til iPhone. Ny onboarding gør det nemt at komme i gang.</p>
+        <section class="lp-value" id="value">
+            <div class="lp-value-inner">
+                <h2 class="visually-hidden">Det får du</h2>
+                <ul class="lp-value-grid">
+                    <li class="lp-value-card">
+                        <span class="lp-value-icon" aria-hidden="true">◎</span>
+                        <p><strong>Se hvem der er i centeret lige nu</strong></p>
+                    </li>
+                    <li class="lp-value-card">
+                        <span class="lp-value-icon" aria-hidden="true">→</span>
+                        <p><strong>Swipe for at tjekke ind</strong></p>
+                    </li>
+                    <li class="lp-value-card">
+                        <span class="lp-value-icon" aria-hidden="true">🔥</span>
+                        <p><strong>Hold streaks og træn sammen</strong></p>
+                    </li>
+                </ul>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">📍</div>
-                <h3>Tjek ind</h3>
-                <p>Forbedret tjek-ind-flow: registrér dit træningssted, så venner og grupper kan følge med.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔥</div>
-                <h3>Badges &amp; streaks</h3>
-                <p>Saml badges, hold streaks i live og konkurrér på ranglister — motivation der føles som et spil.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Features grid -->
-    <section class="section">
-        <h2 class="section-title">Alt, du har brug for</h2>
-        <p class="section-subtitle">Det samme som i appen — social fitness der holder</p>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">👥</div>
-                <h3>Venner &amp; feed</h3>
-                <p>Se hvem der træner, del øjeblikke i feedet og planlæg sessions sammen.</p>
+        <section class="lp-live-wrap" aria-label="Aktivitet i Gymly">
+            <div class="lp-live-marquee">
+                <div class="lp-live-set">
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Patrick tjekkede ind i SATS</div>
+                    <div class="lp-live-pill lp-live-pill--fire"><span class="lp-live-dot lp-live-dot--fire"></span> Emma ramte 10 dages streak 🔥</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Jonas træner lige nu i PureGym</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Sofie delte en træning</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> 3 venner aktive i dit center</div>
+                </div>
+                <div class="lp-live-set" aria-hidden="true">
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Patrick tjekkede ind i SATS</div>
+                    <div class="lp-live-pill lp-live-pill--fire"><span class="lp-live-dot lp-live-dot--fire"></span> Emma ramte 10 dages streak 🔥</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Jonas træner lige nu i PureGym</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> Sofie delte en træning</div>
+                    <div class="lp-live-pill"><span class="lp-live-dot"></span> 3 venner aktive i dit center</div>
+                </div>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎖️</div>
-                <h3>Badge-system</h3>
-                <p>Lås op for badges når du træner. Fejr milepæle og hold fokus i hverdagen.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">💬</div>
-                <h3>Grupper &amp; chat</h3>
-                <p>Opret grupper, skriv med medlemmerne og hold hinanden ansvarlige.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Community -->
-    <section class="section">
-        <div class="social-proof-section">
-            <h2 class="section-title">Sammen er vi stærkere</h2>
-            <p class="section-subtitle">Bliv en del af fællesskabet og træn sammen med dem, du kender</p>
-        </div>
-    </section>
+        <div id="features" class="lp-features-anchor">
+            <section class="lp-band">
+                <div class="lp-split">
+                    <div class="lp-split-text">
+                        <h2>Se hvem der træner lige nu</h2>
+                        <p>Få overblik over venner og stemning, før du tager afsted — så ved du, at du ikke træner alene.</p>
+                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="lp-split-shot">
+                        <div class="lp-device lp-device--sm lp-drift-slow">
+                            <div class="lp-device-bezel">
+                                <div class="lp-device-notch"></div>
+                                <div class="lp-device-screen lp-sc-live">
+                                    <div class="lp-sc-bar">Online</div>
+                                    <div class="lp-sc-row"><span class="lp-pulse"></span> Patrick · 12 min</div>
+                                    <div class="lp-sc-row"><span class="lp-pulse"></span> Emma · I gym</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Aktivitetsfeed preview -->
-    <section class="section">
-        <h2 class="section-title">Levende aktivitet</h2>
-        <p class="section-subtitle">Se hvad der sker i dit netværk – i realtid</p>
-        <div class="features-grid" style="max-width: 600px; margin: 0 auto;">
-            <div class="activity-feed-card">
-                <div class="activity-feed-avatar">P</div>
-                <div class="activity-feed-content">
-                    <div class="activity-feed-text"><strong>Patrick</strong> checkede ind i SATS Nørrebro</div>
-                    <div class="activity-feed-time">2 min siden</div>
+            <section class="lp-band lp-band--tint">
+                <div class="lp-split lp-split--rev">
+                    <div class="lp-split-text">
+                        <h2>Find centre omkring dig</h2>
+                        <p>Se centre på kortet, vælg dit sted og bliv en del af det lokale community.</p>
+                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="lp-split-shot">
+                        <div class="lp-map-shot" aria-hidden="true">
+                            <div class="lp-map-grid"></div>
+                            <div class="lp-map-pin">📍</div>
+                            <div class="lp-map-tag">Dit center</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="activity-feed-card">
-                <div class="activity-feed-avatar">M</div>
-                <div class="activity-feed-content">
-                    <div class="activity-feed-text"><strong>Mia</strong> låste badge op: <strong>14 dages streak</strong> 🔥</div>
-                    <div class="activity-feed-time">14 min siden</div>
-                </div>
-            </div>
-            <div class="activity-feed-card">
-                <div class="activity-feed-avatar">J</div>
-                <div class="activity-feed-content">
-                    <div class="activity-feed-text"><strong>Jonas</strong> trænede ben i 92 min</div>
-                    <div class="activity-feed-time">32 min siden</div>
-                </div>
-            </div>
-            <div class="activity-feed-card">
-                <div class="activity-feed-avatar">S</div>
-                <div class="activity-feed-content">
-                    <div class="activity-feed-text"><strong>Sara</strong> joined Group: Copenhagen Cut Club</div>
-                    <div class="activity-feed-time">1 time siden</div>
-                </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Leaderboard preview -->
-    <section class="section">
-        <h2 class="section-title">Ranglister</h2>
-        <p class="section-subtitle">Konkurrér med venner og hold dig motiveret</p>
-        <div class="leaderboard-preview" style="max-width: 400px; margin: 0 auto;">
-            <div class="leaderboard-preview-row">
-                <span class="leaderboard-rank gold">1</span>
-                <div class="leaderboard-preview-avatar">P</div>
-                <div class="leaderboard-preview-info">
-                    <div class="leaderboard-preview-name">Patrick</div>
-                    <div class="leaderboard-preview-meta">SATS Valby · 47 check-ins</div>
+            <section class="lp-band">
+                <div class="lp-split">
+                    <div class="lp-split-text">
+                        <h2>Ranglister &amp; badges</h2>
+                        <p>Små sejre der holder motivationen — konkurrér på lister og fejr badges, når du holder kadencen.</p>
+                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="lp-split-shot">
+                        <div class="lp-device lp-device--sm lp-drift">
+                            <div class="lp-device-bezel">
+                                <div class="lp-device-notch"></div>
+                                <div class="lp-device-screen lp-sc-lb">
+                                    <div class="lp-sc-bar">Rangliste</div>
+                                    <div class="lp-lb-line"><span>1</span> Dig <em>128</em></div>
+                                    <div class="lp-lb-line"><span>2</span> Ven <em>119</em></div>
+                                    <div class="lp-badge-strip"><span>Ny badge</span><span>10 dage</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <span class="leaderboard-preview-streak">🔥 21 dage</span>
-            </div>
-            <div class="leaderboard-preview-row">
-                <span class="leaderboard-rank silver">2</span>
-                <div class="leaderboard-preview-avatar">M</div>
-                <div class="leaderboard-preview-info">
-                    <div class="leaderboard-preview-name">Marie</div>
-                    <div class="leaderboard-preview-meta">PureGym · 42 check-ins</div>
-                </div>
-                <span class="leaderboard-preview-streak">🔥 14 dage</span>
-            </div>
-            <div class="leaderboard-preview-row">
-                <span class="leaderboard-rank bronze">3</span>
-                <div class="leaderboard-preview-avatar">L</div>
-                <div class="leaderboard-preview-info">
-                    <div class="leaderboard-preview-name">Lars</div>
-                    <div class="leaderboard-preview-meta">SATS Adelgade · 38 check-ins</div>
-                </div>
-                <span class="leaderboard-preview-streak">🔥 7 dage</span>
-            </div>
-        </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <a href="leaderboard.html" class="btn-secondary">Se fuld rangliste</a>
-        </div>
-    </section>
+            </section>
 
-    <!-- CTA section -->
-    <section class="cta-section">
-        <h2>Klar til at træne sammen?</h2>
-        <p>Hent Gymly i App Store — <strong>Stærkere sammen</strong> starter med ét download.</p>
-        <div class="hero-buttons" style="justify-content: center;">
-            <a href="download.html" class="btn-primary">Download appen</a>
-            <a href="leaderboard.html" class="btn-secondary">Se ranglister</a>
-        </div>
-    </section>
+            <section class="lp-band lp-band--tint">
+                <div class="lp-split lp-split--rev">
+                    <div class="lp-split-text">
+                        <h2>Del din træning</h2>
+                        <p>Del fremskridt i feedet — social energi uden støj, så vennerne kan heppe med.</p>
+                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="lp-split-shot">
+                        <div class="lp-device lp-device--sm lp-drift-slow">
+                            <div class="lp-device-bezel">
+                                <div class="lp-device-notch"></div>
+                                <div class="lp-device-screen lp-sc-feed">
+                                    <div class="lp-sc-bar">Feed</div>
+                                    <div class="lp-sc-post">Ben-dag ✓</div>
+                                    <div class="lp-sc-post">Ny PR 🎯</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- Footer -->
+            <section class="lp-band">
+                <div class="lp-split">
+                    <div class="lp-split-text">
+                        <h2>Chat med dine venner</h2>
+                        <p>Skriv sammen, planlæg sessions og hold hinanden opdateret — træning bliver lettere med crewet i lommen.</p>
+                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                    </div>
+                    <div class="lp-split-shot">
+                        <div class="lp-device lp-device--sm lp-drift">
+                            <div class="lp-device-bezel">
+                                <div class="lp-device-notch"></div>
+                                <div class="lp-device-screen lp-sc-chat">
+                                    <div class="lp-sc-bar">Beskeder</div>
+                                    <div class="lp-bub lp-bub-them">Vi tager ben i dag?</div>
+                                    <div class="lp-bub lp-bub-you">Jeg er klar 💪</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="lp-final" id="download">
+            <div class="lp-final-inner">
+                <div class="lp-final-copy">
+                    <h2>Download Gymly i dag</h2>
+                    <p>Appen er på iPhone. Ét tryk — så er du med.</p>
+                    <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-xl" target="_blank" rel="noopener noreferrer">
+                        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                        Download på App Store
+                    </a>
+                </div>
+                <div class="lp-final-side">
+                    <img class="lp-final-qr" width="168" height="168" src="https://api.qrserver.com/v1/create-qr-code/?size=168x168&amp;margin=6&amp;data=https%3A%2F%2Fapps.apple.com%2Fdk%2Fapp%2Fgymly-st%C3%A6rkere-sammen%2Fid6757790972%3Fl%3Dda" alt="QR til App Store" loading="lazy" decoding="async">
+                    <span class="lp-final-qr-cap">Scan med telefonen</span>
+                    <div class="lp-device lp-device--xs lp-drift-slow" aria-hidden="true">
+                        <div class="lp-device-bezel">
+                            <div class="lp-device-notch"></div>
+                            <div class="lp-device-screen lp-sc-checkin">
+                                <div class="lp-sc-bar">Gymly</div>
+                                <div class="lp-sc-swipe"><span class="lp-sc-knob"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
     <footer class="landing-footer">
         <div class="landing-footer-inner">
             <div>
                 <div class="landing-footer-logo">Gymly</div>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Stærkere sammen · Træn med dem, du kender.</p>
+                <p class="lp-footer-line">Swipe ind. Træn. Del.</p>
             </div>
             <div>
                 <div class="landing-footer-links">
                     <a href="privacy.html">Privatlivspolitik</a>
-                    <a href="terms.html">Vilkår og betingelser</a>
+                    <a href="terms.html">Vilkår</a>
                     <a href="samarbejde.html">Samarbejde</a>
                     <a href="support.html">Support</a>
                 </div>
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="download.html">Download appen</a>
-                    <a href="login.html">Log ind</a>
+                    <a href="download.html">Download</a>
                     <a href="leaderboard.html">Ranglister</a>
                 </div>
             </div>
@@ -228,14 +274,12 @@
         (function() {
             var header = document.getElementById('landingHeader');
             if (!header) return;
-            function onScroll() {
-                header.classList.toggle('scrolled', window.scrollY > 20);
-            }
+            function onScroll() { header.classList.toggle('scrolled', window.scrollY > 16); }
             window.addEventListener('scroll', onScroll);
             onScroll();
         })();
         if (window.isLoggedIn && window.isLoggedIn()) {
-            window.location.replace('home.html');
+            window.location.replace('download.html');
         }
     </script>
 </body>
