@@ -8,20 +8,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=15">
-    <script src="auth.js" defer></script>
-    <script src="lang.js" defer></script>
+    <link rel="preload" href="/styles.css?v=16" as="style">
+    <link rel="stylesheet" href="/styles.css?v=16">
+    <script src="/auth.js" defer></script>
+    <script src="/lang.js" defer></script>
 </head>
 <body class="landing-page landing-premium">
     <header class="landing-header lp-header" id="landingHeader">
         <div class="lp-header-inner">
-            <a href="index.html" class="landing-logo-link">
-                <img src="assets/logo.png" alt="Gymly" class="landing-logo">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
             </a>
             <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
                 <a href="#features">Features</a>
-                <a href="download.html">Download</a>
-                <a href="support.html">Support</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html">Support</a>
             </nav>
             <div class="landing-cta lp-header-cta">
                 <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
@@ -102,7 +103,7 @@
                     <div class="lp-split-text">
                         <h2>Se hvem der træner lige nu</h2>
                         <p>Få overblik over venner og stemning, før du tager afsted — så ved du, at du ikke træner alene.</p>
-                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                        <a href="/download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="lp-split-shot">
                         <div class="lp-device lp-device--sm lp-drift-slow">
@@ -124,7 +125,7 @@
                     <div class="lp-split-text">
                         <h2>Find centre omkring dig</h2>
                         <p>Se centre på kortet, vælg dit sted og bliv en del af det lokale community.</p>
-                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                        <a href="/download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="lp-split-shot">
                         <div class="lp-map-shot" aria-hidden="true">
@@ -141,7 +142,7 @@
                     <div class="lp-split-text">
                         <h2>Ranglister &amp; badges</h2>
                         <p>Små sejre der holder motivationen — konkurrér på lister og fejr badges, når du holder kadencen.</p>
-                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                        <a href="/download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="lp-split-shot">
                         <div class="lp-device lp-device--sm lp-drift">
@@ -164,7 +165,7 @@
                     <div class="lp-split-text">
                         <h2>Del din træning</h2>
                         <p>Del fremskridt i feedet — social energi uden støj, så vennerne kan heppe med.</p>
-                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                        <a href="/download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="lp-split-shot">
                         <div class="lp-device lp-device--sm lp-drift-slow">
@@ -186,7 +187,7 @@
                     <div class="lp-split-text">
                         <h2>Chat med dine venner</h2>
                         <p>Skriv sammen, planlæg sessions og hold hinanden opdateret — træning bliver lettere med crewet i lommen.</p>
-                        <a href="download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
+                        <a href="/download.html" class="lp-inline-cta">Hent appen <span aria-hidden="true">→</span></a>
                     </div>
                     <div class="lp-split-shot">
                         <div class="lp-device lp-device--sm lp-drift">
@@ -239,16 +240,16 @@
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="privacy.html">Privatlivspolitik</a>
-                    <a href="terms.html">Vilkår</a>
-                    <a href="samarbejde.html">Samarbejde</a>
-                    <a href="support.html">Support</a>
+                    <a href="/privacy.html">Privatlivspolitik</a>
+                    <a href="/terms.html">Vilkår</a>
+                    <a href="/samarbejde.html">Samarbejde</a>
+                    <a href="/support.html">Support</a>
                 </div>
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="download.html">Download</a>
-                    <a href="leaderboard.html">Ranglister</a>
+                    <a href="/download.html">Download</a>
+                    <a href="/leaderboard.html">Ranglister</a>
                 </div>
             </div>
         </div>
@@ -263,7 +264,7 @@
             onScroll();
         })();
         if (window.isLoggedIn && window.isLoggedIn()) {
-            window.location.replace('download.html');
+            window.location.replace('/download.html');
         }
     </script>
 </body>
