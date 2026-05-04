@@ -11,7 +11,3 @@
 /profile.html /download.html 302
 /settings /download.html 302
 /settings.html /download.html 302
-
-# Password reset (Supabase redirectTo https://gymlyapp.com/reset-password)
-/reset-password    /reset-password.html 200
-/reset-password/   /reset-password.html 200
