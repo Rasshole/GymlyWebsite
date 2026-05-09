@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=15">
     <script src="auth.js" defer></script>
     <script src="lang.js" defer></script>
     <script defer>if (typeof requireAuth === 'function') requireAuth();</script>
@@ -135,7 +135,101 @@
         }
         
         .plan-button:hover {
-            background: rgba(151, 111, 255, 0.25);
+            background: rgba(151, 111, 255, 0.28);
+        }
+        
+        /* Planlagte sessions — social, lightweight */
+        .ps-block {
+            margin-bottom: 0.75rem;
+            background: linear-gradient(165deg, rgba(151, 111, 255, 0.09) 0%, rgba(255, 255, 255, 0.95) 55%, #fff 100%);
+            border: 1px solid rgba(151, 111, 255, 0.14);
+            border-radius: 16px;
+            padding: 0.8rem 0.9rem;
+            box-shadow: 0 2px 12px rgba(151, 111, 255, 0.06);
+        }
+        .ps-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.55rem;
+        }
+        .ps-head-text { min-width: 0; }
+        .ps-kicker {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--primary-dark);
+            margin: 0 0 0.15rem;
+        }
+        .ps-title {
+            font-family: 'Manrope', sans-serif;
+            font-weight: 800;
+            font-size: 1.02rem;
+            color: #000;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        .ps-sub {
+            font-size: 0.78rem;
+            color: #666;
+            margin: 0.25rem 0 0;
+            line-height: 1.4;
+        }
+        .ps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+            max-height: 200px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        .ps-card {
+            background: #fff;
+            border-radius: 14px;
+            padding: 0.65rem 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.035);
+        }
+        .ps-card-lines {
+            display: flex;
+            flex-direction: column;
+            gap: 0.22rem;
+            font-size: 0.82rem;
+            color: #333;
+            line-height: 1.35;
+        }
+        .ps-card-lines span { display: flex; align-items: center; gap: 0.35rem; }
+        .ps-empty {
+            text-align: center;
+            padding: 0.65rem 0.35rem 0.35rem;
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.45;
+        }
+        .ps-toast {
+            position: fixed;
+            left: 50%;
+            bottom: 88px;
+            transform: translateX(-50%) translateY(120%);
+            max-width: 90%;
+            padding: 0.65rem 1rem;
+            background: rgba(26, 26, 46, 0.92);
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 12px;
+            z-index: 300;
+            opacity: 0;
+            transition: transform 0.35s ease, opacity 0.35s ease;
+            pointer-events: none;
+            text-align: center;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+        }
+        .ps-toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
         }
         
         .center-card {
@@ -720,11 +814,12 @@
             background: #e5e5e5;
         }
         
-        /* Plan training modal */
+        /* Ny session modal — minimal, social */
         .plan-modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.4);
+            background: rgba(15, 15, 20, 0.45);
+            backdrop-filter: blur(4px);
             z-index: 200;
             display: none;
             align-items: flex-end;
@@ -736,45 +831,65 @@
         }
         
         .plan-modal {
-            background: white;
-            border-radius: 20px 20px 0 0;
+            background: #fff;
+            border-radius: 22px 22px 0 0;
             width: 100%;
-            max-height: 90vh;
+            max-width: 520px;
+            max-height: 88vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            animation: slideUp 0.3s ease;
+            animation: slideUp 0.32s ease;
+            box-shadow: 0 -12px 40px rgba(151, 111, 255, 0.12);
         }
         
         .plan-modal-header {
-            padding: 1.25rem 1.5rem;
-            border-bottom: 1px solid #eee;
+            padding: 1.1rem 1.35rem 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
         
         .plan-modal-title {
             font-family: 'Manrope', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: #000;
             margin: 0;
+            letter-spacing: -0.02em;
+        }
+        .plan-modal-sub {
+            font-size: 0.82rem;
+            color: #666;
+            margin: 0.4rem 0 0;
+            line-height: 1.45;
         }
         
         .plan-modal-body {
-            padding: 1.25rem 1.5rem;
+            padding: 1.1rem 1.35rem 1.25rem;
             overflow-y: auto;
         }
         
         .plan-field {
-            margin-bottom: 1rem;
+            margin-bottom: 1.05rem;
         }
         
         .plan-field-label {
             display: block;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 0.9rem;
-            color: #333;
-            margin-bottom: 0.4rem;
+            font-size: 0.82rem;
+            color: #444;
+            margin-bottom: 0.35rem;
+        }
+        .plan-field-hint {
+            font-size: 0.72rem;
+            color: #999;
+            margin: 0.3rem 0 0;
+            line-height: 1.35;
+        }
+        .plan-when-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.5rem;
         }
         
         .plan-field-input {
@@ -839,49 +954,6 @@
             height: 20px;
         }
         
-        .plan-solo-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.75rem 0;
-        }
-        
-        .plan-solo-text {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.9rem;
-            color: #333;
-        }
-        
-        .plan-solo-toggle {
-            position: relative;
-            width: 52px;
-            height: 30px;
-            background: #d0d0d0;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-        
-        .plan-solo-toggle.active {
-            background: var(--primary);
-        }
-        
-        .plan-solo-slider {
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            width: 24px;
-            height: 24px;
-            background: white;
-            border-radius: 50%;
-            transition: transform 0.2s;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-        }
-        
-        .plan-solo-toggle.active .plan-solo-slider {
-            transform: translateX(22px);
-        }
-        
         .plan-friends-list {
             margin-top: 0.5rem;
             max-height: 120px;
@@ -910,21 +982,22 @@
         }
         
         .plan-muscle-chip {
-            padding: 0.4rem 0.75rem;
-            background: #f0f0f0;
-            border: 1px solid #e0e0e0;
-            border-radius: 20px;
+            padding: 0.38rem 0.7rem;
+            background: #f4f4f6;
+            border: 1px solid #e8e8ec;
+            border-radius: 999px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            color: #333;
+            font-size: 0.78rem;
+            color: #444;
             cursor: pointer;
             transition: all 0.2s;
         }
         
         .plan-muscle-chip.selected {
             background: var(--primary-pastel);
-            border-color: var(--primary);
-            color: var(--primary);
+            border-color: rgba(151, 111, 255, 0.45);
+            color: var(--primary-dark);
+            font-weight: 600;
         }
         
         .plan-modal-actions {
@@ -967,6 +1040,112 @@
         .plan-modal-cancel:hover {
             background: #e5e5e5;
         }
+        
+        /* Check-in: matcher planlagt session? */
+        .session-match-overlay,
+        .session-success-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 240;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 1.25rem;
+            background: rgba(15, 15, 20, 0.38);
+            backdrop-filter: blur(5px);
+        }
+        .session-match-overlay.open,
+        .session-success-overlay.open {
+            display: flex;
+        }
+        .session-match-card,
+        .session-success-card {
+            width: 100%;
+            max-width: 340px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.35rem 1.25rem 1.2rem;
+            text-align: center;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.14);
+            border: 1px solid rgba(151, 111, 255, 0.12);
+        }
+        .session-match-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem;
+            color: #000;
+        }
+        .session-match-card p {
+            font-size: 0.88rem;
+            color: #555;
+            margin: 0 0 1.1rem;
+            line-height: 1.45;
+        }
+        .session-match-detail {
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        .session-match-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+        .session-match-btn {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.92rem;
+            cursor: pointer;
+            border: none;
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+        .session-match-btn:active { transform: scale(0.98); }
+        .session-match-btn-yes {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(123, 75, 255, 0.35);
+        }
+        .session-match-btn-no {
+            background: #f3f3f5;
+            color: #444;
+        }
+        .session-success-card .session-success-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0 auto 0.75rem;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.08));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            animation: sessionPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .session-success-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            margin: 0 0 0.35rem;
+        }
+        .session-success-card p {
+            font-size: 0.85rem;
+            color: #666;
+            margin: 0;
+            line-height: 1.4;
+        }
+        .session-success-social {
+            margin-top: 0.65rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+        @keyframes sessionPop {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
     </style>
 </head>
 <body>
@@ -1005,7 +1184,6 @@
             <div class="center-section">
                 <div class="section-header">
                     <h2 class="section-title">Dit center</h2>
-                    <button class="plan-button" id="planButton">Planlæg træning</button>
                 </div>
                 
                 <div class="center-card" id="centerCard">
@@ -1031,6 +1209,19 @@
                         Lokalitet
                     </button>
                 </div>
+            </div>
+            
+            <div class="ps-block" id="plannedSessionsBlock">
+                <div class="ps-head">
+                    <div class="ps-head-text">
+                        <p class="ps-kicker">Venner &amp; accountability</p>
+                        <h2 class="ps-title">Planlagte sessions</h2>
+                        <p class="ps-sub">En hurtig aftale — center, type og tid. Invitér hvis du har lyst.</p>
+                    </div>
+                    <button type="button" class="plan-button" id="planButton" title="Ny session">+ Ny</button>
+                </div>
+                <div class="ps-list" id="plannedSessionsList" hidden></div>
+                <p class="ps-empty" id="plannedSessionsEmpty">Hvornår træner du? Tryk <strong>+ Ny</strong> — vi minder dig, helt uden kalender-støj.</p>
             </div>
             
             <!-- Muscle Groups Grid - Reference style: 2 cols, pill cards, grey outline + peach muscle -->
@@ -1197,7 +1388,7 @@
         <div class="active-view">
             <div class="active-card">
                 <div class="active-confirm">Check-in registreret ✓</div>
-                <div class="active-confirm-sub" style="font-size: 0.9rem; color: var(--success); margin-top: 0.25rem;">Streak beskyttet – du er 1 session tættere på top 10!</div>
+                <div class="active-confirm-sub" id="activeConfirmSub" style="font-size: 0.9rem; color: var(--success); margin-top: 0.25rem;">Godt klaret — din streak lever videre 💪</div>
                 <div class="active-location" id="activeLocation">Destination Skagen Gym • Ben</div>
                 <div class="active-timer">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1302,6 +1493,10 @@
                     <span class="center-modal-item-name">PureGym Rued Langgaardsvej</span>
                     <span class="center-modal-item-details">Rued Langgaardsvej • København • 430 m væk</span>
                 </div>
+                <div class="center-modal-item" data-name="SATS FRB" data-distance="620 m væk" data-details="Frederiksberg • København">
+                    <span class="center-modal-item-name">SATS FRB</span>
+                    <span class="center-modal-item-details">Frederiksberg • København • 620 m væk</span>
+                </div>
                 <div class="center-modal-item" data-name="SHC Scandinavia" data-distance="513 m væk" data-details="Scandinavia • København">
                     <span class="center-modal-item-name">SHC Scandinavia</span>
                     <span class="center-modal-item-details">Scandinavia • København • 513 m væk</span>
@@ -1323,67 +1518,83 @@
         </div>
     </div>
     
-    <!-- Plan training modal -->
+    <!-- Ny planlagt session -->
     <div class="plan-modal-overlay" id="planModalOverlay">
         <div class="plan-modal" onclick="event.stopPropagation()">
             <div class="plan-modal-header">
-                <h2 class="plan-modal-title">Planlæg træning</h2>
+                <h2 class="plan-modal-title">Ny session</h2>
+                <p class="plan-modal-sub">Hurtigt: center, træningstype og tid. Invitér en ven hvis du har lyst — det føles som &ldquo;skal vi træne senere?&rdquo;</p>
             </div>
             <div class="plan-modal-body">
                 <div class="plan-field">
-                    <label class="plan-field-label">Dato</label>
-                    <input type="date" class="plan-field-input" id="planDate">
-                </div>
-                <div class="plan-field">
-                    <label class="plan-field-label">Tidspunkt</label>
-                    <input type="time" class="plan-field-input" id="planTime">
-                </div>
-                <div class="plan-field">
                     <label class="plan-field-label">Center</label>
                     <div class="plan-center-preview" id="planCenterPreview">Destination Skagen Gym</div>
-                    <span class="plan-center-hint">Tryk for at vælge et andet center</span>
+                    <span class="plan-center-hint">Tryk for at skifte center</span>
                 </div>
                 <div class="plan-field">
-                    <label class="plan-field-label">Inviter venner</label>
+                    <label class="plan-field-label">Træningstype</label>
+                    <div class="plan-muscle-chips" id="planMuscleChips" role="listbox" aria-label="Vælg én træningstype">
+                        <span class="plan-muscle-chip selected" data-muscle="chest" role="option" aria-selected="true">Bryst</span>
+                        <span class="plan-muscle-chip" data-muscle="triceps" role="option">Triceps</span>
+                        <span class="plan-muscle-chip" data-muscle="shoulder" role="option">Skulder</span>
+                        <span class="plan-muscle-chip" data-muscle="legs" role="option">Ben</span>
+                        <span class="plan-muscle-chip" data-muscle="biceps" role="option">Biceps</span>
+                        <span class="plan-muscle-chip" data-muscle="abs" role="option">Mave</span>
+                        <span class="plan-muscle-chip" data-muscle="back" role="option">Ryg</span>
+                        <span class="plan-muscle-chip" data-muscle="fullbody" role="option">Hele kroppen</span>
+                    </div>
+                </div>
+                <div class="plan-field">
+                    <label class="plan-field-label">Hvornår</label>
+                    <div class="plan-when-row">
+                        <input type="date" class="plan-field-input" id="planDate" aria-label="Dato">
+                        <input type="time" class="plan-field-input" id="planTime" aria-label="Tid">
+                    </div>
+                </div>
+                <div class="plan-field">
+                    <label class="plan-field-label">Invitér venner <span style="font-weight:500;color:#888;">(valgfrit)</span></label>
                     <button type="button" class="plan-invite-btn" id="planInviteBtn">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2L15 22L11 13L2 9L22 2Z"/></svg>
-                        Inviter venner
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6M23 11h-6"/></svg>
+                        Vælg venner
                     </button>
+                    <p class="plan-field-hint">De får en ren Gymly-notifikation med deltag / ikke nu — ingen gruppe-logik eller booking.</p>
                     <div class="plan-friends-list" id="planFriendsList" style="display:none">
+                        <label class="plan-friend-item"><input type="checkbox" data-friend="Mio"> Mio</label>
                         <label class="plan-friend-item"><input type="checkbox" data-friend="Marie"> Marie</label>
                         <label class="plan-friend-item"><input type="checkbox" data-friend="Lars"> Lars</label>
                         <label class="plan-friend-item"><input type="checkbox" data-friend="Sofie"> Sofie</label>
-                        <label class="plan-friend-item"><input type="checkbox" data-friend="Emil"> Emil</label>
-                    </div>
-                </div>
-                <div class="plan-field">
-                    <div class="plan-solo-row">
-                        <span class="plan-solo-text">Solo træning (skjul for venner)</span>
-                        <div class="plan-solo-toggle" id="planSoloToggle">
-                            <div class="plan-solo-slider"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="plan-field">
-                    <label class="plan-field-label">Muskelgrupper (valgfrit)</label>
-                    <div class="plan-muscle-chips" id="planMuscleChips">
-                        <span class="plan-muscle-chip" data-muscle="chest">Bryst</span>
-                        <span class="plan-muscle-chip" data-muscle="triceps">Triceps</span>
-                        <span class="plan-muscle-chip" data-muscle="shoulder">Skulder</span>
-                        <span class="plan-muscle-chip" data-muscle="legs">Ben</span>
-                        <span class="plan-muscle-chip" data-muscle="biceps">Biceps</span>
-                        <span class="plan-muscle-chip" data-muscle="abs">Mave</span>
-                        <span class="plan-muscle-chip" data-muscle="back">Ryg</span>
-                        <span class="plan-muscle-chip" data-muscle="fullbody">Hele kroppen</span>
                     </div>
                 </div>
             </div>
             <div class="plan-modal-actions">
-                <button class="plan-modal-cancel" id="planModalCancel">Annuller</button>
-                <button class="plan-modal-save" id="planModalSave">Gem plan</button>
+                <button type="button" class="plan-modal-cancel" id="planModalCancel">Annuller</button>
+                <button type="button" class="plan-modal-save" id="planModalSave">Gem session</button>
             </div>
         </div>
     </div>
+    
+    <div class="session-match-overlay" id="sessionMatchOverlay" aria-hidden="true">
+        <div class="session-match-card" role="dialog" aria-labelledby="sessionMatchTitle" aria-modal="true">
+            <h3 id="sessionMatchTitle">Var dette din planlagte session?</h3>
+            <p id="sessionMatchBody">Vi matcher med din aftale, så du kan fejre små sejre sammen med venner.</p>
+            <p class="session-match-detail" id="sessionMatchDetail"></p>
+            <div class="session-match-actions">
+                <button type="button" class="session-match-btn session-match-btn-yes" id="sessionMatchYes">Ja, det var planen</button>
+                <button type="button" class="session-match-btn session-match-btn-no" id="sessionMatchNo">Nej tak</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="session-success-overlay" id="sessionSuccessOverlay" aria-hidden="true">
+        <div class="session-success-card">
+            <div class="session-success-icon" aria-hidden="true">✓</div>
+            <h3>Session gennemført</h3>
+            <p id="sessionSuccessLine">Godt gået — vi har gemt det på din plan.</p>
+            <p class="session-success-social" id="sessionSuccessSocial" hidden>🔥 I trænede sammen i dag</p>
+        </div>
+    </div>
+    
+    <div class="ps-toast" id="psToast" role="status" aria-live="polite"></div>
     
     <script>
         const muscleLabels = { chest: 'Bryst', triceps: 'Triceps', shoulder: 'Skulder', legs: 'Ben', biceps: 'Biceps', abs: 'Mave', back: 'Ryg', fullbody: 'Hele kroppen' };
@@ -1399,6 +1610,7 @@
         
         const allCenters = [
             { name: 'PureGym Rued Langgaardsvej', distance: '430 m væk', details: 'Rued Langgaardsvej • København' },
+            { name: 'SATS FRB', distance: '620 m væk', details: 'Frederiksberg • København' },
             { name: 'SHC Scandinavia', distance: '513 m væk', details: 'Scandinavia • København' },
             { name: 'PureGym Kbh S. Bryggen', distance: '592 m væk', details: 'Kbh S. Bryggen • København' },
             { name: 'Fitness World Nørrebro', distance: '1,2 km væk', details: 'Nørrebrogade • København' },
@@ -1450,7 +1662,8 @@
             renderCenterList(filtered);
         });
         
-        // Plan training modal
+        // Planlagte sessions (local demo state — modular for senere backend)
+        const SESSIONS_KEY = 'gymly_planned_sessions_v1';
         const planButton = document.getElementById('planButton');
         const planModalOverlay = document.getElementById('planModalOverlay');
         const planModalCancel = document.getElementById('planModalCancel');
@@ -1459,59 +1672,200 @@
         const planTime = document.getElementById('planTime');
         const planCenterPreview = document.getElementById('planCenterPreview');
         const planMuscleChips = document.getElementById('planMuscleChips');
-        const planSoloToggle = document.getElementById('planSoloToggle');
         const planFriendsList = document.getElementById('planFriendsList');
+        const sessionMatchOverlay = document.getElementById('sessionMatchOverlay');
+        const sessionSuccessOverlay = document.getElementById('sessionSuccessOverlay');
+        const psToast = document.getElementById('psToast');
+        let pendingCheckinMuscle = null;
+        let sessionMatchState = null;
+        
+        function localYmd(d) {
+            const y = d.getFullYear();
+            const m = String(d.getMonth() + 1).padStart(2, '0');
+            const day = String(d.getDate()).padStart(2, '0');
+            return y + '-' + m + '-' + day;
+        }
+        
+        function loadPlannedSessions() {
+            try {
+                const raw = localStorage.getItem(SESSIONS_KEY);
+                return raw ? JSON.parse(raw) : [];
+            } catch (e) { return []; }
+        }
+        
+        function savePlannedSessions(arr) {
+            localStorage.setItem(SESSIONS_KEY, JSON.stringify(arr));
+        }
+        
+        function escapeHtml(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+        }
+        
+        function formatSessionWhen(s) {
+            const parts = s.date.split('-');
+            const t = (s.time || '12:00').slice(0, 5);
+            if (parts.length !== 3) return t;
+            return parseInt(parts[2], 10) + '.' + parseInt(parts[1], 10) + '. kl. ' + t;
+        }
+        
+        function parseSessionDateTime(s) {
+            const t = (s.time || '12:00').length >= 5 ? s.time.slice(0, 5) : '12:00';
+            const d = new Date(s.date + 'T' + t + ':00');
+            return isNaN(d.getTime()) ? null : d;
+        }
+        
+        function findMatchingPlannedSession(centerName) {
+            const now = new Date();
+            const ymd = localYmd(now);
+            const c = centerName.trim();
+            const sessions = loadPlannedSessions().filter(function(s) {
+                return !s.completed && (s.center || '').trim() === c && s.date === ymd;
+            });
+            if (!sessions.length) return null;
+            const windowMs = 2 * 60 * 60 * 1000;
+            var best = null;
+            var bestDiff = Infinity;
+            sessions.forEach(function(s) {
+                var dt = parseSessionDateTime(s);
+                if (!dt) return;
+                var diff = Math.abs(now - dt);
+                if (diff <= windowMs && diff < bestDiff) {
+                    best = s;
+                    bestDiff = diff;
+                }
+            });
+            return best;
+        }
+        
+        function renderPlannedSessions() {
+            var list = document.getElementById('plannedSessionsList');
+            var empty = document.getElementById('plannedSessionsEmpty');
+            if (!list || !empty) return;
+            var upcoming = loadPlannedSessions().filter(function(s) { return !s.completed; });
+            upcoming.sort(function(a, b) {
+                var ta = parseSessionDateTime(a);
+                var tb = parseSessionDateTime(b);
+                if (!ta || !tb) return 0;
+                return ta - tb;
+            });
+            if (!upcoming.length) {
+                list.innerHTML = '';
+                list.hidden = true;
+                empty.hidden = false;
+                return;
+            }
+            empty.hidden = true;
+            list.hidden = false;
+            list.innerHTML = upcoming.map(function(s) {
+                var names = s.invitedNames || [];
+                var joinLine = names.length === 0
+                    ? '<span>👥 Ingen inviteret endnu — helt ok</span>'
+                    : names.length === 1
+                        ? '<span>👥 <strong>' + escapeHtml(names[0]) + '</strong> deltager</span>'
+                        : '<span>👥 ' + escapeHtml(names.slice(0, 2).join(', ')) + (names.length > 2 ? ' +' + (names.length - 2) : '') + ' deltager</span>';
+                return '<div class="ps-card" data-session-id="' + escapeHtml(s.id) + '">' +
+                    '<div class="ps-card-lines">' +
+                    '<span>💪 <strong>' + escapeHtml(s.label) + '</strong></span>' +
+                    '<span>📍 ' + escapeHtml(s.center) + '</span>' +
+                    '<span>🕒 ' + escapeHtml(formatSessionWhen(s)) + '</span>' +
+                    joinLine +
+                    '</div></div>';
+            }).join('');
+        }
+        
+        function showPsToast(msg) {
+            if (!psToast) return;
+            psToast.textContent = msg;
+            psToast.classList.add('show');
+            clearTimeout(showPsToast._t);
+            showPsToast._t = setTimeout(function() { psToast.classList.remove('show'); }, 2600);
+        }
         
         function openPlanModal() {
-            const today = new Date().toISOString().split('T')[0];
+            var today = localYmd(new Date());
             planDate.value = today;
             planTime.value = '18:00';
             planCenterPreview.textContent = centerNameEl.textContent;
-            planMuscleChips.querySelectorAll('.plan-muscle-chip').forEach(chip => chip.classList.remove('selected'));
-            planSoloToggle.classList.remove('active');
+            planMuscleChips.querySelectorAll('.plan-muscle-chip').forEach(function(chip) {
+                var on = chip.dataset.muscle === 'chest';
+                chip.classList.toggle('selected', on);
+                chip.setAttribute('aria-selected', on ? 'true' : 'false');
+            });
             planFriendsList.style.display = 'none';
-            planFriendsList.querySelectorAll('input[type=checkbox]').forEach(cb => cb.checked = false);
+            planFriendsList.querySelectorAll('input[type=checkbox]').forEach(function(cb) { cb.checked = false; });
             planModalOverlay.classList.add('open');
         }
         
-        planCenterPreview.addEventListener('click', () => {
+        planCenterPreview.addEventListener('click', function() {
             window._centerModalForPlan = true;
             centerModalOverlay.classList.add('open');
             centerSearchInput.value = '';
             renderCenterList(allCenters);
         });
         
-        document.getElementById('planInviteBtn').addEventListener('click', () => {
-            const list = planFriendsList;
+        document.getElementById('planInviteBtn').addEventListener('click', function() {
+            var list = planFriendsList;
             list.style.display = list.style.display === 'none' ? 'block' : 'none';
         });
         
-        planSoloToggle.addEventListener('click', () => planSoloToggle.classList.toggle('active'));
-        
         planButton.addEventListener('click', openPlanModal);
-        planModalCancel.addEventListener('click', () => planModalOverlay.classList.remove('open'));
-        planModalOverlay.addEventListener('click', (e) => {
+        planModalCancel.addEventListener('click', function() { planModalOverlay.classList.remove('open'); });
+        planModalOverlay.addEventListener('click', function(e) {
             if (e.target === planModalOverlay) planModalOverlay.classList.remove('open');
         });
         
-        planMuscleChips.querySelectorAll('.plan-muscle-chip').forEach(chip => {
-            chip.addEventListener('click', () => chip.classList.toggle('selected'));
+        planMuscleChips.querySelectorAll('.plan-muscle-chip').forEach(function(chip) {
+            chip.addEventListener('click', function() {
+                planMuscleChips.querySelectorAll('.plan-muscle-chip').forEach(function(c) {
+                    c.classList.remove('selected');
+                    c.setAttribute('aria-selected', 'false');
+                });
+                chip.classList.add('selected');
+                chip.setAttribute('aria-selected', 'true');
+            });
         });
         
-        planModalSave.addEventListener('click', () => {
-            const date = planDate.value;
-            const time = planTime.value;
-            const center = planCenterPreview.textContent;
-            const muscles = [...planMuscleChips.querySelectorAll('.plan-muscle-chip.selected')].map(c => c.textContent);
-            const friends = [...planFriendsList.querySelectorAll('input[type=checkbox]:checked')].map(cb => cb.dataset.friend);
-            const solo = planSoloToggle.classList.contains('active');
-            let msg = `Træning planlagt: ${date} kl. ${time} i ${center}`;
-            if (muscles.length > 0) msg += `\nMuskelgrupper: ${muscles.join(', ')}`;
-            if (friends.length > 0) msg += `\nInviteret: ${friends.join(', ')}`;
-            msg += `\nSolo træning: ${solo ? 'Ja' : 'Nej'}`;
-            alert(msg);
+        planModalSave.addEventListener('click', function() {
+            var date = planDate.value;
+            var time = planTime.value;
+            var center = planCenterPreview.textContent.trim();
+            var chip = planMuscleChips.querySelector('.plan-muscle-chip.selected');
+            if (!date || !time) {
+                showPsToast('Vælg dato og tid');
+                return;
+            }
+            if (!chip) {
+                showPsToast('Vælg en træningstype');
+                return;
+            }
+            var muscleKey = chip.dataset.muscle;
+            var label = muscleLabels[muscleKey] || chip.textContent.trim();
+            var invitedNames = Array.prototype.map.call(
+                planFriendsList.querySelectorAll('input[type=checkbox]:checked'),
+                function(cb) { return cb.dataset.friend; }
+            );
+            var session = {
+                id: 'ps_' + Date.now(),
+                date: date,
+                time: time.length >= 5 ? time.slice(0, 5) : time,
+                center: center,
+                muscleKey: muscleKey,
+                label: label,
+                invitedNames: invitedNames,
+                completed: false,
+                createdAt: Date.now()
+            };
+            var arr = loadPlannedSessions();
+            arr.push(session);
+            savePlannedSessions(arr);
+            renderPlannedSessions();
             planModalOverlay.classList.remove('open');
+            showPsToast(invitedNames.length
+                ? 'Session gemt · Venner får en notifikation 💪'
+                : 'Session gemt · Vi minder dig diskret');
         });
+        
+        renderPlannedSessions();
         
         // Muscle selection
         const muscleButtons = document.querySelectorAll('.muscle-button');
@@ -1561,19 +1915,79 @@
             setTimeout(() => swipeHandle.classList.remove('animate-back'), 400);
         }
         
+        function enterActiveWorkout(muscle, opts) {
+            opts = opts || {};
+            var center = document.querySelector('.center-name');
+            activeLocation.textContent = (center ? center.textContent : 'Destination Skagen Gym') + ' • ' + (muscleLabels[muscle] || muscle);
+            var sub = document.getElementById('activeConfirmSub');
+            if (sub) {
+                sub.textContent = opts.fromPlanned
+                    ? 'Fedt — din planlagte session er gemt 💜'
+                    : 'Godt klaret — din streak lever videre 💪';
+            }
+            preCheckinView.classList.add('hidden');
+            activeView.classList.remove('hidden');
+            resetHandle();
+            startWorkoutTimer();
+        }
+        
         function doCheckin() {
-            const selected = document.querySelectorAll('.muscle-button.selected');
+            var selected = document.querySelectorAll('.muscle-button.selected');
             if (selected.length === 0) {
                 resetHandle();
                 return;
             }
-            const muscle = selected[0].dataset.muscle;
-            const center = document.querySelector('.center-name');
-            activeLocation.textContent = (center ? center.textContent : 'Destination Skagen Gym') + ' • ' + (muscleLabels[muscle] || muscle);
-            preCheckinView.classList.add('hidden');
-            activeView.classList.remove('hidden');
-            startWorkoutTimer();
+            var muscle = selected[0].dataset.muscle;
+            var centerName = centerNameEl.textContent.trim();
+            var match = findMatchingPlannedSession(centerName);
+            if (match) {
+                pendingCheckinMuscle = muscle;
+                sessionMatchState = { id: match.id, hadInvites: (match.invitedNames && match.invitedNames.length > 0) };
+                document.getElementById('sessionMatchDetail').textContent =
+                    '💪 ' + match.label + ' · 📍 ' + match.center + ' · 🕒 ' + (match.time || '').slice(0, 5);
+                sessionMatchOverlay.classList.add('open');
+                sessionMatchOverlay.setAttribute('aria-hidden', 'false');
+                resetHandle();
+                return;
+            }
+            enterActiveWorkout(muscle, { fromPlanned: false });
         }
+        
+        document.getElementById('sessionMatchYes').addEventListener('click', function() {
+            if (!sessionMatchState) return;
+            var id = sessionMatchState.id;
+            var hadInvites = sessionMatchState.hadInvites;
+            var arr = loadPlannedSessions();
+            var idx = arr.findIndex(function(s) { return s.id === id; });
+            if (idx !== -1) {
+                arr[idx].completed = true;
+                savePlannedSessions(arr);
+                renderPlannedSessions();
+            }
+            sessionMatchOverlay.classList.remove('open');
+            sessionMatchOverlay.setAttribute('aria-hidden', 'true');
+            var socialEl = document.getElementById('sessionSuccessSocial');
+            if (socialEl) socialEl.hidden = !hadInvites;
+            sessionSuccessOverlay.classList.add('open');
+            sessionSuccessOverlay.setAttribute('aria-hidden', 'false');
+            setTimeout(function() {
+                sessionSuccessOverlay.classList.remove('open');
+                sessionSuccessOverlay.setAttribute('aria-hidden', 'true');
+                var m = pendingCheckinMuscle;
+                pendingCheckinMuscle = null;
+                sessionMatchState = null;
+                enterActiveWorkout(m, { fromPlanned: true });
+            }, 1200);
+        });
+        
+        document.getElementById('sessionMatchNo').addEventListener('click', function() {
+            sessionMatchOverlay.classList.remove('open');
+            sessionMatchOverlay.setAttribute('aria-hidden', 'true');
+            var m = pendingCheckinMuscle;
+            pendingCheckinMuscle = null;
+            sessionMatchState = null;
+            enterActiveWorkout(m, { fromPlanned: false });
+        });
         
         swipeHandle.addEventListener('mousedown', e => {
             e.preventDefault();

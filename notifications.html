@@ -80,6 +80,35 @@
         .notif-empty-icon { font-size: 2.5rem; margin-bottom: 1rem; opacity: 0.5; }
         .notif-empty-title { font-family: 'Manrope', sans-serif; font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
         .notif-empty-text { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 1rem; }
+        .notif-item.notif-session-invite { text-decoration: none; color: inherit; cursor: default; }
+        .notif-session-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.65rem;
+            flex-wrap: wrap;
+        }
+        .notif-session-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 0.55rem 0.75rem;
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s, transform 0.15s;
+        }
+        .notif-session-btn:active { transform: scale(0.98); }
+        .notif-session-btn-yes {
+            background: var(--primary-gradient);
+            color: #fff;
+            box-shadow: 0 2px 10px rgba(123, 75, 255, 0.3);
+        }
+        .notif-session-btn-no {
+            background: #f0f0f3;
+            color: #444;
+        }
     </style>
 </head>
 <body>
@@ -92,9 +121,30 @@
     </header>
     
     <main class="notif-page">
-        <p class="notif-intro">Her er alle dine notifikationer – nye beskeder, når venner tjekker ind, og planlagte gruppetræninger.</p>
+        <p class="notif-intro">Beskeder, når venner tjekker ind, og korte invites til planlagte sessions — uden booking-støj.</p>
         
         <div class="notif-list">
+            <div class="notif-item unread notif-session-invite" id="sessionInviteNotif">
+                <div class="notif-item-header">
+                    <div class="notif-icon message">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <div class="notif-content">
+                        <div class="notif-title">Session-invite</div>
+                        <div class="notif-text">Patrick inviterede dig til Bryst træning i SATS FRB kl. 18:00 💪</div>
+                        <div class="notif-session-actions">
+                            <button type="button" class="notif-session-btn notif-session-btn-yes" id="sessionInviteAccept">Deltag</button>
+                            <button type="button" class="notif-session-btn notif-session-btn-no" id="sessionInviteDecline">Ikke nu</button>
+                        </div>
+                        <div class="notif-time">Lige nu</div>
+                    </div>
+                </div>
+            </div>
             <a href="messages.html" class="notif-item unread">
                 <div class="notif-item-header">
                     <div class="notif-icon message">
@@ -126,19 +176,17 @@
                 </div>
             </a>
             
-            <a href="online.html#groups" class="notif-item unread">
+            <a href="checkin.html" class="notif-item">
                 <div class="notif-item-header">
                     <div class="notif-icon group">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
                         </svg>
                     </div>
                     <div class="notif-content">
-                        <div class="notif-title">Ny gruppetræning planlagt</div>
-                        <div class="notif-text">Weekend Warriors har planlagt træning lørdag kl. 10:00</div>
+                        <div class="notif-title">Påmindelse</div>
+                        <div class="notif-text">Din session (Ben) i PureGym Rued Langgaardsvej starter om 1 time.</div>
                         <div class="notif-time">I går 14:30</div>
                     </div>
                 </div>
@@ -176,5 +224,29 @@
             </a>
         </div>
     </main>
+    <script>
+        (function() {
+            var card = document.getElementById('sessionInviteNotif');
+            var yes = document.getElementById('sessionInviteAccept');
+            var no = document.getElementById('sessionInviteDecline');
+            if (!card || !yes || !no) return;
+            function respond(accepted) {
+                card.classList.remove('unread');
+                var title = card.querySelector('.notif-title');
+                var text = card.querySelector('.notif-text');
+                var actions = card.querySelector('.notif-session-actions');
+                if (actions) actions.style.display = 'none';
+                if (title) title.textContent = accepted ? 'Du er med' : 'Afslået';
+                if (text) text.textContent = accepted
+                    ? 'Sessionen ligger nu i Tjek ind under Planlagte sessions.'
+                    : 'Helt i orden — ingen besked sendt tilbage.';
+                try {
+                    localStorage.setItem('gymly_session_invite_demo', accepted ? 'accepted' : 'declined');
+                } catch (e) {}
+            }
+            yes.addEventListener('click', function() { respond(true); });
+            no.addEventListener('click', function() { respond(false); });
+        })();
+    </script>
 </body>
 </html>
