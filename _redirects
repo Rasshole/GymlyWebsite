@@ -1,5 +1,5 @@
-# Marketing: pretty URL til badges-siden
-/badges /badges.html 200
+# Badges: statisk mappe /badges/index.html (ingen 200-rewrite — undgår ERR_TOO_MANY_REDIRECTS).
+/badges.html /badges/ 301
 
 # Web app routes → conversion (Gymly er mobil-app; undgå offentlige "dashboard"-sider)
 /home /download.html 302
