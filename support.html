@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" class="landing-page landing-premium">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Support | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=5">
-    <script src="lang.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=19">
+    <script src="/lang.js" defer></script>
     <style>
         .support-page {
             min-height: 100vh;
@@ -16,22 +16,11 @@
             flex-direction: column;
             background-color: var(--bg-white);
         }
-        .support-header {
-            padding: 2rem 2rem 1rem;
-            text-align: center;
-        }
-        .support-header a {
-            display: inline-block;
-        }
-        .support-header img {
-            height: 72px;
-            width: auto;
-        }
         .support-main {
             flex: 1;
             max-width: 560px;
             margin: 0 auto;
-            padding: 3rem 2rem 4rem;
+            padding: 2rem 2rem 4rem;
             width: 100%;
         }
         .support-main h1 {
@@ -132,11 +121,25 @@
         }
     </style>
 </head>
-<body class="support-page">
-    <header class="support-header">
-        <a href="index.html" aria-label="Gymly">
-            <img src="assets/logo.png" alt="Gymly">
-        </a>
+<body class="landing-page landing-premium support-page">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="/#features">Features</a>
+                <a href="/badges/">Badges</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html" aria-current="page">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
+        </div>
     </header>
 
     <main class="support-main">
@@ -173,10 +176,10 @@
     </main>
 
     <footer class="support-footer">
-        <a href="privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
-        <a href="terms.html" data-i18n="footer.terms">Vilkår og betingelser</a>
-        <a href="samarbejde.html" data-i18n="footer.collab">Samarbejde</a>
-        <a href="support.html" data-i18n="footer.support">Support</a>
+        <a href="/privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
+        <a href="/terms.html" data-i18n="footer.terms">Vilkår og betingelser</a>
+        <a href="/samarbejde.html" data-i18n="footer.collab">Samarbejde</a>
+        <a href="/support.html" data-i18n="footer.support">Support</a>
         <span class="sep">·</span>
         <a href="#" data-lang="da">Dansk</a>
         <a href="#" data-lang="en">English (US)</a>
@@ -184,5 +187,14 @@
         <a href="#" data-lang="de">Deutsch</a>
         <a href="#" data-lang-more>Flere sprog...</a>
     </footer>
+    <script>
+        (function() {
+            var h = document.getElementById('landingHeader');
+            if (!h) return;
+            function s() { h.classList.toggle('scrolled', window.scrollY > 16); }
+            window.addEventListener('scroll', s);
+            s();
+        })();
+    </script>
 </body>
 </html>

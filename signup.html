@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" class="landing-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Opret dig | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=19">
     <style>
         .signup-page {
-            min-height: calc(100vh - 5rem);
+            min-height: calc(100vh - var(--site-header-height));
         }
         
         .signup-three-column {
@@ -18,7 +18,7 @@
             grid-template-columns: 1fr 1fr 1fr;
             max-width: 1400px;
             margin: 0 auto;
-            min-height: calc(100vh - 5rem);
+            min-height: calc(100vh - var(--site-header-height));
         }
         
         .signup-left-panel,
@@ -246,21 +246,25 @@
     </style>
 </head>
 <body class="landing-page">
-    <header class="landing-header" id="signupHeader">
-        <a href="index.html" class="landing-logo-link">
-            <img src="assets/logo.png" alt="Gymly" class="landing-logo">
-        </a>
-        <nav class="landing-nav">
-            <a href="/badges/">Badges</a>
-            <a href="support.html">Support</a>
-        </nav>
-        <div class="landing-cta">
-            <a href="download.html" class="btn-secondary">Download appen</a>
-            <a href="login.html" class="btn-primary">Log ind</a>
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="/#features">Features</a>
+                <a href="/badges/">Badges</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="/download.html" class="btn-secondary lp-btn-compact">Download appen</a>
+                <a href="/login.html" class="btn-primary lp-btn-compact">Log ind</a>
+            </div>
         </div>
     </header>
     <!-- Main Content -->
-    <main class="signup-page" style="padding-top: 5rem;">
+    <main class="signup-page">
         <div class="signup-three-column">
             <!-- Left Panel - Image -->
             <div class="signup-left-panel">
@@ -351,9 +355,9 @@
     <script src="lang.js"></script>
     <script>
         (function() {
-            var header = document.getElementById('signupHeader');
+            var header = document.getElementById('landingHeader');
             if (header) {
-                function onScroll() { header.classList.toggle('scrolled', window.scrollY > 20); }
+                function onScroll() { header.classList.toggle('scrolled', window.scrollY > 16); }
                 window.addEventListener('scroll', onScroll);
                 onScroll();
             }

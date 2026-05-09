@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="da">
+<html lang="da" class="landing-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vilkår og betingelser | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=2">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Montserrat:wght@600&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=19">
     <style>
         body {
             display: flex;
@@ -26,8 +26,6 @@
             padding: 2rem 1rem;
             position: fixed;
             left: 0;
-            top: 0;
-            height: calc(100vh - 60px);
             overflow-y: auto;
             border-right: 1px solid #e0e0e0;
         }
@@ -90,7 +88,6 @@
         
         .terms-page {
             flex: 1;
-            min-height: calc(100vh - 60px);
             padding: 2rem;
             padding-top: 4rem;
             padding-bottom: 100px;
@@ -119,7 +116,6 @@
             font-weight: 800;
             margin-top: 2rem;
             margin-bottom: 1rem;
-            scroll-margin-top: 100px;
         }
         
         .terms-page p {
@@ -146,7 +142,26 @@
         }
     </style>
 </head>
-<body>
+<body class="terms-legal">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="/#features">Features</a>
+                <a href="/badges/">Badges</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
+        </div>
+    </header>
     <div class="content-wrapper">
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -278,7 +293,7 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                if (window.scrollY >= (sectionTop - 150)) {
+                if (window.scrollY >= (sectionTop - 220)) {
                     current = section.getAttribute('id');
                 }
             });
@@ -293,6 +308,15 @@
         
         window.addEventListener('scroll', updateActiveSection);
         updateActiveSection(); // Call once on load
+    </script>
+    <script>
+        (function() {
+            var h = document.getElementById('landingHeader');
+            if (!h) return;
+            function s() { h.classList.toggle('scrolled', window.scrollY > 16); }
+            window.addEventListener('scroll', s);
+            s();
+        })();
     </script>
 </body>
 </html>

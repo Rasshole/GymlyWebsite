@@ -47,6 +47,8 @@
     --bg-light: var(--background);
     --border-color: var(--border);
     --online-green: var(--success);
+    /* Fixed marketing header — keep in sync with .landing-header height (padding + logo) */
+    --site-header-height: 4.75rem;
 }
 
 body {
@@ -2112,9 +2114,50 @@ a.friend-card:hover {
 }
 
 /* ===== LANDING PAGE ===== */
+html.landing-page {
+    scroll-padding-top: var(--site-header-height);
+}
+
 .landing-page {
     background: var(--background);
     overflow-x: hidden;
+}
+
+/* Reserve space for fixed .landing-header so content never sits underneath */
+body.landing-page.landing-premium {
+    padding-top: var(--site-header-height);
+}
+
+body.landing-page:not(.landing-premium) {
+    padding-top: var(--site-header-height);
+}
+
+body.landing-page:not(.landing-premium) .hero-section {
+    padding-top: calc(8rem - var(--site-header-height));
+    padding-bottom: 4rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+body.landing-page:not(.landing-premium) main.signup-page {
+    padding-top: max(0.75rem, calc(5rem - var(--site-header-height)));
+}
+
+body.terms-legal {
+    padding-top: var(--site-header-height);
+}
+
+body.terms-legal .sidebar {
+    top: var(--site-header-height);
+    height: calc(100vh - var(--site-header-height));
+}
+
+body.terms-legal .terms-page {
+    min-height: calc(100vh - var(--site-header-height));
+}
+
+body.terms-legal .terms-page h2 {
+    scroll-margin-top: calc(var(--site-header-height) + 1.25rem);
 }
 
 .landing-header {
@@ -2122,7 +2165,7 @@ a.friend-card:hover {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 1100;
     padding: 1rem 1.5rem;
     display: flex;
     align-items: center;
@@ -2639,7 +2682,6 @@ a.friend-card:hover {
 
 /* ===== LEADERBOARD PAGE ===== */
 .leaderboard-page {
-    padding-top: 72px;
     min-height: 100vh;
     background: var(--background);
 }
@@ -3486,7 +3528,7 @@ body.landing-premium {
 .landing-premium .lp-hero {
     position: relative;
     min-height: min(100vh, 900px);
-    padding: 6.5rem 1.5rem 4rem;
+    padding: calc(6.5rem - var(--site-header-height)) 1.5rem 4rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -4234,7 +4276,7 @@ body.landing-premium {
 
 /* Download page */
 .page-download .dl-page {
-    padding-top: 5.5rem;
+    padding-top: max(0.75rem, calc(5.5rem - var(--site-header-height)));
     padding-bottom: 3rem;
 }
 
