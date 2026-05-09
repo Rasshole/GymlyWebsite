@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="da" class="landing-page landing-premium">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optjen badges | Gymly</title>
+    <meta name="description" content="Byg din Gymly-profil med badges for consistency, træning, venner og fællesskab — uden ranglister og konkurrence.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="/styles.css?v=18" as="style">
+    <link rel="stylesheet" href="/styles.css?v=18">
+    <script src="/auth.js" defer></script>
+    <script src="/lang.js" defer></script>
+    <style>
+        .badges-page-main {
+            padding: 0 1.25rem 4rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .badges-hero {
+            text-align: center;
+            padding: 3.25rem 0 2.5rem;
+            position: relative;
+        }
+        .badges-hero::before {
+            content: "";
+            position: absolute;
+            inset: -2rem 50% auto;
+            transform: translateX(-50%);
+            width: min(520px, 90vw);
+            height: 180px;
+            background: radial-gradient(ellipse at center, rgba(151, 111, 255, 0.18) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        .badges-hero-inner { position: relative; z-index: 1; }
+        .badges-hero-kicker {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary-dark);
+            margin: 0 0 0.75rem;
+        }
+        .badges-hero h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 2.65rem);
+            font-weight: 800;
+            color: var(--text);
+            margin: 0 0 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+        }
+        .badges-hero-lead {
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            max-width: 36rem;
+            margin: 0 auto 0.85rem;
+            line-height: 1.55;
+        }
+        .badges-hero-note {
+            font-size: 0.92rem;
+            color: var(--text-light);
+            max-width: 32rem;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+        .badges-cta-row {
+            margin-top: 1.75rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+            justify-content: center;
+        }
+        .badges-section {
+            margin-top: 2.75rem;
+        }
+        .badges-section-head {
+            margin-bottom: 1.1rem;
+        }
+        .badges-section-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin: 0 0 0.35rem;
+        }
+        .badges-section-title {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+        .badges-section-desc {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin: 0.35rem 0 0;
+            max-width: 40rem;
+            line-height: 1.45;
+        }
+        .badges-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        @media (min-width: 720px) {
+            .badges-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.1rem; }
+        }
+        .badge-card {
+            background: linear-gradient(165deg, #fff 0%, #faf9ff 100%);
+            border: 1px solid rgba(151, 111, 255, 0.12);
+            border-radius: 16px;
+            padding: 1.1rem 1.05rem 1.05rem;
+            box-shadow: 0 2px 12px rgba(15, 15, 20, 0.04);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            text-align: left;
+        }
+        .badge-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(151, 111, 255, 0.12);
+            border-color: rgba(151, 111, 255, 0.22);
+        }
+        .badge-card-icon {
+            font-size: 1.65rem;
+            line-height: 1;
+            display: block;
+            margin-bottom: 0.65rem;
+        }
+        .badge-card h3 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 0.98rem;
+            font-weight: 800;
+            color: var(--text);
+            margin: 0 0 0.35rem;
+            letter-spacing: -0.01em;
+        }
+        .badge-card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.45;
+        }
+        .badges-footer-note {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem 1rem;
+            border-radius: var(--radius-lg);
+            background: linear-gradient(135deg, rgba(151, 111, 255, 0.08) 0%, rgba(123, 75, 255, 0.05) 100%);
+            border: 1px solid rgba(151, 111, 255, 0.12);
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+            max-width: 36rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body class="landing-page landing-premium">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="/#features">Features</a>
+                <a href="/badges" aria-current="page">Badges</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="badges-page-main">
+        <header class="badges-hero">
+            <div class="badges-hero-inner">
+                <p class="badges-hero-kicker">Identitet &amp; progression</p>
+                <h1>Optjen badges</h1>
+                <p class="badges-hero-lead">Byg din Gymly profil gennem consistency, aktivitet og sociale sessions.</p>
+                <p class="badges-hero-note">Små milestones der gør træning mere motiverende — uden at gøre det til en konkurrence.</p>
+                <div class="badges-cta-row">
+                    <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-xl" target="_blank" rel="noopener noreferrer">Hent Gymly</a>
+                    <a href="/download.html" class="btn-secondary lp-btn-xl">Læs mere</a>
+                </div>
+            </div>
+        </header>
+
+        <section class="badges-section" aria-labelledby="cat-consistency">
+            <div class="badges-section-head">
+                <p class="badges-section-label" id="cat-consistency">Consistency</p>
+                <h2 class="badges-section-title">Kom igen — det tæller</h2>
+                <p class="badges-section-desc">Belønning for vaner og gentagelse, ikke for at “vinde” over andre.</p>
+            </div>
+            <div class="badges-grid">
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🔥</span><h3>7 dages streak</h3><p>Én uge i træk med meningsfuld aktivitet.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">⚡</span><h3>30 aktive dage</h3><p>En måned hvor du viser op for dig selv.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🫡</span><h3>Consistency</h3><p>Stabil rytme — roligt og bæredygtigt.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">📅</span><h3>Weekend warrior</h3><p>Weekenden blev din ally, ikke undskyldningen.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🎯</span><h3>Månedens groove</h3><p>Du fandt flowet fire uger i streg.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">⏰</span><h3>Pålidelig pattern</h3><p>Samme tidspunkt ofte nok til at det føles som ritual.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🌱</span><h3>Nye vaner</h3><p>Første måned med små, realistiske skridt.</p></article>
+            </div>
+        </section>
+
+        <section class="badges-section" aria-labelledby="cat-social">
+            <div class="badges-section-head">
+                <p class="badges-section-label" id="cat-social">Social</p>
+                <h2 class="badges-section-title">Sammen er bedre</h2>
+                <p class="badges-section-desc">Badges der hylder nærvær, vibes og fælles energi.</p>
+            </div>
+            <div class="badges-grid">
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">💜</span><h3>Social vibe</h3><p>Du deler stemning — ikke kun stats.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">👥</span><h3>Trænet sammen</h3><p>Sessioner hvor crewet faktisk mødtes.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🤝</span><h3>Første ven</h3><p>Netværket voksede med et ægte første handshake.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">📨</span><h3>Sendt 25 vibes</h3><p>Du hepper — og bliver set for det.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">💬</span><h3>Crew check-in</h3><p>Let koordinering før I rammer centeret.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🫂</span><h3>Mutual hype</h3><p>Gensidig støtte der føles ægte, ikke performativ.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">✨</span><h3>Delte øjeblikke</h3><p>Øjeblikke i feedet der skaber fællesskab.</p></article>
+            </div>
+        </section>
+
+        <section class="badges-section" aria-labelledby="cat-training">
+            <div class="badges-section-head">
+                <p class="badges-section-label" id="cat-training">Training</p>
+                <h2 class="badges-section-title">Din stil, din identitet</h2>
+                <p class="badges-section-desc">Personlige milepæle — ikke pointjagt.</p>
+            </div>
+            <div class="badges-grid">
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">💪</span><h3>50 check-ins</h3><p>Du har vist op — gang efter gang.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🏃</span><h3>Cardio grinder</h3><p>Puls op, tanker ned — din favorit.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🏋️</span><h3>Iron regular</h3><p>Vægtstangen kender dit navn.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🌙</span><h3>Night athlete</h3><p>Træning når byen er stille.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">☀️</span><h3>Early bird</h3><p>Morgenen er din — før alarmen snakker.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🔥</span><h3>Double session</h3><p>Ekstra omgang fordi kroppen sagde ja.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🧘</span><h3>Recovery minded</h3><p>Du prioriterer rest som en del af træningen.</p></article>
+            </div>
+        </section>
+
+        <section class="badges-section" aria-labelledby="cat-community">
+            <div class="badges-section-head">
+                <p class="badges-section-label" id="cat-community">Community</p>
+                <h2 class="badges-section-title">Hjemmebane &amp; fællesskab</h2>
+                <p class="badges-section-desc">Lokalt nærvær og live energi — uden ranglister.</p>
+            </div>
+            <div class="badges-grid">
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">📍</span><h3>Local regular</h3><p>Dit center kender dig — på den gode måde.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🏟️</span><h3>Center legend</h3><p>Du er en del af stemningen i hallen.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">⚡</span><h3>Active now</h3><p>Du er online når fællesskabet har brug for det.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🟢</span><h3>Live session</h3><p>Du mødte op mens andre også var i gang.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🏠</span><h3>Dit gym crew</h3><p>Den faste flok der gør hverdag bedre.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">🌍</span><h3>Fællesskab starter</h3><p>Du tog første skridt mod et åbent miljø.</p></article>
+                <article class="badge-card"><span class="badge-card-icon" aria-hidden="true">💠</span><h3>Stærkere sammen</h3><p>Gymlys DNA: social fitness med hjerte.</p></article>
+            </div>
+        </section>
+
+        <p class="badges-footer-note">Badges i Gymly er tænkt som små anerkendelser af din rejse — sammen med venner, i dit tempo. Ingen pladser, ingen pres. Bare dig, dit netværk og næste session.</p>
+    </main>
+
+    <footer class="landing-footer">
+        <div class="landing-footer-inner">
+            <div>
+                <div class="landing-footer-logo">Gymly</div>
+                <p class="lp-footer-line">Swipe ind. Træn. Del.</p>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="/privacy.html">Privatlivspolitik</a>
+                    <a href="/terms.html">Vilkår</a>
+                    <a href="/samarbejde.html">Samarbejde</a>
+                    <a href="/support.html">Support</a>
+                </div>
+            </div>
+            <div>
+                <div class="landing-footer-links">
+                    <a href="/download.html">Download</a>
+                    <a href="/badges">Badges</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        (function() {
+            var header = document.getElementById('landingHeader');
+            if (!header) return;
+            function onScroll() { header.classList.toggle('scrolled', window.scrollY > 16); }
+            window.addEventListener('scroll', onScroll);
+            onScroll();
+        })();
+    </script>
+</body>
+</html>

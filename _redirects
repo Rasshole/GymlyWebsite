@@ -1,3 +1,6 @@
+# Marketing: pretty URL til badges-siden
+/badges /badges.html 200
+
 # Web app routes → conversion (Gymly er mobil-app; undgå offentlige "dashboard"-sider)
 /home /download.html 302
 /home.html /download.html 302
