@@ -3796,6 +3796,171 @@ body.landing-premium {
     color: var(--primary-dark);
 }
 
+/* Premium landing: profile / badges mock (no rankings) */
+.lp-sc-profile {
+    background: linear-gradient(180deg, #fff 0%, #faf9ff 100%);
+}
+
+.lp-sc-profile .lp-pr-user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.lp-sc-profile .lp-pr-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(123, 75, 255, 0.28);
+}
+
+.lp-sc-profile .lp-pr-user-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.08rem;
+    min-width: 0;
+}
+
+.lp-sc-profile .lp-pr-name {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: var(--text);
+}
+
+.lp-sc-profile .lp-pr-sub {
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    line-height: 1.25;
+}
+
+.lp-sc-profile .lp-pr-streak {
+    align-self: flex-start;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.35rem 0.55rem;
+    border-radius: 999px;
+    background: linear-gradient(135deg, rgba(151, 111, 255, 0.14) 0%, rgba(123, 75, 255, 0.09) 100%);
+    color: var(--primary-dark);
+    border: 1px solid rgba(151, 111, 255, 0.22);
+}
+
+.lp-sc-profile .lp-pr-milestone {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.45rem 0.55rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.lp-sc-profile .lp-pr-milestone-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.66rem;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.lp-sc-profile .lp-pr-milestone-tag {
+    font-size: 0.52rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+}
+
+.lp-sc-profile .lp-pr-milestone-next {
+    margin: 0.3rem 0 0;
+    font-size: 0.56rem;
+    color: var(--text-light);
+}
+
+.lp-sc-profile .lp-pr-bar {
+    height: 4px;
+    border-radius: 999px;
+    background: var(--border);
+    margin-top: 0.4rem;
+    overflow: hidden;
+}
+
+.lp-sc-profile .lp-pr-bar > span {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: var(--primary-gradient);
+}
+
+.lp-sc-profile .lp-pr-bar--sub {
+    margin-top: 0.35rem;
+}
+
+.lp-sc-profile .lp-pr-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+}
+
+.lp-sc-profile .lp-pr-chips span {
+    font-size: 0.56rem;
+    font-weight: 600;
+    padding: 0.25rem 0.4rem;
+    border-radius: 999px;
+    background: rgba(151, 111, 255, 0.1);
+    color: var(--primary-dark);
+    border: 1px solid rgba(151, 111, 255, 0.18);
+}
+
+.lp-sc-profile .lp-pr-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-top: auto;
+}
+
+.lp-sc-profile .lp-pr-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    padding: 0.45rem 0.5rem;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid rgba(151, 111, 255, 0.14);
+    box-shadow: 0 2px 8px rgba(151, 111, 255, 0.06);
+}
+
+.lp-sc-profile .lp-pr-card--next {
+    border-color: var(--border);
+    opacity: 0.95;
+}
+
+.lp-sc-profile .lp-pr-card-ico {
+    font-size: 1rem;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.lp-sc-profile .lp-pr-card-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 0.64rem;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.lp-sc-profile .lp-pr-card-desc {
+    font-size: 0.55rem;
+    color: var(--text-muted);
+    margin-top: 0.06rem;
+}
+
 .lp-sc-chat .lp-bub {
     max-width: 88%;
     padding: 0.5rem 0.65rem;
