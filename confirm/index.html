@@ -774,7 +774,7 @@
             </div>
             <!-- Mobile CTAs -->
             <div class="confirm-actions confirm-actions--mobile">
-                <a href="gymly://auth/confirmed" class="confirm-btn confirm-btn--primary confirm-open-app" tabindex="0" aria-label="Åbn Gymly-appen; henvises til download-side hvis appen ikke åbnes">
+                <a href="gymly://confirmed" class="confirm-btn confirm-btn--primary confirm-open-app" tabindex="0" aria-label="Åbn Gymly-appen; henvises til App Store hvis appen ikke åbnes">
                     Åbn Gymly
                 </a>
                 <a href="https://gymlyapp.com/" class="confirm-btn confirm-btn--ghost confirm-mobile-home">Til forsiden</a>
@@ -813,8 +813,17 @@
         })();
 
         (function () {
-            var DEEP_LINK = 'gymly://auth/confirmed';
-            var FALLBACK_URL = 'https://gymlyapp.com/download';
+            /* Primær deeplink-path skal matche hvad iOS-appen registrerer (se DEEPLINKS.md). */
+            var DEEP_LINK = 'gymly://confirmed';
+            var FALLBACK_STORE_IOS = 'https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da';
+            var FALLBACK_DOWNLOAD = 'https://gymlyapp.com/download';
+
+            var deepLinkBusy = false;
+
+            function isIOS() {
+                var ua = navigator.userAgent || '';
+                return /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+            }
 
             function isLikelyMobile() {
                 var ua = navigator.userAgent || '';
@@ -828,30 +837,50 @@
                 document.body.classList.toggle('confirm-mobile-cta', isLikelyMobile());
             }
 
-            function tryDeepLink(deepUrl, fallbackUrl, ms) {
-                var delay = typeof ms === 'number' ? ms : 1750;
-                var appOpened = false;
-                function flag() {
-                    appOpened = true;
-                    teardown();
+            function pickFallbackUrl() {
+                return isIOS() ? FALLBACK_STORE_IOS : FALLBACK_DOWNLOAD;
+            }
+
+            /**
+             * Én navigation pr. brugertryk. iOS: længere timeout + ingen blur‑listener (undgår false positives Safari-dialog).
+             */
+            function tryDeepLink(deepUrl) {
+                if (deepLinkBusy) return;
+                deepLinkBusy = true;
+
+                var fallbackUrl = pickFallbackUrl();
+                var delay = isIOS() ? 2800 : 2000;
+
+                var appLikelyOpened = false;
+                var fallbackTimerId;
+
+                function markOpened() {
+                    appLikelyOpened = true;
+                    if (fallbackTimerId) window.clearTimeout(fallbackTimerId);
+                    cleanup();
+                    deepLinkBusy = false;
                 }
-                function teardown() {
-                    window.removeEventListener('pagehide', flag);
-                    window.removeEventListener('blur', flag);
-                    document.removeEventListener('visibilitychange', onVis);
+
+                function cleanup() {
+                    window.removeEventListener('pagehide', markOpened);
+                    document.removeEventListener('visibilitychange', onVisibility);
                 }
-                function onVis() {
-                    if (document.hidden) flag();
+
+                function onVisibility() {
+                    if (document.hidden) {
+                        markOpened();
+                    }
                 }
-                window.addEventListener('pagehide', flag, { passive: true });
-                window.addEventListener('blur', flag, { passive: true });
-                document.addEventListener('visibilitychange', onVis, { passive: true });
+
+                window.addEventListener('pagehide', markOpened, { passive: true });
+                document.addEventListener('visibilitychange', onVisibility, { passive: true });
 
                 window.location.href = deepUrl;
 
-                window.setTimeout(function () {
-                    teardown();
-                    if (!appOpened && document.visibilityState === 'visible') {
+                fallbackTimerId = window.setTimeout(function () {
+                    cleanup();
+                    deepLinkBusy = false;
+                    if (!appLikelyOpened && document.visibilityState === 'visible') {
                         window.location.href = fallbackUrl;
                     }
                 }, delay);
@@ -874,12 +903,14 @@
                 opener.addEventListener('click', function (e) {
                     if (!document.body.classList.contains('confirm-mobile-cta')) return;
                     e.preventDefault();
-                    tryDeepLink(DEEP_LINK, FALLBACK_URL, 1750);
-                }, { passive: false });
+                    e.stopPropagation();
+                    tryDeepLink(DEEP_LINK);
+                });
+
                 opener.addEventListener('keydown', function (e) {
                     if ((e.key === 'Enter' || e.key === ' ') && document.body.classList.contains('confirm-mobile-cta')) {
                         e.preventDefault();
-                        opener.click();
+                        tryDeepLink(DEEP_LINK);
                     }
                 });
             }
