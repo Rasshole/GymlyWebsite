@@ -510,6 +510,18 @@
             animation: softFadeUp 0.82s var(--ease-premium) 0.52s forwards;
         }
 
+        .confirm-actions--mobile {
+            display: none !important;
+        }
+
+        body.confirm-mobile-cta .confirm-actions--desktop {
+            display: none !important;
+        }
+
+        body.confirm-mobile-cta .confirm-actions--mobile {
+            display: flex !important;
+        }
+
         .confirm-btn {
             position: relative;
             display: inline-flex;
@@ -755,9 +767,17 @@
             <h1 id="confirmTitle" class="confirm-headline">Din konto er nu <span class="accent">bekræftet</span></h1>
             <p class="confirm-lead">Velkommen til Gymly — du kan lukke dette vindue og åbne appen igen, eller vende tilbage til forsiden herunder.</p>
 
-            <div class="confirm-actions">
+            <!-- Desktop CTAs -->
+            <div class="confirm-actions confirm-actions--desktop">
                 <a href="/index.html" class="confirm-btn confirm-btn--primary">Til forsiden</a>
                 <a href="/download.html" class="confirm-btn confirm-btn--ghost">Download appen</a>
+            </div>
+            <!-- Mobile CTAs -->
+            <div class="confirm-actions confirm-actions--mobile">
+                <a href="gymly://auth/confirmed" class="confirm-btn confirm-btn--primary confirm-open-app" tabindex="0" aria-label="Åbn Gymly-appen; henvises til download-side hvis appen ikke åbnes">
+                    Åbn Gymly
+                </a>
+                <a href="https://gymlyapp.com/" class="confirm-btn confirm-btn--ghost confirm-mobile-home">Til forsiden</a>
             </div>
 
             <div class="confirm-foot-wrap">
@@ -783,13 +803,86 @@
             var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
             if (!splash || mq.matches) {
                 if (splash) splash.classList.add('confirm-splash--skip');
-                return;
+            } else {
+                splash.classList.add('is-on');
+                window.setTimeout(function () {
+                    splash.classList.remove('is-on');
+                    splash.classList.add('is-off');
+                }, 840);
             }
-            splash.classList.add('is-on');
-            window.setTimeout(function () {
-                splash.classList.remove('is-on');
-                splash.classList.add('is-off');
-            }, 840);
+        })();
+
+        (function () {
+            var DEEP_LINK = 'gymly://auth/confirmed';
+            var FALLBACK_URL = 'https://gymlyapp.com/download';
+
+            function isLikelyMobile() {
+                var ua = navigator.userAgent || '';
+                var uaMob = /iPhone|iPod|Android.+Mobile|webOS|BlackBerry|Opera Mini|IEMobile|Mobile Safari|MobileSafari/i.test(ua);
+                var ipadOs = navigator.platform === 'MacIntel' && navigator.maxTouchPoints && navigator.maxTouchPoints > 1;
+                var narrow = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+                return uaMob || ipadOs || narrow;
+            }
+
+            function syncCtas() {
+                document.body.classList.toggle('confirm-mobile-cta', isLikelyMobile());
+            }
+
+            function tryDeepLink(deepUrl, fallbackUrl, ms) {
+                var delay = typeof ms === 'number' ? ms : 1750;
+                var appOpened = false;
+                function flag() {
+                    appOpened = true;
+                    teardown();
+                }
+                function teardown() {
+                    window.removeEventListener('pagehide', flag);
+                    window.removeEventListener('blur', flag);
+                    document.removeEventListener('visibilitychange', onVis);
+                }
+                function onVis() {
+                    if (document.hidden) flag();
+                }
+                window.addEventListener('pagehide', flag, { passive: true });
+                window.addEventListener('blur', flag, { passive: true });
+                document.addEventListener('visibilitychange', onVis, { passive: true });
+
+                window.location.href = deepUrl;
+
+                window.setTimeout(function () {
+                    teardown();
+                    if (!appOpened && document.visibilityState === 'visible') {
+                        window.location.href = fallbackUrl;
+                    }
+                }, delay);
+            }
+
+            syncCtas();
+
+            var resizeTimer;
+            window.addEventListener('resize', function () {
+                window.clearTimeout(resizeTimer);
+                resizeTimer = window.setTimeout(syncCtas, 120);
+            }, { passive: true });
+
+            if (window.matchMedia) {
+                window.matchMedia('(max-width: 768px)').addEventListener('change', syncCtas);
+            }
+
+            var opener = document.querySelector('.confirm-open-app');
+            if (opener) {
+                opener.addEventListener('click', function (e) {
+                    if (!document.body.classList.contains('confirm-mobile-cta')) return;
+                    e.preventDefault();
+                    tryDeepLink(DEEP_LINK, FALLBACK_URL, 1750);
+                }, { passive: false });
+                opener.addEventListener('keydown', function (e) {
+                    if ((e.key === 'Enter' || e.key === ' ') && document.body.classList.contains('confirm-mobile-cta')) {
+                        e.preventDefault();
+                        opener.click();
+                    }
+                });
+            }
         })();
     </script>
 </body>
