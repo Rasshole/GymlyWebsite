@@ -1,6 +1,9 @@
+/auth/callback     /auth/callback/index.html 200!
+/auth/callback/    /auth/callback/index.html 200!
+/.well-known/apple-app-site-association /.well-known/apple-app-site-association 200!
+/.well-known/assetlinks.json /.well-known/assetlinks.json 200!
 # Badges: statisk mappe /badges/index.html (ingen 200-rewrite — undgår ERR_TOO_MANY_REDIRECTS).
 /badges.html /badges/ 301
-
 # Web app routes → conversion (Gymly er mobil-app; undgå offentlige "dashboard"-sider)
 /home /download.html 302
 /home.html /download.html 302
