@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="da">
 <head>
+    <script>
+(function () {
+  var q = window.location.search || '';
+  var h = window.location.hash || '';
+  if (q || h) {
+    window.location.replace('/auth/callback' + q + h);
+  }
+})();
+</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Konto bekræftet | Gymly</title>
@@ -774,7 +783,7 @@
             </div>
             <!-- Mobile CTAs -->
             <div class="confirm-actions confirm-actions--mobile">
-                <a href="gymly://confirmed" class="confirm-btn confirm-btn--primary confirm-open-app" tabindex="0" aria-label="Åbn Gymly-appen; henvises til App Store hvis appen ikke åbnes">
+                <a href="gymly://auth/callback"" class="confirm-btn confirm-btn--primary confirm-open-app" tabindex="0" aria-label="Åbn Gymly-appen; henvises til App Store hvis appen ikke åbnes">
                     Åbn Gymly
                 </a>
                 <a href="https://gymlyapp.com/" class="confirm-btn confirm-btn--ghost confirm-mobile-home">Til forsiden</a>
@@ -814,8 +823,8 @@
 
         (function () {
             /* Primær deeplink-path skal matche hvad iOS-appen registrerer (se DEEPLINKS.md). */
-            var DEEP_LINK = 'gymly://confirmed';
-            var FALLBACK_STORE_IOS = 'https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da';
+            var DEEP_LINK = 'gymly://auth/callback' + (window.location.search || '') + (window.location.hash || '');
+var FALLBACK_STORE_IOS = 'https://gymlyapp.com/download';
             var FALLBACK_DOWNLOAD = 'https://gymlyapp.com/download';
 
             var deepLinkBusy = false;
