@@ -6,18 +6,21 @@
         "appIDs": ["CDVFBW66X4.com.test1.Gymly"],
         "components": [
           {
-            "/": "/auth/callback",
-            "comment": "Supabase email verify, magic link, PKCE"
-          },
-          {
-            "/": "/auth/callback/*"
-          },
-          {
             "/": "/confirm",
-            "comment": "Legacy email confirm"
+            "exclude": true,
+            "comment": "Web confirm page first; app opens via gymly:// button"
           },
           {
-            "/": "/confirm/*"
+            "/": "/confirm/*",
+            "exclude": true
+          },
+          {
+            "/": "/auth/callback",
+            "exclude": true
+          },
+          {
+            "/": "/auth/callback/*",
+            "exclude": true
           },
           {
             "/": "/reset-password",
