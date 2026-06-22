@@ -139,3 +139,42 @@ Typiske årsager:
 ## TestFlight
 
 Brug samme **bundle id** og scheme som produktion, eller opdater websitets fallback til TestFlight-URL hvis I kun distribuerer der i en periode (pt. peger iOS-fallback til **App Store**).
+
+---
+
+## Din manuelle tjekliste (step-by-step)
+
+Det der står ovenfor hjælper udviklere til at vide *hvad* der skal kodes. Nedenfor er en **prioriteret rækkefølge** af ting **du** eller holdet skal gøre på **uden for dette git-repo** (native app + auth/email + test).
+
+### A. Native app (obligatorisk for `gymly://confirmed`)
+
+1. **Åbn iOS-appens Xcode-projekt** (eller Expo-projektet efter prebuild).
+2. **Under Info → URL Types** (eller `Info.plist`): sørg for at **`gymly`** er i **URL Schemes** – præcis ét ord, ikke `gymly://`.
+3. **Implementer modtagelse af linket** ved koldstart og ved genåbning:
+   - RN/Expo: `Linking.getInitialURL()`, `Linking.addEventListener('url', …)`.
+   - Ren Swift/SwiftUI: `onOpenURL` / scene `openURLContexts`.
+4. **Parse **`gymly://confirmed`**** og naviger til **Home** eller næste skærm efter bekræftelse (matcher React Navigation-/Routing-config som i afsnit 3).
+5. **Sørg for at appen ikke crasher**, når den åbnes med den URL (fejl i init → iOS kan stadig melde ”app kunne ikke åbnes”).
+6. **Fjern eller ret **eventuelle forkerte paths**: hvis native kun lytter efter fx `gymly://auth/confirmed`, ret native **eller** ret websitet – de skal matche **`gymly://confirmed`** (som på `gymlyapp.com/confirm`).
+
+### B. Backend / e-mail (valider at domæne matcher)
+
+7. **I Supabase (eller jeres auth-udbyder)** under *Redirect URLs* / *Site URL*: tillad **`https://gymlyapp.com/**`** eller mindst **`https://gymlyapp.com/confirm`** så mail-link efter signup/bevis ikke blokeres eller havner på forkert side.
+8. **Tjek hvad konfirmations-mailen linker til.** Den skal ramme **`https://gymlyapp.com/confirm`** (eller den præcise OAuth-callback Supabase kræver) – ikke et gammelt domæne eller fejl-hash alene på forsiden.
+
+### C. Deploy af websitet (hvis ændringer ikke er live)
+
+9. Merge til **`main`** og push til **`Rasshole/GymlyWebsite`**, så **Cloudflare Pages** bygger. Uden merge viser produktion måske gammelt indhold.
+10. **`email-confirmed.html`** omdirigerer nu til **`https://gymlyapp.com/confirm`** (ældre `appgymly.com`-variant skal erstattes i mail-skabeloner der stadig pegede der).
+
+### D. Slut-test på rigtig telefon
+
+11. **Afinstallér** appen eller brug ny **TestFlight/Test-build**, så `Info.plist` med scheme virkelig er med.
+12. Åbn **`https://gymlyapp.com/confirm`** i **Safari** (ikke indlejret webview første gang om muligt).
+13. Tryk **Åbn Gymly** → forvent åbning uden loops og uden nedbrud; land på den rigtige skærm når session/token er på plads.
+
+### E. Fremtidigt (valgfrit)
+
+14. Skift til **Universal Links** (`https://gymlyapp.com/confirm` åbner app uden scheme): kræver **Associated Domains** i Xcode + **`apple-app-site-association`** hostet på `gymlyapp.com`. Det kan ikke erstattes alene ved ændringer kun i den statiske landingsside du har her – det er også manuelt/DevOps/Xcode.
+
+Genvej til tekniske detaljer: afsnit 1–6 og “Testflow” ovenfor.
