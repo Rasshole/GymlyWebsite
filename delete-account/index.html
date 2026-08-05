@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="da" class="landing-page landing-premium">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slet din Gymly-konto | Gymly</title>
+    <meta name="description" content="Anmod om permanent sletning af din Gymly-konto og tilknyttede data.">
+    <link rel="canonical" href="https://gymlyapp.com/delete-account">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=19">
+    <script src="/lang.js" defer></script>
+    <style>
+        .delete-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-white);
+        }
+        .delete-main {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 2rem 4rem;
+            width: 100%;
+        }
+        .delete-main h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        .delete-main .intro,
+        .delete-main .in-app-path {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            line-height: 1.55;
+        }
+        .delete-main .in-app-path {
+            padding: 1rem 1.15rem;
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .delete-main .in-app-path strong {
+            color: var(--primary);
+        }
+        .delete-info-box {
+            padding: 1.15rem 1.25rem;
+            background: rgba(151, 111, 255, 0.06);
+            border: 1px solid rgba(151, 111, 255, 0.16);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .delete-info-box p {
+            margin: 0 0 0.65rem;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        .delete-info-box p:last-child {
+            margin-bottom: 0;
+        }
+        .delete-info-box ul {
+            margin: 0.5rem 0 0.75rem;
+            padding-left: 1.25rem;
+            color: var(--text-light);
+            font-size: 0.92rem;
+            line-height: 1.55;
+        }
+        .delete-info-box li {
+            margin-bottom: 0.35rem;
+        }
+        .delete-form label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 0.35rem;
+        }
+        .delete-form input[type="email"],
+        .delete-form textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: inherit;
+            margin-bottom: 1.25rem;
+            box-sizing: border-box;
+        }
+        .delete-form textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        .delete-form input:focus,
+        .delete-form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-pastel);
+        }
+        .delete-form .optional {
+            color: var(--text-secondary);
+            font-weight: 400;
+            font-size: 0.85rem;
+        }
+        .delete-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.65rem;
+            margin-bottom: 1.25rem;
+        }
+        .delete-checkbox input {
+            margin-top: 0.2rem;
+            width: 1.05rem;
+            height: 1.05rem;
+            accent-color: var(--primary);
+            flex-shrink: 0;
+        }
+        .delete-checkbox label {
+            margin: 0;
+            font-size: 0.92rem;
+            line-height: 1.45;
+            font-weight: 400;
+            color: var(--text-dark);
+        }
+        .delete-form button[type="submit"] {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            background-color: var(--primary);
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s, opacity 0.2s;
+        }
+        .delete-form button[type="submit"]:hover:not(:disabled) {
+            background-color: var(--primary-dark);
+        }
+        .delete-form button[type="submit"]:disabled {
+            opacity: 0.55;
+            cursor: not-allowed;
+        }
+        .delete-honeypot {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .delete-status {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+        .delete-status.show {
+            display: block;
+        }
+        .delete-status.success {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.25);
+            color: #166534;
+        }
+        .delete-status.error {
+            background: rgba(239, 68, 68, 0.08);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #991b1b;
+        }
+        .delete-retention {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-top: 1.5rem;
+        }
+        .delete-footer {
+            padding: 1rem 2rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem 1.25rem;
+            justify-content: center;
+            background: var(--bg-white);
+        }
+        .delete-footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.8rem;
+        }
+        .delete-footer a:hover {
+            text-decoration: underline;
+            color: var(--primary);
+        }
+        .delete-footer .sep {
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="landing-page landing-premium delete-page">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+                <a href="/#features">Features</a>
+                <a href="/badges/">Badges</a>
+                <a href="/download.html">Download</a>
+                <a href="/support.html">Support</a>
+            </nav>
+            <div class="landing-cta lp-header-cta">
+                <a href="https://apps.apple.com/dk/app/gymly-st%C3%A6rkere-sammen/id6757790972?l=da" class="btn-primary lp-btn-compact" target="_blank" rel="noopener noreferrer">
+                    <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+                    Download
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="delete-main">
+        <h1 data-i18n="deleteAccount.title">Slet din Gymly-konto</h1>
+        <p class="intro" data-i18n="deleteAccount.intro">Du kan anmode om permanent sletning af din Gymly-konto og de data, der er knyttet til kontoen.</p>
+        <p class="in-app-path"><span data-i18n="deleteAccount.inAppBefore">Hvis du stadig har adgang til Gymly-appen, kan du slette din konto direkte under:</span> <strong data-i18n="deleteAccount.inAppPath">Profil → Indstillinger → Slet konto</strong></p>
+        <p class="intro" data-i18n="deleteAccount.formIntro">Hvis du ikke længere har adgang til appen, kan du sende en anmodning herunder.</p>
+
+        <div class="delete-info-box" role="note">
+            <p data-i18n="deleteAccount.verifyNote">Når vi modtager din anmodning, sender vi en bekræftelsesmail til den angivne e-mailadresse for at kontrollere, at du ejer kontoen.</p>
+            <p data-i18n="deleteAccount.deletedTitle">Efter bekræftelse slettes:</p>
+            <ul>
+                <li data-i18n="deleteAccount.deleted1">Brugerprofil</li>
+                <li data-i18n="deleteAccount.deleted2">Træningshistorik og check-ins</li>
+                <li data-i18n="deleteAccount.deleted3">Opslag, billeder og kommentarer</li>
+                <li data-i18n="deleteAccount.deleted4">Beskeder og sociale forbindelser</li>
+                <li data-i18n="deleteAccount.deleted5">Streaks, badges og øvrige kontodata</li>
+            </ul>
+        </div>
+
+        <form class="delete-form" id="deleteAccountForm" novalidate>
+            <div class="delete-honeypot" aria-hidden="true">
+                <label for="website">Website</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+            </div>
+
+            <label for="email" data-i18n="deleteAccount.emailLabel">E-mailadresse tilknyttet Gymly-kontoen</label>
+            <input type="email" id="email" name="email" required autocomplete="email" data-i18n-placeholder="deleteAccount.emailPlaceholder" placeholder="din@email.dk">
+
+            <label for="message">
+                <span data-i18n="deleteAccount.messageLabel">Valgfri besked</span>
+                <span class="optional" data-i18n="deleteAccount.optional"> (valgfrit)</span>
+            </label>
+            <textarea id="message" name="message" maxlength="2000" data-i18n-placeholder="deleteAccount.messagePlaceholder" placeholder="Tilføj evt. en kort besked"></textarea>
+
+            <div class="delete-checkbox">
+                <input type="checkbox" id="confirmDelete" name="confirmDelete" required>
+                <label for="confirmDelete" data-i18n="deleteAccount.checkbox">Jeg forstår, at min konto og tilknyttede data slettes permanent.</label>
+            </div>
+
+            <button type="submit" id="submitBtn" data-i18n="deleteAccount.submit">Anmod om sletning</button>
+            <div class="delete-status" id="formStatus" role="status" aria-live="polite"></div>
+        </form>
+
+        <p class="delete-retention" data-i18n="deleteAccount.retention">Visse oplysninger kan opbevares i en begrænset periode, hvis det er nødvendigt af hensyn til sikkerhed, forebyggelse af misbrug eller juridiske krav.</p>
+    </main>
+
+    <footer class="delete-footer">
+        <a href="/privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
+        <a href="/support.html" data-i18n="footer.support">Kontakt support</a>
+        <a href="/" data-i18n="deleteAccount.backHome">Tilbage til forsiden</a>
+        <span class="sep">·</span>
+        <a href="#" data-lang="da">Dansk</a>
+        <a href="#" data-lang="en">English (US)</a>
+    </footer>
+
+    <script>
+        (function () {
+            var SUPABASE_URL = 'https://ykantlsuszpauddasqvz.supabase.co';
+            var REQUEST_URL = SUPABASE_URL + '/functions/v1/request-account-deletion';
+            var RATE_KEY = 'gymly_delete_account_last_submit';
+            var RATE_MS = 60 * 1000;
+            var NEUTRAL_MSG = 'Hvis der findes en Gymly-konto med denne e-mailadresse, modtager du en bekræftelsesmail.';
+
+            var header = document.getElementById('landingHeader');
+            if (header) {
+                function onScroll() { header.classList.toggle('scrolled', window.scrollY > 16); }
+                window.addEventListener('scroll', onScroll);
+                onScroll();
+            }
+
+            function tr(key, fallback) {
+                if (typeof window.t === 'function') {
+                    var val = window.t(key);
+                    if (val && val !== key) return val;
+                }
+                return fallback;
+            }
+
+            function showStatus(kind, text) {
+                var el = document.getElementById('formStatus');
+                el.className = 'delete-status show ' + kind;
+                el.textContent = text;
+            }
+
+            function canSubmitLocally() {
+                try {
+                    var last = parseInt(localStorage.getItem(RATE_KEY) || '0', 10);
+                    return !last || (Date.now() - last) >= RATE_MS;
+                } catch (e) {
+                    return true;
+                }
+            }
+
+            function markSubmittedLocally() {
+                try { localStorage.setItem(RATE_KEY, String(Date.now())); } catch (e) {}
+            }
+
+            document.getElementById('deleteAccountForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+                var email = document.getElementById('email').value.trim();
+                var message = document.getElementById('message').value.trim();
+                var confirmed = document.getElementById('confirmDelete').checked;
+                var honeypot = document.getElementById('website').value;
+                var btn = document.getElementById('submitBtn');
+
+                if (honeypot) {
+                    showStatus('success', tr('deleteAccount.success', NEUTRAL_MSG));
+                    return;
+                }
+
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    showStatus('error', tr('deleteAccount.invalidEmail', 'Angiv en gyldig e-mailadresse.'));
+                    return;
+                }
+
+                if (!confirmed) {
+                    showStatus('error', tr('deleteAccount.mustConfirm', 'Du skal bekræfte, at du forstår sletningen.'));
+                    return;
+                }
+
+                if (!canSubmitLocally()) {
+                    showStatus('success', tr('deleteAccount.success', NEUTRAL_MSG));
+                    return;
+                }
+
+                btn.disabled = true;
+                showStatus('', '');
+
+                try {
+                    var res = await fetch(REQUEST_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            email: email,
+                            message: message || null,
+                            locale: document.documentElement.lang || 'da'
+                        })
+                    });
+
+                    markSubmittedLocally();
+                    showStatus('success', tr('deleteAccount.success', NEUTRAL_MSG));
+                    document.getElementById('deleteAccountForm').reset();
+                } catch (err) {
+                    markSubmittedLocally();
+                    showStatus('success', tr('deleteAccount.success', NEUTRAL_MSG));
+                } finally {
+                    btn.disabled = false;
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

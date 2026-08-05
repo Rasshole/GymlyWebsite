@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="da" class="landing-page landing-premium">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bekræft kontosletning | Gymly</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=19">
+    <script src="/lang.js" defer></script>
+    <style>
+        .confirm-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-white);
+        }
+        .confirm-main {
+            flex: 1;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            width: 100%;
+            text-align: center;
+        }
+        .confirm-main h1 {
+            font-family: 'Manrope', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+        .confirm-main p {
+            color: var(--text-light);
+            font-size: 1rem;
+            line-height: 1.55;
+            margin-bottom: 1.25rem;
+        }
+        .confirm-card {
+            padding: 1.5rem;
+            border-radius: 14px;
+            border: 1px solid rgba(151, 111, 255, 0.16);
+            background: rgba(151, 111, 255, 0.05);
+            margin-bottom: 1.5rem;
+        }
+        .confirm-card.success {
+            border-color: rgba(34, 197, 94, 0.25);
+            background: rgba(34, 197, 94, 0.08);
+        }
+        .confirm-card.error {
+            border-color: rgba(239, 68, 68, 0.2);
+            background: rgba(239, 68, 68, 0.06);
+        }
+        .confirm-btn {
+            display: inline-block;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            background: var(--primary);
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .confirm-btn:hover {
+            background: var(--primary-dark);
+        }
+        .confirm-spinner {
+            width: 36px;
+            height: 36px;
+            border: 3px solid rgba(151, 111, 255, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto 1rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="landing-page landing-premium confirm-page">
+    <header class="landing-header lp-header" id="landingHeader">
+        <div class="lp-header-inner">
+            <a href="/" class="landing-logo-link">
+                <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
+            </a>
+        </div>
+    </header>
+
+    <main class="confirm-main">
+        <div id="loadingState">
+            <div class="confirm-spinner" aria-hidden="true"></div>
+            <h1 data-i18n="deleteAccount.confirmLoading">Bekræfter anmodning…</h1>
+            <p data-i18n="deleteAccount.confirmWait">Vent et øjeblik, mens vi behandler dit link.</p>
+        </div>
+
+        <div id="successState" hidden>
+            <div class="confirm-card success">
+                <h1 data-i18n="deleteAccount.confirmSuccessTitle">Anmodning bekræftet</h1>
+                <p data-i18n="deleteAccount.confirmSuccessBody">Din anmodning om kontosletning er modtaget. Vi behandler sletningen inden for kort tid.</p>
+            </div>
+            <a href="/" class="confirm-btn" data-i18n="deleteAccount.backHome">Tilbage til forsiden</a>
+        </div>
+
+        <div id="errorState" hidden>
+            <div class="confirm-card error">
+                <h1 data-i18n="deleteAccount.confirmErrorTitle">Linket virker ikke</h1>
+                <p id="errorDetail" data-i18n="deleteAccount.confirmErrorBody">Linket er ugyldigt eller udløbet. Anmod om sletning igen fra sletningssiden.</p>
+            </div>
+            <a href="/delete-account/" class="confirm-btn" data-i18n="deleteAccount.confirmRetry">Gå til sletningssiden</a>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var SUPABASE_URL = 'https://ykantlsuszpauddasqvz.supabase.co';
+            var CONFIRM_URL = SUPABASE_URL + '/functions/v1/confirm-account-deletion';
+
+            var loading = document.getElementById('loadingState');
+            var success = document.getElementById('successState');
+            var error = document.getElementById('errorState');
+
+            function show(state) {
+                loading.hidden = state !== 'loading';
+                success.hidden = state !== 'success';
+                error.hidden = state !== 'error';
+            }
+
+            async function init() {
+                var params = new URLSearchParams(window.location.search);
+                var token = params.get('token');
+
+                if (!token || token.length < 32) {
+                    show('error');
+                    return;
+                }
+
+                try {
+                    var res = await fetch(CONFIRM_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ token: token })
+                    });
+
+                    if (res.ok) {
+                        show('success');
+                        history.replaceState(null, '', window.location.pathname);
+                        return;
+                    }
+                } catch (e) {
+                    /* fall through to neutral error */
+                }
+
+                show('error');
+            }
+
+            init();
+        })();
+    </script>
+</body>
+</html>
