@@ -15,7 +15,8 @@ const SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY') ?? '';
 const MAIL_FROM = Deno.env.get('DELETE_ACCOUNT_MAIL_FROM') ?? 'Gymly <noreply@gymlyapp.com>';
 const CONFIRM_BASE_URL =
-  Deno.env.get('DELETE_ACCOUNT_CONFIRM_URL') ?? 'https://gymlyapp.com/delete-account/confirm';
+  Deno.env.get('DELETE_ACCOUNT_CONFIRM_URL') ??
+  `${SUPABASE_URL.replace(/\/$/, '')}/functions/v1/confirm-account-deletion`;
 const TOKEN_TTL_HOURS = Number(Deno.env.get('DELETE_ACCOUNT_TOKEN_TTL_HOURS') ?? '24');
 const IP_RATE_LIMIT = Number(Deno.env.get('DELETE_ACCOUNT_IP_RATE_LIMIT') ?? '5');
 const EMAIL_COOLDOWN_HOURS = Number(Deno.env.get('DELETE_ACCOUNT_EMAIL_COOLDOWN_HOURS') ?? '24');

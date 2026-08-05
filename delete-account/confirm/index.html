@@ -114,11 +114,12 @@
     <script>
         (function () {
             var SUPABASE_URL = 'https://ykantlsuszpauddasqvz.supabase.co';
-            var CONFIRM_URL = SUPABASE_URL + '/functions/v1/confirm-account-deletion';
+            var CONFIRM_FUNCTION_URL = SUPABASE_URL + '/functions/v1/confirm-account-deletion';
 
             var loading = document.getElementById('loadingState');
             var success = document.getElementById('successState');
             var error = document.getElementById('errorState');
+            var errorDetail = document.getElementById('errorDetail');
 
             function show(state) {
                 loading.hidden = state !== 'loading';
@@ -126,29 +127,34 @@
                 error.hidden = state !== 'error';
             }
 
-            async function init() {
+            function init() {
                 var params = new URLSearchParams(window.location.search);
+                var result = params.get('result');
+                var reason = params.get('reason');
                 var token = params.get('token');
 
-                if (!token || token.length < 32) {
-                    show('error');
+                if (result === 'success') {
+                    show('success');
+                    history.replaceState(null, '', window.location.pathname);
                     return;
                 }
 
-                try {
-                    var res = await fetch(CONFIRM_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ token: token })
-                    });
-
-                    if (res.ok) {
-                        show('success');
-                        history.replaceState(null, '', window.location.pathname);
-                        return;
+                if (result === 'error') {
+                    if (reason === 'server' && errorDetail) {
+                        errorDetail.textContent =
+                            'Vi kunne ikke fuldføre sletningen lige nu. Prøv linket igen om lidt, eller kontakt support.';
                     }
-                } catch (e) {
-                    /* fall through to neutral error */
+                    show('error');
+                    history.replaceState(null, '', window.location.pathname);
+                    return;
+                }
+
+                if (token && token.length >= 32) {
+                    show('loading');
+                    window.location.replace(
+                        CONFIRM_FUNCTION_URL + '?token=' + encodeURIComponent(token)
+                    );
+                    return;
                 }
 
                 show('error');
