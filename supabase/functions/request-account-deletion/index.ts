@@ -1,6 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2.49.1';
 import {
   corsHeaders,
+  getAdminUserByEmail,
   isValidEmail,
   jsonResponse,
   neutralOk,
@@ -105,67 +106,75 @@ async function sendVerificationEmail(
 }
 
 Deno.serve(async (req) => {
-  if (req.method === 'OPTIONS') {
-    return new Response('ok', { headers: corsHeaders });
-  }
-
-  if (req.method !== 'POST') {
-    return jsonResponse({ error: 'method_not_allowed' }, 405);
-  }
-
-  let body: RequestBody;
   try {
-    body = await req.json();
-  } catch {
+    if (req.method === 'OPTIONS') {
+      return new Response('ok', { headers: corsHeaders });
+    }
+
+    if (req.method !== 'POST') {
+      return jsonResponse({ error: 'method_not_allowed' }, 405);
+    }
+
+    if (!SUPABASE_URL || !SERVICE_ROLE_KEY) {
+      console.error('Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY');
+      return neutralOk();
+    }
+
+    let body: RequestBody;
+    try {
+      body = await req.json();
+    } catch {
+      return neutralOk();
+    }
+
+    const emailRaw = String(body.email ?? '').trim();
+    const message = body.message ? String(body.message).slice(0, 2000) : null;
+    const locale = String(body.locale ?? 'da').slice(0, 10);
+
+    if (!isValidEmail(emailRaw)) {
+      return neutralOk();
+    }
+
+    const emailNormalized = normalizeEmail(emailRaw);
+    const ipHash = await sha256Hex(clientIp(req));
+    const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
+
+    if (await exceededRateLimits(supabase, emailNormalized, ipHash)) {
+      return neutralOk();
+    }
+
+    const user = await getAdminUserByEmail(SUPABASE_URL, SERVICE_ROLE_KEY, emailNormalized);
+    if (!user) {
+      return neutralOk();
+    }
+
+    const rawToken = tokenFromRequest();
+    const tokenHash = await sha256Hex(rawToken);
+    const expiresAt = new Date(Date.now() + TOKEN_TTL_HOURS * 60 * 60 * 1000).toISOString();
+
+    const { error: insertError } = await supabase.from('account_deletion_requests').insert({
+      email: emailRaw,
+      email_normalized: emailNormalized,
+      message,
+      token_hash: tokenHash,
+      status: 'pending',
+      locale,
+      ip_hash: ipHash,
+      user_agent: req.headers.get('user-agent')?.slice(0, 512) ?? null,
+      expires_at: expiresAt,
+    });
+
+    if (insertError) {
+      console.error('insert failed', insertError.message);
+      return neutralOk();
+    }
+
+    const confirmUrl = `${CONFIRM_BASE_URL}?token=${encodeURIComponent(rawToken)}`;
+    await sendVerificationEmail(emailRaw, confirmUrl, locale);
+
+    return neutralOk();
+  } catch (e) {
+    console.error('request-account-deletion unhandled', e);
     return neutralOk();
   }
-
-  const emailRaw = String(body.email ?? '').trim();
-  const message = body.message ? String(body.message).slice(0, 2000) : null;
-  const locale = String(body.locale ?? 'da').slice(0, 10);
-
-  if (!isValidEmail(emailRaw)) {
-    return neutralOk();
-  }
-
-  const emailNormalized = normalizeEmail(emailRaw);
-  const ipHash = await sha256Hex(clientIp(req));
-  const supabase = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
-
-  if (await exceededRateLimits(supabase, emailNormalized, ipHash)) {
-    return neutralOk();
-  }
-
-  const rawToken = tokenFromRequest();
-  const tokenHash = await sha256Hex(rawToken);
-  const expiresAt = new Date(Date.now() + TOKEN_TTL_HOURS * 60 * 60 * 1000).toISOString();
-
-  const { data: userLookup, error: userLookupError } =
-    await supabase.auth.admin.getUserByEmail(emailNormalized);
-
-  if (userLookupError || !userLookup?.user) {
-    return neutralOk();
-  }
-
-  const { error: insertError } = await supabase.from('account_deletion_requests').insert({
-    email: emailRaw,
-    email_normalized: emailNormalized,
-    message,
-    token_hash: tokenHash,
-    status: 'pending',
-    locale,
-    ip_hash: ipHash,
-    user_agent: req.headers.get('user-agent')?.slice(0, 512) ?? null,
-    expires_at: expiresAt,
-  });
-
-  if (insertError) {
-    console.error('insert failed', insertError.message);
-    return neutralOk();
-  }
-
-  const confirmUrl = `${CONFIRM_BASE_URL}?token=${encodeURIComponent(rawToken)}`;
-  await sendVerificationEmail(emailRaw, confirmUrl, locale);
-
-  return neutralOk();
 });

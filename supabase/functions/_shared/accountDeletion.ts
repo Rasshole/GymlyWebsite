@@ -38,3 +38,61 @@ export function tokenFromRequest(): string {
     .map((b) => b.toString(16).padStart(2, '0'))
     .join('');
 }
+
+export type AdminUser = { id: string; email?: string | null };
+
+/** Lookup auth user by e-mail via GoTrue Admin API (works without getUserByEmail in all SDK builds). */
+export async function getAdminUserByEmail(
+  supabaseUrl: string,
+  serviceRoleKey: string,
+  email: string,
+): Promise<AdminUser | null> {
+  const base = supabaseUrl.replace(/\/$/, '');
+  const headers = {
+    Authorization: `Bearer ${serviceRoleKey}`,
+    apikey: serviceRoleKey,
+  };
+
+  const filterUrl =
+    `${base}/auth/v1/admin/users?filter=${encodeURIComponent(`email.eq.${email}`)}&page=1&per_page=1`;
+
+  try {
+    const filtered = await fetch(filterUrl, { headers });
+    if (filtered.ok) {
+      const payload = await filtered.json();
+      const users = Array.isArray(payload?.users) ? payload.users : [];
+      if (users.length > 0 && users[0]?.id) {
+        return { id: users[0].id, email: users[0].email ?? null };
+      }
+    }
+  } catch (e) {
+    console.error('getAdminUserByEmail filter lookup failed', e);
+  }
+
+  try {
+    let page = 1;
+    const perPage = 200;
+    while (page <= 5) {
+      const res = await fetch(
+        `${base}/auth/v1/admin/users?page=${page}&per_page=${perPage}`,
+        { headers },
+      );
+      if (!res.ok) break;
+      const payload = await res.json();
+      const users = Array.isArray(payload?.users) ? payload.users : [];
+      if (!users.length) break;
+      const match = users.find(
+        (u: { email?: string }) => u.email && normalizeEmail(u.email) === email,
+      );
+      if (match?.id) {
+        return { id: match.id, email: match.email ?? null };
+      }
+      if (users.length < perPage) break;
+      page += 1;
+    }
+  } catch (e) {
+    console.error('getAdminUserByEmail paginated lookup failed', e);
+  }
+
+  return null;
+}

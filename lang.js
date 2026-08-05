@@ -168,12 +168,17 @@
     window.location.reload();
   }
 
-  function tr(path) {
-    var lang = getLang();
-    var obj = t[lang] || t[DEFAULT_LANG];
+  function lookup(path, langCode) {
+    var obj = t[langCode];
+    if (!obj) return null;
     var parts = path.split('.');
     for (var i = 0; i < parts.length && obj; i++) obj = obj[parts[i]];
-    return (typeof obj === 'string') ? obj : path;
+    return (typeof obj === 'string') ? obj : null;
+  }
+
+  function tr(path) {
+    var lang = getLang();
+    return lookup(path, lang) || lookup(path, DEFAULT_LANG) || lookup(path, 'en') || path;
   }
 
   function apply() {
@@ -184,11 +189,14 @@
     document.querySelectorAll('[data-i18n]').forEach(function(el) {
       var key = el.getAttribute('data-i18n');
       var val = tr(key);
+      if (val === key) return;
       if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.placeholder = val;
       else el.textContent = val;
     });
     document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
-      el.placeholder = tr(el.getAttribute('data-i18n-placeholder'));
+      var key = el.getAttribute('data-i18n-placeholder');
+      var val = tr(key);
+      if (val !== key) el.placeholder = val;
     });
   }
 
