@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="da" class="landing-page landing-premium">
+<html lang="en" class="landing-page landing-premium">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Slet din Gymly-konto | Gymly</title>
-    <meta name="description" content="Anmod om permanent sletning af din Gymly-konto og tilknyttede data.">
+    <title>Delete your Gymly account | Gymly</title>
+    <meta name="description" content="Request permanent deletion of your Gymly account and associated data.">
     <link rel="canonical" href="https://gymlyapp.com/delete-account">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css?v=19">
-    <script src="/lang.js?v=20" defer></script>
+    <script src="/lang.js?v=21" defer></script>
     <style>
         .delete-page {
             min-height: 100vh;
@@ -212,7 +212,7 @@
             <a href="/" class="landing-logo-link">
                 <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
             </a>
-            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+            <nav class="landing-nav lp-nav" aria-label="Main menu">
                 <a href="/#features">Features</a>
                 <a href="/badges/">Badges</a>
                 <a href="/download.html">Download</a>
@@ -228,20 +228,20 @@
     </header>
 
     <main class="delete-main">
-        <h1 data-i18n="deleteAccount.title">Slet din Gymly-konto</h1>
-        <p class="intro" data-i18n="deleteAccount.intro">Du kan anmode om permanent sletning af din Gymly-konto og de data, der er knyttet til kontoen.</p>
-        <p class="in-app-path"><span data-i18n="deleteAccount.inAppBefore">Hvis du stadig har adgang til Gymly-appen, kan du slette din konto direkte under:</span> <strong data-i18n="deleteAccount.inAppPath">Profil → Indstillinger → Slet konto</strong></p>
-        <p class="intro" data-i18n="deleteAccount.formIntro">Hvis du ikke længere har adgang til appen, kan du sende en anmodning herunder.</p>
+        <h1 data-i18n="deleteAccount.title">Delete your Gymly account</h1>
+        <p class="intro" data-i18n="deleteAccount.intro">You can request permanent deletion of your Gymly account and the data associated with it.</p>
+        <p class="in-app-path"><span data-i18n="deleteAccount.inAppBefore">If you still have access to the Gymly app, you can delete your account directly under:</span> <strong data-i18n="deleteAccount.inAppPath">Profile → Settings → Delete account</strong></p>
+        <p class="intro" data-i18n="deleteAccount.formIntro">If you no longer have access to the app, you can submit a request below.</p>
 
         <div class="delete-info-box" role="note">
-            <p data-i18n="deleteAccount.verifyNote">Når vi modtager din anmodning, sender vi en bekræftelsesmail til den angivne e-mailadresse for at kontrollere, at du ejer kontoen.</p>
-            <p data-i18n="deleteAccount.deletedTitle">Efter bekræftelse slettes:</p>
+            <p data-i18n="deleteAccount.verifyNote">When we receive your request, we will send a confirmation email to the address provided to verify that you own the account.</p>
+            <p data-i18n="deleteAccount.deletedTitle">After confirmation, the following will be deleted:</p>
             <ul>
-                <li data-i18n="deleteAccount.deleted1">Brugerprofil</li>
-                <li data-i18n="deleteAccount.deleted2">Træningshistorik og check-ins</li>
-                <li data-i18n="deleteAccount.deleted3">Opslag, billeder og kommentarer</li>
-                <li data-i18n="deleteAccount.deleted4">Beskeder og sociale forbindelser</li>
-                <li data-i18n="deleteAccount.deleted5">Streaks, badges og øvrige kontodata</li>
+                <li data-i18n="deleteAccount.deleted1">User profile</li>
+                <li data-i18n="deleteAccount.deleted2">Workout history and check-ins</li>
+                <li data-i18n="deleteAccount.deleted3">Posts, photos and comments</li>
+                <li data-i18n="deleteAccount.deleted4">Messages and social connections</li>
+                <li data-i18n="deleteAccount.deleted5">Streaks, badges and other account data</li>
             </ul>
         </div>
 
@@ -251,31 +251,31 @@
                 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
             </div>
 
-            <label for="email" data-i18n="deleteAccount.emailLabel">E-mailadresse tilknyttet Gymly-kontoen</label>
-            <input type="email" id="email" name="email" required autocomplete="email" data-i18n-placeholder="deleteAccount.emailPlaceholder" placeholder="din@email.dk">
+            <label for="email" data-i18n="deleteAccount.emailLabel">Email address linked to your Gymly account</label>
+            <input type="email" id="email" name="email" required autocomplete="email" data-i18n-placeholder="deleteAccount.emailPlaceholder" placeholder="you@email.com">
 
             <label for="message">
-                <span data-i18n="deleteAccount.messageLabel">Valgfri besked</span>
-                <span class="optional" data-i18n="deleteAccount.optional"> (valgfrit)</span>
+                <span data-i18n="deleteAccount.messageLabel">Optional message</span>
+                <span class="optional" data-i18n="deleteAccount.optional"> (optional)</span>
             </label>
-            <textarea id="message" name="message" maxlength="2000" data-i18n-placeholder="deleteAccount.messagePlaceholder" placeholder="Tilføj evt. en kort besked"></textarea>
+            <textarea id="message" name="message" maxlength="2000" data-i18n-placeholder="deleteAccount.messagePlaceholder" placeholder="Add a short message if you wish"></textarea>
 
             <div class="delete-checkbox">
                 <input type="checkbox" id="confirmDelete" name="confirmDelete" required>
-                <label for="confirmDelete" data-i18n="deleteAccount.checkbox">Jeg forstår, at min konto og tilknyttede data slettes permanent.</label>
+                <label for="confirmDelete" data-i18n="deleteAccount.checkbox">I understand that my account and associated data will be permanently deleted.</label>
             </div>
 
-            <button type="submit" id="submitBtn" data-i18n="deleteAccount.submit">Anmod om sletning</button>
+            <button type="submit" id="submitBtn" data-i18n="deleteAccount.submit">Request deletion</button>
             <div class="delete-status" id="formStatus" role="status" aria-live="polite"></div>
         </form>
 
-        <p class="delete-retention" data-i18n="deleteAccount.retention">Visse oplysninger kan opbevares i en begrænset periode, hvis det er nødvendigt af hensyn til sikkerhed, forebyggelse af misbrug eller juridiske krav.</p>
+        <p class="delete-retention" data-i18n="deleteAccount.retention">Certain information may be retained for a limited period where necessary for security, abuse prevention or legal requirements.</p>
     </main>
 
     <footer class="delete-footer">
-        <a href="/privacy.html" data-i18n="footer.privacy">Privatlivspolitik</a>
-        <a href="/support.html" data-i18n="footer.support">Kontakt support</a>
-        <a href="/" data-i18n="deleteAccount.backHome">Tilbage til forsiden</a>
+        <a href="/privacy.html" data-i18n="footer.privacy">Privacy Policy</a>
+        <a href="/support.html" data-i18n="footer.support">Contact support</a>
+        <a href="/" data-i18n="deleteAccount.backHome">Back to homepage</a>
         <span class="sep">·</span>
         <a href="#" data-lang="da">Dansk</a>
         <a href="#" data-lang="en">English (US)</a>

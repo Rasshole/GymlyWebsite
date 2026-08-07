@@ -4,7 +4,7 @@
  */
 (function() {
   var STORAGE_KEY = 'gymly_lang';
-  var DEFAULT_LANG = 'da';
+  var DEFAULT_LANG = 'en';
 
   var LANG_NAMES = {
     da: 'Dansk',
@@ -178,7 +178,7 @@
 
   function tr(path) {
     var lang = getLang();
-    return lookup(path, lang) || lookup(path, DEFAULT_LANG) || lookup(path, 'en') || path;
+    return lookup(path, lang) || lookup(path, 'en') || lookup(path, 'da') || path;
   }
 
   function apply() {

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="da" class="landing-page landing-premium">
+<html lang="en" class="landing-page landing-premium">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bekræft kontosletning | Gymly</title>
+    <title>Confirm account deletion | Gymly</title>
     <meta name="robots" content="noindex">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css?v=19">
-    <script src="/lang.js?v=20" defer></script>
+    <script src="/lang.js?v=21" defer></script>
     <style>
         .confirm-page {
             min-height: 100vh;
@@ -142,7 +142,7 @@
                 if (result === 'error') {
                     if (reason === 'server' && errorDetail) {
                         errorDetail.textContent =
-                            'Vi kunne ikke fuldføre sletningen lige nu. Prøv linket igen om lidt, eller kontakt support.';
+                            'We could not complete the deletion right now. Try the link again in a moment, or contact support.';
                     }
                     show('error');
                     history.replaceState(null, '', window.location.pathname);

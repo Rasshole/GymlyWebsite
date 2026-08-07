@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="da" class="landing-page">
+<html lang="en" class="landing-page">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
-    <title>Log ind | Gymly</title>
+    <title>Log in | Gymly</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@700;800&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="supabase-client.js" defer></script>
     <script src="auth.js" defer></script>
-    <script src="lang.js" defer></script>
+    <script src="lang.js?v=21" defer></script>
 </head>
 <body class="landing-page">
     <header class="landing-header lp-header" id="landingHeader">
@@ -22,16 +22,16 @@
             <a href="/" class="landing-logo-link">
                 <img src="/assets/logo.png" alt="Gymly" class="landing-logo">
             </a>
-            <nav class="landing-nav lp-nav" aria-label="Hovedmenu">
+            <nav class="landing-nav lp-nav" aria-label="Main menu">
                 <a href="/#features">Features</a>
                 <a href="/badges/">Badges</a>
                 <a href="/download.html">Download</a>
                     <a href="/support.html">Support</a>
-                    <a href="/delete-account/">Slet konto</a>
+                    <a href="/delete-account/">Delete account</a>
             </nav>
             <div class="landing-cta lp-header-cta">
-                <a href="/download.html" class="btn-secondary lp-btn-compact">Download appen</a>
-                <a href="/signup.html" class="btn-primary lp-btn-compact">Opret konto</a>
+                <a href="/download.html" class="btn-secondary lp-btn-compact">Download the app</a>
+                <a href="/signup.html" class="btn-primary lp-btn-compact">Create account</a>
             </div>
         </div>
     </header>
@@ -40,18 +40,18 @@
     <section class="hero-section">
         <div class="hero-inner" style="grid-template-columns: 1fr; max-width: 420px; margin: 0 auto;">
             <div class="hero-content">
-                <h1>Log på <span>Gymly</span></h1>
-                <p>Træn sammen med dem, du kender. Log ind for at fortsætte.</p>
+                <h1>Log in to <span>Gymly</span></h1>
+                <p>Train together with people you know. Log in to continue.</p>
                 <form id="loginForm" class="login-form">
-                    <input type="email" id="email" name="email" placeholder="E-mail eller mobilnummer" required class="login-input">
-                    <input type="password" id="password" name="password" placeholder="Adgangskode" required class="login-input">
-                    <button type="submit" class="btn-primary" style="width: 100%; padding: 0.875rem;">Log på</button>
+                    <input type="email" id="email" name="email" placeholder="Email or phone number" required class="login-input">
+                    <input type="password" id="password" name="password" placeholder="Password" required class="login-input">
+                    <button type="submit" class="btn-primary" style="width: 100%; padding: 0.875rem;">Log in</button>
                 </form>
-                <a href="password.html" class="login-forgot">Glemt adgangskode?</a>
-                <a href="signup.html" class="btn-secondary" style="width: 100%; text-align: center; display: block; margin-top: 0.5rem;">Opret ny konto</a>
-                <p class="login-meta">Gymly – Dit fitness fælleskab</p>
+                <a href="password.html" class="login-forgot">Forgot password?</a>
+                <a href="signup.html" class="btn-secondary" style="width: 100%; text-align: center; display: block; margin-top: 0.5rem;">Create new account</a>
+                <p class="login-meta">Gymly – Your fitness community</p>
                 <div class="login-download">
-                    <p class="login-download-label">Download appen</p>
+                    <p class="login-download-label">Download the app</p>
                     <div class="hero-buttons" style="justify-content: center;">
                         <a href="download.html" class="btn-primary">App Store</a>
                         <a href="download.html" class="btn-secondary">Google Play</a>
@@ -65,20 +65,20 @@
         <div class="landing-footer-inner">
             <div>
                 <div class="landing-footer-logo">Gymly</div>
-                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Træn sammen med dem, du kender.</p>
+                <p style="font-size: 0.9rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Train together with people you know.</p>
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="privacy.html">Privatlivspolitik</a>
-                    <a href="terms.html">Vilkår og betingelser</a>
-                    <a href="samarbejde.html">Samarbejde</a>
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms and Conditions</a>
+                    <a href="samarbejde.html">Collaboration</a>
                     <a href="support.html">Support</a>
                 </div>
             </div>
             <div>
                 <div class="landing-footer-links">
-                    <a href="download.html">Download appen</a>
-                    <a href="login.html">Log ind</a>
+                    <a href="download.html">Download the app</a>
+                    <a href="login.html">Log in</a>
                     <a href="/badges/">Badges</a>
                 </div>
             </div>
