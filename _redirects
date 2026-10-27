@@ -1,10 +1,12 @@
-/auth/callback     /auth/callback/index.html 200!
-/auth/callback/    /auth/callback/index.html 200!
-/.well-known/apple-app-site-association /.well-known/apple-app-site-association 200!
-/.well-known/assetlinks.json /.well-known/assetlinks.json 200!
-# Badges: statisk mappe /badges/index.html (ingen 200-rewrite — undgår ERR_TOO_MANY_REDIRECTS).
+# Cloudflare Pages redirects/proxying.
+# https://developers.cloudflare.com/pages/configuration/redirects/
+# /invite and /w are handled by Pages Functions — do not rewrite them here.
+
+/auth/callback /auth/callback/index.html 200
+/.well-known/apple-app-site-association /.well-known/apple-app-site-association 200
+/.well-known/assetlinks.json /.well-known/assetlinks.json 200
+
 /badges.html /badges/ 301
-# Web app routes → conversion (Gymly er mobil-app; undgå offentlige "dashboard"-sider)
 /home /download.html 302
 /home.html /download.html 302
 /activity /download.html 302

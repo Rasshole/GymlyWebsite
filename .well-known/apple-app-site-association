@@ -8,7 +8,7 @@
           {
             "/": "/confirm",
             "exclude": true,
-            "comment": "Web confirm page first; app opens via gymly:// button"
+            "comment": "Web confirm page first; app opens via gymly:// button only"
           },
           {
             "/": "/confirm/*",
@@ -16,7 +16,8 @@
           },
           {
             "/": "/auth/callback",
-            "exclude": true
+            "exclude": true,
+            "comment": "Web bridge only; do not hijack Mail links into app"
           },
           {
             "/": "/auth/callback/*",
@@ -28,6 +29,17 @@
           },
           {
             "/": "/reset-password/*"
+          },
+          {
+            "/": "/invite",
+            "comment": "Invite referral deep link"
+          },
+          {
+            "/": "/invite/*"
+          },
+          {
+            "/": "/w/*",
+            "comment": "Coach shared workout session or program"
           }
         ]
       }

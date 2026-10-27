@@ -1,0 +1,9 @@
+# Local Pages Functions env (copy to .dev.vars — gitignored).
+# Production: set the same names in Cloudflare Pages → Settings → Environment variables.
+# Values are public anon only — never service_role.
+
+GYMLY_SUPABASE_URL=http://127.0.0.1:54321
+GYMLY_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0
+# Local Pages QA only — serves w/fixtures/{slug}.json when Worker cannot reach local Supabase.
+# Do NOT set in Cloudflare Production.
+GYMLY_ALLOW_SHARE_FIXTURES=1

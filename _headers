@@ -1,0 +1,21 @@
+# Cloudflare Pages custom headers (static responses only).
+# Function responses set Cache-Control in code — see functions/w/
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+
+/.well-known/assetlinks.json
+  Content-Type: application/json
+
+/invite
+  Cache-Control: private, no-store, no-cache, max-age=0, must-revalidate
+  CDN-Cache-Control: no-store
+  Pragma: no-cache
+  Expires: 0
+
+/invite/*
+  Cache-Control: private, no-store, no-cache, max-age=0, must-revalidate
+  CDN-Cache-Control: no-store
+  Pragma: no-cache
+  Expires: 0
