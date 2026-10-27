@@ -1,2 +1,7 @@
 .DS_Store
 supabase/.temp/
+.dev.vars
+.wrangler/
+node_modules/
+# Local Pages QA fixtures only (never enable GYMLY_ALLOW_SHARE_FIXTURES in Production)
+w/fixtures/
